@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SirenitoEngine", "SirenitoEngine\SirenitoEngine.vcxproj", "{F784119B-00EF-4CFA-8950-352119817E49}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DLL", "DLL\DLL.vcxproj", "{4AE84DA4-C0EF-407A-9128-4B0371FAADAF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EXE", "EXE\EXE.vcxproj", "{F784119B-00EF-4CFA-8950-352119817E49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4AE84DA4-C0EF-407A-9128-4B0371FAADAF}.Debug|x64.ActiveCfg = Debug|x64
+		{4AE84DA4-C0EF-407A-9128-4B0371FAADAF}.Debug|x64.Build.0 = Debug|x64
+		{4AE84DA4-C0EF-407A-9128-4B0371FAADAF}.Debug|x86.ActiveCfg = Debug|Win32
+		{4AE84DA4-C0EF-407A-9128-4B0371FAADAF}.Debug|x86.Build.0 = Debug|Win32
+		{4AE84DA4-C0EF-407A-9128-4B0371FAADAF}.Release|x64.ActiveCfg = Release|x64
+		{4AE84DA4-C0EF-407A-9128-4B0371FAADAF}.Release|x64.Build.0 = Release|x64
+		{4AE84DA4-C0EF-407A-9128-4B0371FAADAF}.Release|x86.ActiveCfg = Release|Win32
+		{4AE84DA4-C0EF-407A-9128-4B0371FAADAF}.Release|x86.Build.0 = Release|Win32
 		{F784119B-00EF-4CFA-8950-352119817E49}.Debug|x64.ActiveCfg = Debug|x64
 		{F784119B-00EF-4CFA-8950-352119817E49}.Debug|x64.Build.0 = Debug|x64
 		{F784119B-00EF-4CFA-8950-352119817E49}.Debug|x86.ActiveCfg = Debug|Win32
