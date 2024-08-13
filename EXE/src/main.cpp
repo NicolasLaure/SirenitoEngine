@@ -4,5 +4,5 @@ int main(void)
 {
 	BaseGame game;
 
-	game.RunProgram();
+	game.RunProgram(640, 480, "SirenitoEngine");
 }
