@@ -99,7 +99,8 @@
     </Link>
     <PostBuildEvent>
       <Command>copy /y "$(SolutionDir)bin\DLL\Debug\DLL.dll" "$(OutDir)"
-copy /y "$(SolutionDir)libs\glfw-3.4\lib\glfw3.dll" "$(OutDir)"</Command>
+copy /y "$(SolutionDir)bin\DLL\Debug\glfw3.dll" "$(OutDir)"
+copy /y "$(SolutionDir)bin\DLL\Debug\glew32.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -121,8 +122,9 @@ copy /y "$(SolutionDir)libs\glfw-3.4\lib\glfw3.dll" "$(OutDir)"</Command>
       <AdditionalDependencies>DLL.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "$(SolutionDir)bin\DLL\Debug\DLL.dll" "$(OutDir)"
-copy /y "$(SolutionDir)libs\glfw-3.4\lib\glfw3.dll" "$(OutDir)"</Command>
+      <Command>copy /y "$(SolutionDir)bin\DLL\Release\DLL.dll" "$(OutDir)"
+copy /y "$(SolutionDir)libs\DLL\Release\glfw3.dll" "$(OutDir)"
+copy /y "$(SolutionDir)libs\DLL\Release\glew32.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -140,7 +142,9 @@ copy /y "$(SolutionDir)libs\glfw-3.4\lib\glfw3.dll" "$(OutDir)"</Command>
       <AdditionalDependencies>DLL.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "$(SolutionDir)bin\DLL\Debug\DLL.dll" "$(OutDir)"</Command>
+      <Command>copy /y "$(SolutionDir)bin\DLL\Debug\DLL.dll" "$(OutDir)"
+copy /y "$(SolutionDir)bin\DLL\Debug\glfw3.dll" "$(OutDir)"
+copy /y "$(SolutionDir)bin\DLL\Debug\glew32.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -162,7 +166,9 @@ copy /y "$(SolutionDir)libs\glfw-3.4\lib\glfw3.dll" "$(OutDir)"</Command>
       <AdditionalDependencies>DLL.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "$(SolutionDir)libs\glfw-3.4\lib\glfw3.dll" "$(OutDir)"</Command>
+      <Command>copy /y "$(SolutionDir)bin\DLL\Release\DLL.dll" "$(OutDir)"
+copy /y "$(SolutionDir)libs\DLL\Release\glfw3.dll" "$(OutDir)"
+copy /y "$(SolutionDir)libs\DLL\Release\glew32.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

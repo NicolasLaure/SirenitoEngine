@@ -1,9 +1,9 @@
 #include "BaseGame.h"
 
+#include <GL/glew.h>
 #include "GLFW/glfw3.h"
 #include "Window/Window.h"
 #include "Renderer/Renderer.h"
-#include <GL/glew.h>
 
 void BaseGame::RunProgram(int width, int height, const char* title)
 {
