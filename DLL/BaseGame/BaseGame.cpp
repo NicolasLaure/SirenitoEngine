@@ -3,12 +3,15 @@
 #include "GLFW/glfw3.h"
 #include "Window/Window.h"
 #include "Renderer/Renderer.h"
+#include <GL/glew.h>
 
 void BaseGame::RunProgram(int width, int height, const char* title)
 {
 	/* Initialize the glfw library */
 	if (!glfwInit())
 		return;
+
+	glewInit();
 
 	Window windowInstance = Window(width, height, title);
 	Renderer rendererInstance;
@@ -18,7 +21,6 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 	{
 		/* Render here */
 		rendererInstance.Clear();
-
 		/* Swap front and back buffers */
 		glfwSwapBuffers(windowInstance.GetWindow());
 
