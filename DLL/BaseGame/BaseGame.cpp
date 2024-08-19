@@ -21,6 +21,13 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 	{
 		/* Render here */
 		rendererInstance.Clear();
+
+		glBegin(GL_TRIANGLES);
+		glVertex2f(-0.5, -0.5);
+		glVertex2f(0, 0.5);
+		glVertex2f(0.5, -0.5);
+		glEnd();
+
 		/* Swap front and back buffers */
 		glfwSwapBuffers(windowInstance.GetWindow());
 
