@@ -23,9 +23,36 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		rendererInstance.Clear();
 
 		glBegin(GL_TRIANGLES);
-		glVertex2f(-0.5, -0.5);
-		glVertex2f(0, 0.5);
-		glVertex2f(0.5, -0.5);
+		glColor3f(1, 0, 0);
+
+		glVertex2f(-0.2f, 0.0f);
+		glVertex2f(0.2f, 0.0f);
+		glVertex2f(0.0f, 0.8f);
+
+		glVertex2f(0.4f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(-0.2f, -0.65f);
+
+		glVertex2f(-0.4f, 0.0f);
+		glVertex2f(0.0f, 0.0f);
+		glVertex2f(-0.05f, -0.375f);
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		glColor3f(0, 0, 0);
+
+		glVertex2f(-0.2f, 0.0f);
+		glVertex2f(0.05f, 0.0f);
+		glVertex2f(0.13f, -0.3f);
+
+		glVertex2f(-0.05f, 0.0f);
+		glVertex2f(0.2f, 0.0f);
+		glVertex2f(-0.13f, -0.3f);
+
+		glVertex2f(-0.05f, 0.0f);
+		glVertex2f(0.05f, 0.0f);
+		glVertex2f(0, 0.2f);
+
 		glEnd();
 
 		/* Swap front and back buffers */
