@@ -35,16 +35,7 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		rendererInstance.Clear();
 
 		glBegin(GL_TRIANGLES);
-
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-		//glColor3f(1, 0, 0);
-		//glVertex2f(-0.5, -0.5);
-
-		//glColor3f(0, 1, 0);
-		//glVertex2f(0, 0.5);
-
-		//glColor3f(0, 0, 1);
-		//glVertex2f(0.5, -0.5);
 		glEnd();
 
 		/* Swap front and back buffers */
