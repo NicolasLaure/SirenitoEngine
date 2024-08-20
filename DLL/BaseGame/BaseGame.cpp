@@ -23,10 +23,8 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		0.5f,-0.5f
 	};
 
-	unsigned int buffer;
-	glGenBuffers(1, &buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+	rendererInstance.CreateBuffer();
+	rendererInstance.SetData(positions, 6);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(windowInstance.GetWindow()))
