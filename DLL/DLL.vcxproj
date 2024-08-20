@@ -168,13 +168,20 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseGame\BaseGame.cpp" />
+    <ClCompile Include="Entity\Entity.cpp" />
+    <ClCompile Include="Entity\Entity2D\Entity2D.cpp" />
+    <ClCompile Include="Entity\Entity2D\Shape\Shape.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
     <ClCompile Include="Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseGame\BaseGame.h" />
+    <ClInclude Include="Entity\Entity.h" />
+    <ClInclude Include="Entity\Entity2D\Entity2D.h" />
+    <ClInclude Include="Entity\Entity2D\Shape\Shape.h" />
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Utilities\Exporter.h" />
+    <ClInclude Include="Utilities\Vector2.h" />
     <ClInclude Include="Window\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
