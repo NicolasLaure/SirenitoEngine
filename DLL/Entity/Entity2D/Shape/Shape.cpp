@@ -1,10 +1,11 @@
 #include "Shape.h"
 
 
-Shape::Shape(Vector2f vertices[], int vertexQty)
+Shape::Shape(float vertices[], int vertexQty, Renderer rendererInstance)
 {
 	this->vertexQty = vertexQty;
 	this->vertices = vertices;
+	rendererInstance.SetData(vertices, vertexQty);
 }
 
 Shape::~Shape()
@@ -14,5 +15,6 @@ Shape::~Shape()
 
 void Shape::Draw(Renderer rendererInstance)
 {
-	rendererInstance.AddVertices(vertices, vertexQty);
+	rendererInstance.Draw();
+	//rendererInstance.AddVertices(vertices, vertexQty);
 }

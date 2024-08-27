@@ -10,9 +10,9 @@ private:
 	int vertexQty;
 
 public:
-	Vector2f* vertices;
+	float* vertices;
 
-	SIRENITO_API Shape(Vector2f vertices[], int vertexQty);
+	SIRENITO_API Shape(float vertices[], int vertexQty, Renderer rendererInstance);
 	SIRENITO_API ~Shape();
 
 	SIRENITO_API void Draw(Renderer rendererInstance) override;

@@ -10,8 +10,9 @@ SIRENITO_API class Renderer
 {
 private:
 	unsigned int buffer;
-	vector<float> verticesToDraw;
+	//vector<float> verticesToDraw;
 
+	unsigned int shaderProgram;
 public:
 
 	SIRENITO_API void Clear();
@@ -22,4 +23,6 @@ public:
 
 	SIRENITO_API void AddVertices(Vector2f vertices[], int vertexQty);
 	SIRENITO_API void Draw();
+
+	SIRENITO_API void CompileBasicShader();
 };
