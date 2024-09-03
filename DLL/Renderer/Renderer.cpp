@@ -5,6 +5,7 @@
 
 #include <algorithm>
 
+
 SIRENITO_API void Renderer::Clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -12,22 +13,20 @@ SIRENITO_API void Renderer::Clear()
 
 void Renderer::CreateBuffer()
 {
-	glGenBuffers(1, &buffer);
+	glGenBuffers(1, &VBO);
 }
 
 unsigned int* Renderer::GetBuffer()
 {
-	return &buffer;
+	return &VBO;
 }
 
-void Renderer::SetData(float positions[], int arraySize)
+void Renderer::SetData(float* positions, int size)
 {
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, arraySize, positions, GL_STATIC_DRAW);
-
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), positions, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
 	glEnableVertexAttribArray(0);
-
 	glUseProgram(shaderProgram);
 }
 
@@ -42,7 +41,6 @@ void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
 
 void Renderer::Draw()
 {
-	glUseProgram(shaderProgram);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
@@ -60,7 +58,6 @@ void Renderer::CompileBasicShader()
 
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
-
 
 	unsigned int fragmentShader;
 	const char* fragmentShaderSource = "#version 330 core\n"

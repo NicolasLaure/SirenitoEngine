@@ -27,7 +27,7 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		0.5f,-0.5f
 	};
 
-	Shape triangle = Shape(vertices, 6, rendererInstance);
+	Shape triangle = Shape(vertices, 6, &rendererInstance);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(windowInstance.GetWindow()))
@@ -35,7 +35,7 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		/* Render here */
 		rendererInstance.Clear();
 
-		triangle.Draw(rendererInstance);
+		triangle.Draw();
 
 		/* Render all loaded 2D entities */
 		//rendererInstance.Draw();
