@@ -20,14 +20,14 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 	rendererInstance.CreateBuffer();
 	rendererInstance.CompileBasicShader();
 
-	float vertices[6] =
+	float vertices[9] =
 	{
-		-0.5f,-0.5f,
-		0.5f,-0.5f,
-		0.0f, 0.5f
+		-0.5f, -0.5f, 0.0f,
+	 0.5f, -0.5f, 0.0f,
+	 0.0f,  0.5f, 0.0f
 	};
 
-	Shape triangle = Shape(vertices, 6, &rendererInstance);
+	Shape triangle = Shape(vertices, 9, &rendererInstance);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(windowInstance.GetWindow()))
