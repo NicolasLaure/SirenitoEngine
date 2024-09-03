@@ -22,9 +22,9 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 
 	float vertices[6] =
 	{
+		-0.5f,-0.5f,
 		0.5f,-0.5f,
-		0.0f, 0.5f,
-		0.5f,-0.5f
+		0.0f, 0.5f
 	};
 
 	Shape triangle = Shape(vertices, 6, &rendererInstance);
