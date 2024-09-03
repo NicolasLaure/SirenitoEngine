@@ -180,6 +180,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="Entity\Entity2D\Entity2D.h" />
     <ClInclude Include="Entity\Entity2D\Shape\Shape.h" />
     <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Renderer\ShapeBufferStruct.h" />
     <ClInclude Include="Utilities\Exporter.h" />
     <ClInclude Include="Utilities\Vector2.h" />
     <ClInclude Include="Window\Window.h" />

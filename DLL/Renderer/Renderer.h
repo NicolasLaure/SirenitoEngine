@@ -3,6 +3,7 @@
 #include <vector>
 #include "Utilities/Vector2.h"
 #include "Utilities/Exporter.h"
+#include "ShapeBufferStruct.h"
 
 using namespace std;
 
@@ -12,14 +13,14 @@ private:
 	//vector<float> verticesToDraw;
 
 public:
-	unsigned int VBO;
+	ShapeBuffer shapeBuffer;
 	unsigned int shaderProgram;
 
 	SIRENITO_API void Clear();
 
 	SIRENITO_API void CreateBuffer();
 	SIRENITO_API unsigned int* GetBuffer();
-	SIRENITO_API void SetData(float* positions, int size);
+	SIRENITO_API void SetData(float* positions, int positionsSize, unsigned int* indices, float indicesSize);
 
 	SIRENITO_API void AddVertices(Vector2f vertices[], int vertexQty);
 	SIRENITO_API void Draw();

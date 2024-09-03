@@ -13,18 +13,23 @@ SIRENITO_API void Renderer::Clear()
 
 void Renderer::CreateBuffer()
 {
-	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &shapeBuffer.VBO);
+	glGenBuffers(1, &shapeBuffer.EBO);
 }
 
 unsigned int* Renderer::GetBuffer()
 {
-	return &VBO;
+	return &shapeBuffer.VBO;
 }
 
-void Renderer::SetData(float* positions, int size)
+void Renderer::SetData(float* positions, int positionsSize, unsigned int* indices, float indicesSize)
 {
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), positions, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, shapeBuffer.VBO);
+	glBufferData(GL_ARRAY_BUFFER, positionsSize * sizeof(float), positions, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shapeBuffer.EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
 	glEnableVertexAttribArray(0);
 	glUseProgram(shaderProgram);
@@ -41,7 +46,10 @@ void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
 
 void Renderer::Draw()
 {
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shapeBuffer.EBO);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
 void Renderer::CompileBasicShader()
