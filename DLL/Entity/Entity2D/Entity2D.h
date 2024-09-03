@@ -8,6 +8,7 @@ SIRENITO_API class Entity2D : public Entity
 {
 protected:
 	Renderer* rendererInstance;
+	unsigned int VAO;
 	unsigned int VBO;
 	unsigned int EBO;
 public:

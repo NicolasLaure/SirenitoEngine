@@ -21,8 +21,8 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 
 	float vertices[12] =
 	{
-	 0.5f,  0.5f, 0.0f,
-	 0.5f, -0.5f, 0.0f,
+	 -0.1f,  0.5f, 0.0f,
+	 -0.1f, -0.5f, 0.0f,
 	-0.5f, -0.5f, 0.0f,
 	-0.5f,  0.5f, 0.0f
 	};
@@ -37,12 +37,12 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 	{
 	 0.5f,  0.5f, 0.0f,
 	 0.5f, -0.5f, 0.0f,
-	0.0f, -0.5f, 0.0f,
-	0.0f,  0.5f, 0.0f
+	0.1f, -0.5f, 0.0f,
+	0.1f,  0.5f, 0.0f
 	};
 
-	Shape rectangle2 = Shape(vertices2, 12, indices, 6, &rendererInstance);
 	Shape rectangle = Shape(vertices, 12, indices, 6, &rendererInstance);
+	Shape rectangle2 = Shape(vertices2, 12, indices, 6, &rendererInstance);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(windowInstance.GetWindow()))

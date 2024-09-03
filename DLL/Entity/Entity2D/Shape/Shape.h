@@ -8,6 +8,7 @@ SIRENITO_API class Shape : public Entity2D
 {
 private:
 	int vertexQty;
+	int indexQty;
 	float* vertices;
 
 public:

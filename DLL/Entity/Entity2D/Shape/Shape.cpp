@@ -3,11 +3,13 @@
 Shape::Shape(float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance)
 {
 	this->vertexQty = vertexQty;
+	this->indexQty = indexQty;
 	this->vertices = vertices;
 	this->rendererInstance = rendererInstance;
+	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
-	rendererInstance->SetData(vertices, vertexQty, indices, indexQty, VBO, EBO);
+	rendererInstance->SetData(vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
 
 Shape::~Shape()
@@ -17,5 +19,5 @@ Shape::~Shape()
 
 void Shape::Draw()
 {
-	rendererInstance->Draw(EBO, VBO);
+	rendererInstance->Draw(VAO, indexQty);
 }

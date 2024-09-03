@@ -17,10 +17,11 @@ public:
 	SIRENITO_API void Clear();
 
 	SIRENITO_API unsigned int CreateBuffer();
-	SIRENITO_API void SetData(float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VBO, unsigned int& EBO);
+	SIRENITO_API unsigned int CreateVertexArray();
+	SIRENITO_API void SetData(float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
 
 	SIRENITO_API void AddVertices(Vector2f vertices[], int vertexQty);
-	SIRENITO_API void Draw(unsigned int& EBO, unsigned int& VBO);
+	SIRENITO_API void Draw(unsigned int& VAO, int indexQty);
 
 	SIRENITO_API void CompileBasicShader();
 };
