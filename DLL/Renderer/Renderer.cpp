@@ -11,27 +11,31 @@ SIRENITO_API void Renderer::Clear()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Renderer::CreateBuffer()
+unsigned int Renderer::CreateBuffer()
 {
-	glGenBuffers(1, &shapeBuffer.VBO);
-	glGenBuffers(1, &shapeBuffer.EBO);
+	unsigned int buffer;
+	glGenBuffers(1, &buffer);
+	return buffer;
+}
+unsigned int Renderer::CreateVertexArray()
+{
+	unsigned int VAO;
+	glGenVertexArrays(1, &VAO);
+	return VAO;
 }
 
-unsigned int* Renderer::GetBuffer()
+void Renderer::SetData(float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
-	return &shapeBuffer.VBO;
-}
-
-void Renderer::SetData(float* positions, int positionsSize, unsigned int* indices, float indicesSize)
-{
-	glBindBuffer(GL_ARRAY_BUFFER, shapeBuffer.VBO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, positionsSize * sizeof(float), positions, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shapeBuffer.EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
 	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
 	glUseProgram(shaderProgram);
 }
 
@@ -44,12 +48,12 @@ void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
 	}*/
 }
 
-void Renderer::Draw()
+void Renderer::Draw(unsigned int& VAO, int indexQty)
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, shapeBuffer.EBO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(VAO);
+	glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, (void*)0);
 }
 
 void Renderer::CompileBasicShader()

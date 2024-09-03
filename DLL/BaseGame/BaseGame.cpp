@@ -17,13 +17,12 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 
 	glewInit();
 
-	rendererInstance.CreateBuffer();
 	rendererInstance.CompileBasicShader();
 
 	float vertices[12] =
 	{
-	 0.5f,  0.5f, 0.0f,
-	 0.5f, -0.5f, 0.0f,
+	 -0.1f,  0.5f, 0.0f,
+	 -0.1f, -0.5f, 0.0f,
 	-0.5f, -0.5f, 0.0f,
 	-0.5f,  0.5f, 0.0f
 	};
@@ -34,7 +33,16 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		1, 2, 3
 	};
 
+	float vertices2[12] =
+	{
+	 0.5f,  0.5f, 0.0f,
+	 0.5f, -0.5f, 0.0f,
+	0.1f, -0.5f, 0.0f,
+	0.1f,  0.5f, 0.0f
+	};
+
 	Shape rectangle = Shape(vertices, 12, indices, 6, &rendererInstance);
+	Shape rectangle2 = Shape(vertices2, 12, indices, 6, &rendererInstance);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(windowInstance.GetWindow()))
@@ -43,7 +51,7 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		rendererInstance.Clear();
 
 		rectangle.Draw();
-
+		rectangle2.Draw();
 		/* Render all loaded 2D entities */
 		//rendererInstance.Draw();
 
