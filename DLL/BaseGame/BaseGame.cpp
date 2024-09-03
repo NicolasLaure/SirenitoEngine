@@ -18,15 +18,16 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 	glewInit();
 
 	rendererInstance.CreateBuffer();
+	rendererInstance.CompileBasicShader();
 
-	Vector2f vertices[3] =
+	float vertices[6] =
 	{
-		{0.5f,-0.5f},
-		{0.0f, 0.5f},
-		{0.5f,-0.5f}
+		0.5f,-0.5f,
+		0.0f, 0.5f,
+		0.5f,-0.5f
 	};
 
-	Shape triangle = Shape(vertices, 3);
+	Shape triangle = Shape(vertices, 6, &rendererInstance);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(windowInstance.GetWindow()))
@@ -34,10 +35,10 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		/* Render here */
 		rendererInstance.Clear();
 
-		triangle.Draw(rendererInstance);
+		triangle.Draw();
 
 		/* Render all loaded 2D entities */
-		rendererInstance.Draw();
+		//rendererInstance.Draw();
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(windowInstance.GetWindow());

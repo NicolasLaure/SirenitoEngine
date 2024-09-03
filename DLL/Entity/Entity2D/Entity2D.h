@@ -6,7 +6,9 @@
 
 SIRENITO_API class Entity2D : public Entity
 {
+protected:
+	Renderer* rendererInstance;
 public:
 	SIRENITO_API virtual void Update();
-	SIRENITO_API virtual void Draw(Renderer rendererInstance);
+	SIRENITO_API virtual void Draw();
 };

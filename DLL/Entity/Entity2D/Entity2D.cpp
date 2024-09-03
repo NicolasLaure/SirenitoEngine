@@ -4,6 +4,6 @@ void Entity2D::Update()
 {
 }
 
-void Entity2D::Draw(Renderer rendererInstance)
+void Entity2D::Draw()
 {
 }

@@ -184,6 +184,9 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="Utilities\Vector2.h" />
     <ClInclude Include="Window\Window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
