@@ -12,7 +12,7 @@ public:
 	int vertexQty;
 	float* vertices;
 
-	SIRENITO_API Shape(float* vertices, int vertexQty, Renderer* rendererInstance);
+	SIRENITO_API Shape(float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance);
 	SIRENITO_API ~Shape();
 
 	SIRENITO_API void Draw() override;
