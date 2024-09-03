@@ -20,14 +20,21 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 	rendererInstance.CreateBuffer();
 	rendererInstance.CompileBasicShader();
 
-	float vertices[9] =
+	float vertices[12] =
 	{
-		-0.5f, -0.5f, 0.0f,
+	 0.5f,  0.5f, 0.0f,
 	 0.5f, -0.5f, 0.0f,
-	 0.0f,  0.5f, 0.0f
+	-0.5f, -0.5f, 0.0f,
+	-0.5f,  0.5f, 0.0f
 	};
 
-	Shape triangle = Shape(vertices, 9, &rendererInstance);
+	unsigned int indices[6] =
+	{
+		0, 1, 3,
+		1, 2, 3
+	};
+
+	Shape rectangle = Shape(vertices, 12, indices, 6, &rendererInstance);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(windowInstance.GetWindow()))
@@ -35,7 +42,7 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		/* Render here */
 		rendererInstance.Clear();
 
-		triangle.Draw();
+		rectangle.Draw();
 
 		/* Render all loaded 2D entities */
 		//rendererInstance.Draw();
