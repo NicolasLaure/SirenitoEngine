@@ -11,6 +11,12 @@ SIRENITO_API void Renderer::Clear()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+Renderer::Renderer()
+{
+	projection = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+
+}
+
 unsigned int Renderer::CreateBuffer()
 {
 	unsigned int buffer;
@@ -26,6 +32,7 @@ unsigned int Renderer::CreateVertexArray()
 
 void Renderer::SetData(float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
+
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, positionsSize * sizeof(float), positions, GL_STATIC_DRAW);
@@ -56,15 +63,16 @@ void Renderer::Draw(unsigned int& VAO, int indexQty)
 	glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, (void*)0);
 }
 
-void Renderer::CompileBasicShader()
+glm::mat4 Renderer::MVP_Transformation(glm::mat4 model)
+{
+	return projection * view * model;
+}
+
+void Renderer::CompileBasicShader(string vertexSource, string fragmentSource)
 {
 	unsigned int vertexShader;
-	const char* vertexShaderSource = "#version 330 core\n"
-		"layout (location = 0) in vec3 aPos;\n"
-		"void main()\n"
-		"{\n"
-		"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-		"}\0";
+
+	const char* vertexShaderSource = vertexSource.c_str();
 
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
@@ -72,12 +80,8 @@ void Renderer::CompileBasicShader()
 	glCompileShader(vertexShader);
 
 	unsigned int fragmentShader;
-	const char* fragmentShaderSource = "#version 330 core\n"
-		"out vec4 FragColor;\n"
-		"void main()\n"
-		"{\n"
-		"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-		"}\0";
+
+	const char* fragmentShaderSource = fragmentSource.c_str();
 
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 

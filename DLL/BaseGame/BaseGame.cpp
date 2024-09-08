@@ -4,7 +4,11 @@
 #include "GLFW/glfw3.h"
 #include "Window/Window.h"
 #include "Renderer/Renderer.h"
+#include "Utilities/FileReader.h"
 #include "Entity/Entity2D/Shape/Shape.h"
+
+
+#include <iostream>
 
 void BaseGame::RunProgram(int width, int height, const char* title)
 {
@@ -17,7 +21,14 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 
 	glewInit();
 
-	rendererInstance.CompileBasicShader();
+	FileReader fileReader;
+	const char* vertexPath = "res/shaders/BasicVertex.txt";
+	const char* fragmentPath = "res/shaders/BasicFragment.txt";
+
+	string vertexSource = fileReader.ParseText(vertexPath);
+	string fragmentSource = fileReader.ParseText(fragmentPath);
+
+	rendererInstance.CompileBasicShader(vertexSource, fragmentSource);
 
 	float vertices[12] =
 	{

@@ -1,8 +1,12 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include "Utilities/Vector2.h"
 #include "Utilities/Exporter.h"
+
+#include "glm.hpp"
+#include "gtc/matrix_transform.hpp"
 
 using namespace std;
 
@@ -10,9 +14,13 @@ SIRENITO_API class Renderer
 {
 private:
 	//vector<float> verticesToDraw;
+	glm::mat4 projection;
+	glm::mat4 view;
 
 public:
 	unsigned int shaderProgram;
+
+	Renderer();
 
 	SIRENITO_API void Clear();
 
@@ -22,6 +30,7 @@ public:
 
 	SIRENITO_API void AddVertices(Vector2f vertices[], int vertexQty);
 	SIRENITO_API void Draw(unsigned int& VAO, int indexQty);
+	SIRENITO_API glm::mat4 MVP_Transformation(glm::mat4 model);
 
-	SIRENITO_API void CompileBasicShader();
+	SIRENITO_API void CompileBasicShader(string vertexSource, string fragmentSource);
 };
