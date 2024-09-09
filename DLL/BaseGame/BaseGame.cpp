@@ -17,7 +17,7 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		return;
 
 	Window windowInstance = Window(width, height, title);
-	Renderer rendererInstance = Renderer();
+	Renderer rendererInstance = Renderer(width, height);
 
 	glewInit();
 
@@ -32,10 +32,10 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 
 	float vertices[12] =
 	{
-	 -0.1f,  0.5f, 0.0f,
-	 -0.1f, -0.5f, 0.0f,
-	-0.5f, -0.5f, 0.0f,
-	-0.5f,  0.5f, 0.0f
+	 100.0f,  0.0f, 0.0f,
+	 100.0f, 100.0f, 0.0f,
+	0.0f, 100.0f, 0.0f,
+	0.0f,  0.0f, 0.0f
 	};
 
 	unsigned int indices[6] =
@@ -46,10 +46,10 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 
 	float vertices2[12] =
 	{
-	 0.5f,  0.5f, 0.0f,
-	 0.5f, -0.5f, 0.0f,
-	0.1f, -0.5f, 0.0f,
-	0.1f,  0.5f, 0.0f
+	width,  height - 100.0f, 0.0f,
+	 width - 100.0f, height - 100.0f, 0.0f,
+	width - 100.0f, height, 0.0f,
+	width, height, 0.0f
 	};
 
 	Shape rectangle = Shape(vertices, 12, indices, 6, &rendererInstance);

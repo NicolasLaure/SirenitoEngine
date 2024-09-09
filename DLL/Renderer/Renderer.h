@@ -20,7 +20,7 @@ private:
 public:
 	unsigned int shaderProgram;
 
-	Renderer();
+	Renderer(float screenWidth, float screenHeight);
 
 	SIRENITO_API void Clear();
 

@@ -11,9 +11,9 @@ SIRENITO_API void Renderer::Clear()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-Renderer::Renderer()
+Renderer::Renderer(float screenWidth, float screenHeight)
 {
-	projection = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+	projection = glm::ortho(0.0f, screenWidth, screenHeight, 0.0f, -1.0f, 1.0f);
 }
 
 unsigned int Renderer::CreateBuffer()
