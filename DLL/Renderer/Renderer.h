@@ -6,7 +6,7 @@
 #include "Utilities/Exporter.h"
 
 #include "glm.hpp"
-#include "gtc/matrix_transform.hpp"
+#include "Camera/Camera.h"
 
 using namespace std;
 
@@ -15,12 +15,12 @@ SIRENITO_API class Renderer
 private:
 	//vector<float> verticesToDraw;
 	glm::mat4 projection;
-	glm::mat4 view;
+	Camera* mainCamera;
 
 public:
 	unsigned int shaderProgram;
 
-	Renderer(float screenWidth, float screenHeight);
+	Renderer(float screenWidth, float screenHeight, Camera* camera);
 
 	SIRENITO_API void Clear();
 

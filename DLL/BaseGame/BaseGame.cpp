@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include "GLFW/glfw3.h"
 #include "Window/Window.h"
+#include "Camera/Camera.h"
 #include "Renderer/Renderer.h"
 #include "Utilities/FileReader.h"
 #include "Entity/Entity2D/Shape/Shape.h"
@@ -17,7 +18,8 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		return;
 
 	Window windowInstance = Window(width, height, title);
-	Renderer rendererInstance = Renderer(width, height);
+	Camera mainCamera = Camera();
+	Renderer rendererInstance = Renderer(width, height, &mainCamera);
 
 	glewInit();
 
@@ -52,6 +54,8 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 	width, height, 0.0f
 	};
 
+
+	mainCamera.Translate(glm::vec3(25, 0, 0));
 	Shape rectangle = Shape(vertices, 12, indices, 6, &rendererInstance);
 	Shape rectangle2 = Shape(vertices2, 12, indices, 6, &rendererInstance);
 
@@ -65,7 +69,6 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 		rectangle2.Draw();
 		/* Render all loaded 2D entities */
 		//rendererInstance.Draw();
-
 		/* Swap front and back buffers */
 		glfwSwapBuffers(windowInstance.GetWindow());
 

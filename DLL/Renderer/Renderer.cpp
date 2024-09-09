@@ -4,16 +4,17 @@
 #include "GLFW/glfw3.h"
 
 #include <algorithm>
-
+#include "gtc/matrix_transform.hpp"
 
 SIRENITO_API void Renderer::Clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-Renderer::Renderer(float screenWidth, float screenHeight)
+Renderer::Renderer(float screenWidth, float screenHeight, Camera* camera)
 {
 	projection = glm::ortho(0.0f, screenWidth, screenHeight, 0.0f, -1.0f, 1.0f);
+	mainCamera = camera;
 }
 
 unsigned int Renderer::CreateBuffer()
@@ -31,7 +32,6 @@ unsigned int Renderer::CreateVertexArray()
 
 void Renderer::SetData(float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
-
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, positionsSize * sizeof(float), positions, GL_STATIC_DRAW);
@@ -45,7 +45,8 @@ void Renderer::SetData(float* positions, int positionsSize, unsigned int* indice
 
 	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
 	glUseProgram(shaderProgram);
-	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &projection[0][0]);
+	glm::mat4 mvp = projection * mainCamera->GetViewMatrix();
+	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &mvp[0][0]);
 }
 
 void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
@@ -67,7 +68,7 @@ void Renderer::Draw(unsigned int& VAO, int indexQty)
 
 glm::mat4 Renderer::MVP_Transformation(glm::mat4 model)
 {
-	return projection * view * model;
+	return projection * mainCamera->GetViewMatrix() * model;
 }
 
 void Renderer::CompileBasicShader(string vertexSource, string fragmentSource)

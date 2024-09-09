@@ -168,6 +168,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseGame\BaseGame.cpp" />
+    <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Entity\Entity.cpp" />
     <ClCompile Include="Entity\Entity2D\Entity2D.cpp" />
     <ClCompile Include="Entity\Entity2D\Shape\Shape.cpp" />
@@ -177,6 +178,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseGame\BaseGame.h" />
+    <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Entity\Entity.h" />
     <ClInclude Include="Entity\Entity2D\Entity2D.h" />
     <ClInclude Include="Entity\Entity2D\Shape\Shape.h" />
