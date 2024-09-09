@@ -8,6 +8,7 @@
 #include "Utilities/FileReader.h"
 #include "Entity/Entity2D/Shape/Shape.h"
 
+#include "gtc/matrix_transform.hpp"
 
 #include <iostream>
 
@@ -54,10 +55,15 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 	width, height, 0.0f
 	};
 
+	mainCamera.Translate(glm::vec3(-25, 0, 0));
+	glm::mat4 translation = glm::translate(glm::mat4(1.0f), glm::vec3(100, 100, 0));
+	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(45.0f), glm::vec3(0, 0, 1));
+	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1, 1, 1));
 
-	mainCamera.Translate(glm::vec3(25, 0, 0));
-	Shape rectangle = Shape(vertices, 12, indices, 6, &rendererInstance);
-	Shape rectangle2 = Shape(vertices2, 12, indices, 6, &rendererInstance);
+	glm::mat4 trs = translation * rotation * scale;
+
+	Shape rectangle = Shape(trs, vertices, 12, indices, 6, &rendererInstance);
+	Shape rectangle2 = Shape(glm::mat4(1.0f), vertices2, 12, indices, 6, &rendererInstance);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(windowInstance.GetWindow()))

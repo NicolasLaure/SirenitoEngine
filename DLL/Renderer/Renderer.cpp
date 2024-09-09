@@ -30,7 +30,7 @@ unsigned int Renderer::CreateVertexArray()
 	return VAO;
 }
 
-void Renderer::SetData(float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
+void Renderer::SetData(glm::mat4 model, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -45,7 +45,7 @@ void Renderer::SetData(float* positions, int positionsSize, unsigned int* indice
 
 	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
 	glUseProgram(shaderProgram);
-	glm::mat4 mvp = projection * mainCamera->GetViewMatrix();
+	glm::mat4 mvp = MVP_Transformation(model);
 	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &mvp[0][0]);
 }
 
