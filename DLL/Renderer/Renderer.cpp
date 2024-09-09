@@ -14,7 +14,6 @@ SIRENITO_API void Renderer::Clear()
 Renderer::Renderer()
 {
 	projection = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-
 }
 
 unsigned int Renderer::CreateBuffer()
@@ -43,7 +42,10 @@ void Renderer::SetData(float* positions, int positionsSize, unsigned int* indice
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
+
+	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
 	glUseProgram(shaderProgram);
+	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &projection[0][0]);
 }
 
 void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
