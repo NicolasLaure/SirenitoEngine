@@ -100,7 +100,8 @@
     <PostBuildEvent>
       <Command>copy /y "$(SolutionDir)bin\DLL\Debug\DLL.dll" "$(OutDir)"
 copy /y "$(SolutionDir)bin\DLL\Debug\glfw3.dll" "$(OutDir)"
-copy /y "$(SolutionDir)bin\DLL\Debug\glew32.dll" "$(OutDir)"</Command>
+copy /y "$(SolutionDir)bin\DLL\Debug\glew32.dll" "$(OutDir)"
+xcopy /y /i /e "$(SolutionDir)res" "$(OutDir)res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

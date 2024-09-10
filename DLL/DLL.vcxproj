@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;SIRENITO_EXPORT;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)DLL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)DLL;$(SolutionDir)libs\glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,7 +109,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\32bit\glew32.dll" "$(OutDir)"</Comman
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;SIRENITO_EXPORT;GLEW_BUILD;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;;$(SolutionDir)libs\glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,7 +130,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\32bit\glew32.dll" "$(OutDir)"</Comman
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SIRENITO_EXPORT;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;;$(SolutionDir)libs\glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,7 +151,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SIRENITO_EXPORT;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;;$(SolutionDir)libs\glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -168,19 +168,23 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseGame\BaseGame.cpp" />
+    <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Entity\Entity.cpp" />
     <ClCompile Include="Entity\Entity2D\Entity2D.cpp" />
     <ClCompile Include="Entity\Entity2D\Shape\Shape.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
+    <ClCompile Include="Utilities\FileReader.cpp" />
     <ClCompile Include="Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseGame\BaseGame.h" />
+    <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Entity\Entity.h" />
     <ClInclude Include="Entity\Entity2D\Entity2D.h" />
     <ClInclude Include="Entity\Entity2D\Shape\Shape.h" />
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Utilities\Exporter.h" />
+    <ClInclude Include="Utilities\FileReader.h" />
     <ClInclude Include="Utilities\Vector2.h" />
     <ClInclude Include="Window\Window.h" />
   </ItemGroup>
