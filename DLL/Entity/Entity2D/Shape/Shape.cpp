@@ -1,6 +1,6 @@
 #include "Shape.h"
 
-Shape::Shape(glm::mat4 model, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance)
+Shape::Shape(glm::vec3 position, glm::vec3 eulers, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance)
 {
 	this->vertexQty = vertexQty;
 	this->indexQty = indexQty;
@@ -11,9 +11,11 @@ Shape::Shape(glm::mat4 model, float* vertices, int vertexQty, unsigned int* indi
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
 
-	this->model = model;
+	SetPosition(position);
+	SetRotation(eulers);
+	SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 
-	rendererInstance->SetData(this->model, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(trs, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
 
 Shape::~Shape()
@@ -23,6 +25,6 @@ Shape::~Shape()
 
 void Shape::Draw()
 {
-	rendererInstance->SetData(this->model, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(trs, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 	rendererInstance->Draw(VAO, indexQty);
 }

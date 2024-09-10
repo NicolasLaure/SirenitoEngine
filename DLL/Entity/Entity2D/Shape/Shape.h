@@ -12,10 +12,9 @@ private:
 	int indexQty;
 	float* vertices;
 	unsigned int* indices;
-	glm::mat4 model;
 public:
 
-	SIRENITO_API Shape(glm::mat4 model,float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance);
+	SIRENITO_API Shape(glm::vec3 position, glm::vec3 eulers, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance);
 	SIRENITO_API ~Shape();
 
 	SIRENITO_API void Draw() override;
