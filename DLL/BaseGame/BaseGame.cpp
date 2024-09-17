@@ -10,6 +10,7 @@
 #include "gtc/matrix_transform.hpp"
 
 #include <iostream>
+#include <chrono>
 
 BaseGame::BaseGame()
 {
@@ -67,6 +68,7 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 	rectangle = new Shape(position, eulers, vertices, 12, indices, 6, &rendererInstance);
 	Shape rectangle2 = Shape(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), vertices2, 12, indices, 6, &rendererInstance);
 
+	GLfloat currentTime = glfwGetTime();
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(windowInstance.GetWindow()))
 	{
@@ -75,6 +77,10 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 
 		/*rectangle.Draw();
 		rectangle2.Draw();*/
+		deltaTime = glfwGetTime() - currentTime;
+		system("cls");
+		std::cout << deltaTime;
+		currentTime = glfwGetTime();
 
 		Update();
 		Draw();

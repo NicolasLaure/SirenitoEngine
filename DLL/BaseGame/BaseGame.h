@@ -6,6 +6,7 @@ SIRENITO_API class BaseGame
 {
 protected:
 	Shape* rectangle = nullptr;
+	float deltaTime = 0;
 public:
 	SIRENITO_API BaseGame();
 	SIRENITO_API void RunProgram(int width, int height, const char* title);
