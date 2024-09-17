@@ -74,8 +74,14 @@ void Entity::Translate(glm::vec3 translation)
 
 void Entity::Rotate(glm::quat rotation)
 {
-	SetRotation(rotation * rotation);
+	SetRotation(this->rotation * rotation);
 }
+
+void Entity::Rotate(glm::vec3 eulers)
+{
+	Rotate(glm::quat(eulers));
+}
+
 
 void Entity::Scale(glm::vec3 scalation)
 {

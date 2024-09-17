@@ -35,6 +35,7 @@ public:
 	SIRENITO_API void SetScale(glm::vec3 newScale);
 
 	SIRENITO_API void Translate(glm::vec3 translation);
+	SIRENITO_API void Rotate(glm::vec3 eulers);
 	SIRENITO_API void Rotate(glm::quat rotation);
 	SIRENITO_API void Scale(glm::vec3 scalation);
 };

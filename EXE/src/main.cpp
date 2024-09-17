@@ -1,8 +1,7 @@
-#include "DLL/BaseGame/BaseGame.h"
+#include "Program.h"
 
 int main(void)
 {
-	BaseGame game;
-
+	Program game = Program();
 	game.RunProgram(640, 480, "SirenitoEngine");
 }
