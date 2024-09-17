@@ -112,7 +112,7 @@ xcopy /y /i /e "$(SolutionDir)res" "$(OutDir)res"</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)DLL;$(SolutionDir)libs\glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,8 +124,9 @@ xcopy /y /i /e "$(SolutionDir)res" "$(OutDir)res"</Command>
     </Link>
     <PostBuildEvent>
       <Command>copy /y "$(SolutionDir)bin\DLL\Release\DLL.dll" "$(OutDir)"
-copy /y "$(SolutionDir)libs\DLL\Release\glfw3.dll" "$(OutDir)"
-copy /y "$(SolutionDir)libs\DLL\Release\glew32.dll" "$(OutDir)"</Command>
+copy /y "$(SolutionDir)bin\DLL\Release\glfw3.dll" "$(OutDir)"
+copy /y "$(SolutionDir)bin\DLL\Release\glew32.dll" "$(OutDir)"
+xcopy /y /i /e "$(SolutionDir)res" "$(OutDir)res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
