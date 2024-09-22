@@ -38,12 +38,15 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 
 	rendererInstance.CompileBasicShader(vertexSource, fragmentSource);
 
+	float halfRectangleWidth = 50.0f;
+	float halfRectangleHeight = 50.0f;
+
 	float vertices[12] =
 	{
-	 100.0f,  0.0f, 0.0f,
-	 100.0f, 100.0f, 0.0f,
-	0.0f, 100.0f, 0.0f,
-	0.0f,  0.0f, 0.0f
+	 halfRectangleWidth,  -halfRectangleHeight, 0.0f,
+	 halfRectangleWidth, halfRectangleHeight, 0.0f,
+	-halfRectangleWidth, halfRectangleHeight, 0.0f,
+	-halfRectangleWidth,  -halfRectangleHeight, 0.0f
 	};
 
 	unsigned int indices[6] =
@@ -64,6 +67,7 @@ void BaseGame::RunProgram(int width, int height, const char* title)
 
 	glm::vec3 position = glm::vec3(100.0f, 50.0f, 0.0f);
 	glm::vec3 eulers = glm::vec3(0.0f, 0.0f, 45.0f);
+
 
 	rectangle = new Shape(position, eulers, vertices, 12, indices, 6, &rendererInstance);
 	Shape rectangle2 = Shape(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), vertices2, 12, indices, 6, &rendererInstance);
