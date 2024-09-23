@@ -7,7 +7,9 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	float rectangleWidth = 100.0f;
 	float rectangleHeight = 100.0f;
 
-	rectangle = new Rectangle(position, rectangleWidth, rectangleHeight, rendererInstance);
+Program::~Program()
+{
+	delete rectangle;
 }
 
 void Program::Update()

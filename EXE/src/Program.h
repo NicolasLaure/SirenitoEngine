@@ -9,6 +9,7 @@ private:
 	Rectangle* rectangle;
 public:
 	Program(int width, int height, const char* title);
+	~Program();
 	void Update() override;
 	void Draw() override;
 };
