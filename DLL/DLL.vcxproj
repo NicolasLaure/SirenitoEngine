@@ -173,6 +173,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="Entity\Entity2D\Entity2D.cpp" />
     <ClCompile Include="Entity\Entity2D\Shape\Shape.cpp" />
     <ClCompile Include="Entity\Entity2D\Shape\Shapes\Rectangle.cpp" />
+    <ClCompile Include="Entity\Entity2D\Shape\Shapes\Triangle.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
     <ClCompile Include="Utilities\FileReader.cpp" />
     <ClCompile Include="Window\Window.cpp" />
@@ -184,6 +185,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="Entity\Entity2D\Entity2D.h" />
     <ClInclude Include="Entity\Entity2D\Shape\Shape.h" />
     <ClInclude Include="Entity\Entity2D\Shape\Shapes\Rectangle.h" />
+    <ClInclude Include="Entity\Entity2D\Shape\Shapes\Triangle.h" />
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Utilities\Exporter.h" />
     <ClInclude Include="Utilities\FileReader.h" />
