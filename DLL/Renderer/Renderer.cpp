@@ -6,13 +6,14 @@
 #include <algorithm>
 #include "gtc/matrix_transform.hpp"
 
-SIRENITO_API void Renderer::Clear()
+void Renderer::Clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 Renderer::Renderer(float screenWidth, float screenHeight, Camera* camera)
 {
+	glewInit();
 	projection = glm::ortho(0.0f, screenWidth, screenHeight, 0.0f, -1.0f, 1.0f);
 	mainCamera = camera;
 }

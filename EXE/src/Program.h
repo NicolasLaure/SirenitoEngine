@@ -1,11 +1,14 @@
 #pragma once
 #include "DLL/BaseGame/BaseGame.h"
 #include "DLL/Entity/Entity2D/Shape/Shape.h"
+#include "DLL/Entity/Entity2D/Shape/Shapes/Rectangle.h"
 
 SIRENITO_API class Program : public BaseGame
 {
+private:
+	Rectangle* rectangle;
 public:
-	Program();
+	Program(int width, int height, const char* title);
 	void Update() override;
 	void Draw() override;
 };

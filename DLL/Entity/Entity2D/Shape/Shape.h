@@ -8,6 +8,9 @@
 SIRENITO_API class Shape : public Entity2D
 {
 private:
+	
+
+protected:
 	int vertexQty;
 	int indexQty;
 	float* vertices;
@@ -15,6 +18,7 @@ private:
 public:
 
 	SIRENITO_API Shape(glm::vec3 position, glm::vec3 eulers, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance);
+	SIRENITO_API Shape(float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance);
 	SIRENITO_API ~Shape();
 
 	SIRENITO_API void Draw() override;
