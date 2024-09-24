@@ -1,12 +1,13 @@
 #include "Shape.h"
 
-Shape::Shape(glm::vec3 position, glm::vec3 eulers, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance)
+Shape::Shape(glm::vec3 position, glm::vec3 eulers, Color color, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance)
 {
 	this->vertexQty = vertexQty;
 	this->indexQty = indexQty;
 	this->vertices = vertices;
 	this->indices = indices;
 	this->rendererInstance = rendererInstance;
+	this->color = color;
 	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
@@ -15,16 +16,17 @@ Shape::Shape(glm::vec3 position, glm::vec3 eulers, float* vertices, int vertexQt
 	SetRotation(eulers);
 	SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 
-	rendererInstance->SetData(trs, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(trs, color, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
 
-Shape::Shape(float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance)
+Shape::Shape(Color color, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance)
 {
 	this->vertexQty = vertexQty;
 	this->indexQty = indexQty;
 	this->vertices = vertices;
 	this->indices = indices;
 	this->rendererInstance = rendererInstance;
+	this->color = color;
 	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
@@ -38,6 +40,6 @@ Shape::~Shape()
 
 void Shape::Draw()
 {
-	rendererInstance->SetData(trs, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(trs, color, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 	rendererInstance->Draw(VAO, indexQty);
 }

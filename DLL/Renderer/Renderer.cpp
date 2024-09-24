@@ -31,7 +31,7 @@ unsigned int Renderer::CreateVertexArray()
 	return VAO;
 }
 
-void Renderer::SetData(glm::mat4 model, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
+void Renderer::SetData(glm::mat4 model, Color color, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -52,7 +52,7 @@ void Renderer::SetData(glm::mat4 model, float* positions, int positionsSize, uns
 
 	int colorUniform = glGetUniformLocation(shaderProgram, "u_Tint");
 	glUseProgram(shaderProgram);
-	glm::vec4 tintColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	glm::vec4 tintColor = glm::vec4(color.r, color.g, color.b, color.a);
 	glUniform4fv(colorUniform, 1, &tintColor[0]);
 }
 

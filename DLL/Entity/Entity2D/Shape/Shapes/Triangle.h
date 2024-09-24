@@ -6,7 +6,7 @@ SIRENITO_API class Triangle : public Shape
 {
 public:
 
-	SIRENITO_API Triangle(glm::vec3 position, float width, float height, Renderer* renderer);
+	SIRENITO_API Triangle(glm::vec3 position, float width, float height, Color color, Renderer* renderer);
 	SIRENITO_API float* GetVertices(float width, float height);
 	SIRENITO_API unsigned int* GetIndices();
 };
