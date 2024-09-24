@@ -7,8 +7,9 @@
 SIRENITO_API class Program : public BaseGame
 {
 private:
-	Rectangle* rectangle;
-	Triangle* triangle;
+	Triangle* leftTriangle;
+	Triangle* rightTriangle;
+
 public:
 	Program(int width, int height, const char* title);
 	~Program();
