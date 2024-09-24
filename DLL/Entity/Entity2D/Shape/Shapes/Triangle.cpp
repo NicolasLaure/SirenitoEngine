@@ -1,6 +1,6 @@
 #include "Triangle.h"
 
-Triangle::Triangle(glm::vec3 position, float width, float height, Renderer* renderer) : Shape(GetVertices(width, height), 9, GetIndices(), 3, renderer)
+Triangle::Triangle(glm::vec3 position, float width, float height, Renderer* renderer) : Shape(GetVertices(width, height), 21, GetIndices(), 3, renderer)
 {
 	SetPosition(position);
 	SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
@@ -11,11 +11,12 @@ Triangle::Triangle(glm::vec3 position, float width, float height, Renderer* rend
 
 float* Triangle::GetVertices(float width, float height)
 {
-	return new float[9]
+	return new float[21]
 		{
-			-width / 2, -height / 2, 0.0f,
-			 width / 2, -height / 2, 0.0f,
-			 0.0f, height / 2, 0.0f,
+			//Positions								//Colors
+			-width / 2, -height / 2, 0.0f,          1.0f, 1.0f, 1.0f, 1.0f,
+			 width / 2, -height / 2, 0.0f,          1.0f, 1.0f, 1.0f, 1.0f,
+			 0.0f     , height / 2 , 0.0f,          1.0f, 1.0f, 1.0f, 1.0f
 		};;
 }
 

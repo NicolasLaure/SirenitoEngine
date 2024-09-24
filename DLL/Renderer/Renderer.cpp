@@ -40,14 +40,20 @@ void Renderer::SetData(glm::mat4 model, float* positions, int positionsSize, uns
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)0);
 	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
 
 	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
 	glUseProgram(shaderProgram);
 	glm::mat4 mvp = MVP_Transformation(model);
 	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &mvp[0][0]);
+
+	int colorUniform = glGetUniformLocation(shaderProgram, "u_Tint");
+	glUseProgram(shaderProgram);
+	glm::vec4 tintColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	glUniform4fv(colorUniform, 1, &tintColor[0]);
 }
 
 void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
@@ -61,7 +67,7 @@ void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
 
 void Renderer::Draw(unsigned int& VAO, int indexQty)
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, (void*)0);
