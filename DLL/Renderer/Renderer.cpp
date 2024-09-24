@@ -6,13 +6,14 @@
 #include <algorithm>
 #include "gtc/matrix_transform.hpp"
 
-SIRENITO_API void Renderer::Clear()
+void Renderer::Clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 Renderer::Renderer(float screenWidth, float screenHeight, Camera* camera)
 {
+	glewInit();
 	projection = glm::ortho(0.0f, screenWidth, screenHeight, 0.0f, -1.0f, 1.0f);
 	mainCamera = camera;
 }
@@ -30,7 +31,7 @@ unsigned int Renderer::CreateVertexArray()
 	return VAO;
 }
 
-void Renderer::SetData(glm::mat4 model, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
+void Renderer::SetData(glm::mat4 model, Color color, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -39,14 +40,20 @@ void Renderer::SetData(glm::mat4 model, float* positions, int positionsSize, uns
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)0);
 	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
 
 	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
 	glUseProgram(shaderProgram);
 	glm::mat4 mvp = MVP_Transformation(model);
 	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &mvp[0][0]);
+
+	int colorUniform = glGetUniformLocation(shaderProgram, "u_Tint");
+	glUseProgram(shaderProgram);
+	glm::vec4 tintColor = glm::vec4(color.r, color.g, color.b, color.a);
+	glUniform4fv(colorUniform, 1, &tintColor[0]);
 }
 
 void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
@@ -60,7 +67,7 @@ void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
 
 void Renderer::Draw(unsigned int& VAO, int indexQty)
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, (void*)0);
