@@ -3,11 +3,15 @@
 #include "Window/Window.h"
 #include "KeysEnum.h"
 #include "Utilities/Exporter.h"
+#include "Utilities/List.h"
 
 SIRENITO_API class Input
 {
 private:
 	GLFWwindow* window;
+	List<Keys> pressedKeys;
+
+	SIRENITO_API void ClearReleasedKeys();
 public:
 	SIRENITO_API Input(GLFWwindow* window);
 	SIRENITO_API ~Input();

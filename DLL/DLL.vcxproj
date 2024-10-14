@@ -194,6 +194,8 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="Utilities\Color.h" />
     <ClInclude Include="Utilities\Exporter.h" />
     <ClInclude Include="Utilities\FileReader.h" />
+    <ClInclude Include="Utilities\List.h" />
+    <ClInclude Include="Utilities\Node.h" />
     <ClInclude Include="Utilities\Vector2.h" />
     <ClInclude Include="Window\Window.h" />
   </ItemGroup>
