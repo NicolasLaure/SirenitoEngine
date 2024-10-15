@@ -89,7 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)DLL;$(SolutionDir)libs\glm;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glfw-3.4\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)DLL;$(SolutionDir)libs\glm;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\stb_image</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
