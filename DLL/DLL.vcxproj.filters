@@ -55,6 +55,7 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Entity\Entity2D\Sprite\Sprite.cpp">
+    <ClCompile Include="Input\Input.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -102,6 +103,16 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Entity\Entity2D\Sprite\Sprite.h">
+    <ClInclude Include="Input\Input.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\KeysEnum.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\List.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Node.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
