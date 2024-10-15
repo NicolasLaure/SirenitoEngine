@@ -53,10 +53,10 @@ float* Sprite::GetVertices(float width, float height)
 {
 	return new float[36]
 		{
-			width / 2, -height / 2, 0.0f,           1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 1.0f,
-			width / 2, height / 2, 0.0f,           1.0f, 1.0f, 1.0f, 1.0f,         1.0f, 0.0f,
-			-width / 2, height / 2, 0.0f,          1.0f, 1.0f, 1.0f, 1.0f,         0.0f, 0.0f,
-			-width / 2, -height / 2, 0.0f,         1.0f, 1.0f, 1.0f, 1.0f,         0.0f, 1.0f
+			width / 2, -height / 2, 0.0f,           1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 0.0f,
+			width / 2, height / 2, 0.0f,           1.0f, 1.0f, 1.0f, 1.0f,         1.0f, 1.0f,
+			-width / 2, height / 2, 0.0f,          1.0f, 1.0f, 1.0f, 1.0f,         0.0f, 1.0f,
+			-width / 2, -height / 2, 0.0f,         1.0f, 1.0f, 1.0f, 1.0f,         0.0f, 0.0f
 		};
 }
 
