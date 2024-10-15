@@ -3,13 +3,14 @@
 #include "Utilities/Vector2.h"
 #include "Utilities/Exporter.h"
 #include "Utilities/Color.h"
+#include "Textures/Texture.h"
 
 SIRENITO_API class Sprite : public Entity2D
 {
 protected:
 	float width;
 	float height;
-	unsigned int texture;
+	Texture texture;
 	Color color;
 
 	SIRENITO_API float* GetVertices(float width, float height);

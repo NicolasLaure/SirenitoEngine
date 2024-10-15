@@ -79,8 +79,8 @@ void Sprite::SetTexture(const char* path)
 
 void Sprite::Draw()
 {
-	rendererInstance->SetData(trs, color, texture, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
-	rendererInstance->Draw(VAO, 6, texture);
+	rendererInstance->SetData(trs, color, texture.GetId(), GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
+	rendererInstance->Draw(VAO, 6, texture.GetId());
 }
 
 float* Sprite::GetVertices(float width, float height)
