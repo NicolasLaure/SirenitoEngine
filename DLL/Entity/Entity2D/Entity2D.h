@@ -11,6 +11,7 @@ protected:
 	unsigned int VAO;
 	unsigned int VBO;
 	unsigned int EBO;
+
 public:
 	SIRENITO_API virtual void Update() override;
 	SIRENITO_API virtual void Draw() override;
