@@ -4,6 +4,9 @@
 
 Sprite::Sprite(glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance)
 {
+	this->width = width;
+	this->height = height;
+
 	this->rendererInstance = rendererInstance;
 	this->color = color;
 	VAO = rendererInstance->CreateVertexArray();
