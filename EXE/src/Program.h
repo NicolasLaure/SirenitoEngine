@@ -5,8 +5,11 @@
 SIRENITO_API class Program : public BaseGame
 {
 private:
+	Sprite* background;
+	Sprite* heart;
 	Sprite* sans;
 	float sansScaleRatio = 0.1f;
+
 public:
 	Program(int width, int height, const char* title);
 	~Program();

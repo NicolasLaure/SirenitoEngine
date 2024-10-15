@@ -15,11 +15,9 @@ unsigned int TextureImporter::ImportTexture(const char* path)
 	int width, height, colorChannels;
 	unsigned char* data = stbi_load(path, &width, &height, &colorChannels, 0);
 
-	GLenum format;
+	GLenum format = GL_RGB;
 	if (colorChannels == 1)
 		format = GL_RED;
-	else if (colorChannels == 3)
-		format = GL_RGB;
 	else if (colorChannels == 4)
 		format = GL_RGBA;
 
