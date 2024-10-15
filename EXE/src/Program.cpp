@@ -31,6 +31,24 @@ void Program::Update()
 	{
 		sansScaleRatio *= -1;
 	}
+
+
+	glm::vec3 dir = glm::vec3(0.0f);
+	float xAxis = 0;
+	float yAxis = 0;
+	if (inputInstance->isKeyPressed(Keys::A))
+		xAxis = -1.0f;
+	if (inputInstance->isKeyPressed(Keys::D))
+		xAxis = 1.0f;
+
+	if (inputInstance->isKeyPressed(Keys::W))
+		yAxis = -1.0f;
+	if (inputInstance->isKeyPressed(Keys::S))
+		yAxis = 1.0f;
+
+	dir = glm::vec3(xAxis,yAxis,0.0f);
+
+	heart->Translate(dir * heartSpeed);
 }
 
 void Program::Draw()

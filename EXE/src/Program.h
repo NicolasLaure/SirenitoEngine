@@ -9,6 +9,7 @@ private:
 	Sprite* heart;
 	Sprite* sans;
 	float sansScaleRatio = 0.1f;
+	float heartSpeed = 5.0f;
 
 public:
 	Program(int width, int height, const char* title);
