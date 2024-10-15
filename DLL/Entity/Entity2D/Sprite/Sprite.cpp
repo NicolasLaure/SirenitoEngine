@@ -20,6 +20,24 @@ Sprite::Sprite(glm::vec3 position, glm::vec3 eulers, float width, float height, 
 	rendererInstance->SetData(trs, color, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
 }
 
+Sprite::Sprite(glm::vec3 position, glm::vec3 eulers, float width, float height, Renderer* rendererInstance)
+{
+	this->width = width;
+	this->height = height;
+
+	this->rendererInstance = rendererInstance;
+	color = Color::white();
+	VAO = rendererInstance->CreateVertexArray();
+	VBO = rendererInstance->CreateBuffer();
+	EBO = rendererInstance->CreateBuffer();
+
+	SetPosition(position);
+	SetRotation(eulers);
+	SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
+
+	rendererInstance->SetData(trs, color, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
+}
+
 Sprite::Sprite(float width, float height, Color color, Renderer* rendererInstance)
 {
 	this->width = width;
@@ -27,6 +45,22 @@ Sprite::Sprite(float width, float height, Color color, Renderer* rendererInstanc
 
 	this->rendererInstance = rendererInstance;
 	this->color = color;
+	VAO = rendererInstance->CreateVertexArray();
+	VBO = rendererInstance->CreateBuffer();
+	EBO = rendererInstance->CreateBuffer();
+
+	rendererInstance->SetData(trs, color, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
+}
+
+Sprite::Sprite(float width, float height, Renderer* rendererInstance)
+{
+	this->width = width;
+	this->height = height;
+
+	this->rendererInstance = rendererInstance;
+
+	color = Color::white();
+
 	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
@@ -53,10 +87,10 @@ float* Sprite::GetVertices(float width, float height)
 {
 	return new float[36]
 		{
-			width / 2, -height / 2, 0.0f,           1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 0.0f,
-			width / 2, height / 2, 0.0f,           1.0f, 1.0f, 1.0f, 1.0f,         1.0f, 1.0f,
-			-width / 2, height / 2, 0.0f,          1.0f, 1.0f, 1.0f, 1.0f,         0.0f, 1.0f,
-			-width / 2, -height / 2, 0.0f,         1.0f, 1.0f, 1.0f, 1.0f,         0.0f, 0.0f
+			width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+				width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+				-width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+				-width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f
 		};
 }
 

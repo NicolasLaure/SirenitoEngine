@@ -17,7 +17,9 @@ protected:
 public:
 
 	SIRENITO_API Sprite(glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API Sprite(glm::vec3 position, glm::vec3 eulers, float width, float height, Renderer* rendererInstance);
 	SIRENITO_API Sprite(float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API Sprite(float width, float height, Renderer* rendererInstance);
 	SIRENITO_API ~Sprite();
 
 	SIRENITO_API void SetTexture(const char* path);
