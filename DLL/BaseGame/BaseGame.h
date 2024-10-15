@@ -7,6 +7,7 @@
 #include "Window/Window.h"
 #include "Camera/Camera.h"
 #include "Renderer/Renderer.h"
+#include "Input/Input.h"
 
 SIRENITO_API class BaseGame
 {
@@ -17,6 +18,7 @@ public:
 	Camera* mainCamera = nullptr;
 	Window* windowInstance = nullptr;
 	Renderer* rendererInstance = nullptr;
+	Input* inputInstance = nullptr;
 
 	SIRENITO_API BaseGame(int width, int height, const char* title);
 	SIRENITO_API void RunProgram();

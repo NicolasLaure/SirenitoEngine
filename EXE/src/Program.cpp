@@ -15,7 +15,12 @@ Program::~Program()
 
 void Program::Update()
 {
-	rectangle->Translate(glm::vec3(400.0f * deltaTime, 100.0f * deltaTime, 0.0f));
+	if (inputInstance->isKeyDown(Keys::A))
+		rectangle->Translate(glm::vec3(-10.0f, 0.0f, 0.0f));
+
+	if (inputInstance->isKeyPressed(Keys::D))
+		rectangle->Translate(glm::vec3(10.0f, 0.0f, 0.0f));
+
 	rectangle->Rotate(glm::vec3(0.0f, 0.0f, 20.0f * deltaTime));
 }
 

@@ -174,6 +174,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="Entity\Entity2D\Shape\Shape.cpp" />
     <ClCompile Include="Entity\Entity2D\Shape\Shapes\Rectangle.cpp" />
     <ClCompile Include="Entity\Entity2D\Shape\Shapes\Triangle.cpp" />
+    <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
     <ClCompile Include="Utilities\Color.cpp" />
     <ClCompile Include="Utilities\FileReader.cpp" />
@@ -187,10 +188,14 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="Entity\Entity2D\Shape\Shape.h" />
     <ClInclude Include="Entity\Entity2D\Shape\Shapes\Rectangle.h" />
     <ClInclude Include="Entity\Entity2D\Shape\Shapes\Triangle.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\KeysEnum.h" />
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Utilities\Color.h" />
     <ClInclude Include="Utilities\Exporter.h" />
     <ClInclude Include="Utilities\FileReader.h" />
+    <ClInclude Include="Utilities\List.h" />
+    <ClInclude Include="Utilities\Node.h" />
     <ClInclude Include="Utilities\Vector2.h" />
     <ClInclude Include="Window\Window.h" />
   </ItemGroup>

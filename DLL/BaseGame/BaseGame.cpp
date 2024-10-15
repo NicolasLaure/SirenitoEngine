@@ -17,6 +17,7 @@ BaseGame::BaseGame(int width, int height, const char* title)
 	windowInstance = new Window(width, height, title);
 	mainCamera = new Camera();
 	rendererInstance = new Renderer(width, height, mainCamera);
+	inputInstance = new Input(windowInstance->GetWindow());
 
 	FileReader fileReader;
 	const char* vertexPath = "res/shaders/BasicVertex.txt";
@@ -42,20 +43,19 @@ void BaseGame::RunProgram()
 		std::cout << deltaTime;
 		currentTime = glfwGetTime();
 
+		inputInstance->UpdateInput();
 		Update();
 		/* Render all loaded 2D entities */
 		Draw();
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(windowInstance->GetWindow());
-
-		/* Poll for and process events */
-		glfwPollEvents();
 	}
 
 	delete mainCamera;
 	delete windowInstance;
 	delete rendererInstance;
+	delete inputInstance;
 	glfwTerminate();
 	return;
 }
