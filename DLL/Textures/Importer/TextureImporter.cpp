@@ -7,10 +7,10 @@ TextureImporter::TextureImporter()
 {
 }
 
-unsigned int TextureImporter::ImportTexture(const char* path)
+Texture TextureImporter::ImportTexture(const char* path)
 {
-	unsigned int texture;
-	glGenTextures(1, &texture);
+	unsigned int textureID;
+	glGenTextures(1, &textureID);
 
 	int width, height, colorChannels;
 	unsigned char* data = stbi_load(path, &width, &height, &colorChannels, 0);
@@ -21,7 +21,7 @@ unsigned int TextureImporter::ImportTexture(const char* path)
 	else if (colorChannels == 4)
 		format = GL_RGBA;
 
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -32,6 +32,6 @@ unsigned int TextureImporter::ImportTexture(const char* path)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	stbi_image_free(data);
-	return texture;
+	return Texture(textureID, width, height);
 }
 

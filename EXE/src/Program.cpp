@@ -5,15 +5,12 @@
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
 	float sansSize = 150;
-	sans = new Sprite(glm::vec3(width / 2.0f, height / 2.0f - sansSize, 0.0f), glm::vec3(0.0f), sansSize, sansSize, rendererInstance);
-	sans->SetTexture("res/textures/sans-dance.jpg");
+	sans = new Sprite("res/textures/sans-dance.jpg", glm::vec3(width / 2.0f, height / 2.0f - sansSize, 0.0f), glm::vec3(0.0f), sansSize, sansSize, rendererInstance);
 
 	float friskSize = 40;
-	heart = new Sprite(glm::vec3(width / 2.0f, height / 2.0f + friskSize, 0.0f), glm::vec3(0.0f), friskSize, friskSize, rendererInstance);
-	heart->SetTexture("res/textures/heart.png");
+	heart = new Sprite("res/textures/heart.png", glm::vec3(width / 2.0f, height / 2.0f + friskSize, 0.0f), glm::vec3(0.0f), friskSize, friskSize, rendererInstance);
 
-	background = new Sprite(glm::vec3(width / 2.0f, height / 2.0f, 0.0f), glm::vec3(0.0f), width, height, rendererInstance);
-	background->SetTexture("res/textures/background.png");
+	background = new Sprite("res/textures/background.png", glm::vec3(width / 2.0f, height / 2.0f, 0.0f), glm::vec3(0.0f), width, height, rendererInstance);
 }
 
 Program::~Program()
@@ -32,7 +29,6 @@ void Program::Update()
 		sansScaleRatio *= -1;
 	}
 
-
 	glm::vec3 dir = glm::vec3(0.0f);
 	float xAxis = 0;
 	float yAxis = 0;
@@ -46,7 +42,7 @@ void Program::Update()
 	if (inputInstance->isKeyPressed(Keys::S))
 		yAxis = 1.0f;
 
-	dir = glm::vec3(xAxis,yAxis,0.0f);
+	dir = glm::vec3(xAxis, yAxis, 0.0f);
 
 	heart->Translate(dir * heartSpeed);
 }

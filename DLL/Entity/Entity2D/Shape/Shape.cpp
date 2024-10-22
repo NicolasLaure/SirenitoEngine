@@ -16,7 +16,7 @@ Shape::Shape(glm::vec3 position, glm::vec3 eulers, Color color, float* vertices,
 	SetRotation(eulers);
 	SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 
-	rendererInstance->SetData(trs, color, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(trs, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
 
 Shape::Shape(Color color, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance)
@@ -40,6 +40,6 @@ Shape::~Shape()
 
 void Shape::Draw()
 {
-	rendererInstance->SetData(trs, color, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(trs, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 	rendererInstance->Draw(VAO, indexQty);
 }

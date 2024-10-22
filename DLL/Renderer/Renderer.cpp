@@ -31,7 +31,7 @@ unsigned int Renderer::CreateVertexArray()
 	return VAO;
 }
 
-void Renderer::SetData(glm::mat4 model, Color color, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
+void Renderer::SetData(glm::mat4 model, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -40,11 +40,25 @@ void Renderer::SetData(glm::mat4 model, Color color, float* positions, int posit
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)0);
-	glEnableVertexAttribArray(0);
+	if (!hasTexture)
+	{
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)0);
+		glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)(sizeof(float) * 3));
-	glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)(sizeof(float) * 3));
+		glEnableVertexAttribArray(1);
+	}
+	else
+	{
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (void*)0);
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (void*)(sizeof(float) * 3));
+		glEnableVertexAttribArray(1);
+
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (void*)(sizeof(float) * 7));
+		glEnableVertexAttribArray(2);
+	}
 
 	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
 	glUseProgram(shaderProgram);
@@ -55,37 +69,6 @@ void Renderer::SetData(glm::mat4 model, Color color, float* positions, int posit
 	glUseProgram(shaderProgram);
 	glm::vec4 tintColor = glm::vec4(color.r, color.g, color.b, color.a);
 	glUniform4fv(colorUniform, 1, &tintColor[0]);
-}
-
-void Renderer::SetData(glm::mat4 model, Color color, unsigned int texture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
-{
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, positionsSize * sizeof(float), positions, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize * sizeof(unsigned int), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (void*)0);
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (void*)(sizeof(float) * 3));
-	glEnableVertexAttribArray(1);
-
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (void*)(sizeof(float) * 7));
-	glEnableVertexAttribArray(2);
-
-	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
-	glUseProgram(shaderProgram);
-	glm::mat4 mvp = MVP_Transformation(model);
-	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &mvp[0][0]);
-
-	int colorUniform = glGetUniformLocation(shaderProgram, "u_Tint");
-	glUseProgram(shaderProgram);
-	glm::vec4 tintColor = glm::vec4(color.r, color.g, color.b, color.a);
-	glUniform4fv(colorUniform, 1, &tintColor[0]);
-
-
 }
 
 void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
