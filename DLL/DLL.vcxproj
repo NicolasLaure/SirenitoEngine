@@ -167,6 +167,8 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation\Animation.cpp" />
+    <ClCompile Include="Animation\Frame.cpp" />
     <ClCompile Include="BaseGame\BaseGame.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Entity\Entity.cpp" />
@@ -175,16 +177,18 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="Entity\Entity2D\Shape\Shapes\Rectangle.cpp" />
     <ClCompile Include="Entity\Entity2D\Shape\Shapes\Triangle.cpp" />
     <ClCompile Include="Entity\Entity2D\Sprite\Sprite.cpp" />
-    
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
     <ClCompile Include="Textures\Importer\TextureImporter.cpp" />
+    <ClCompile Include="Textures\Texture.cpp" />
     <ClCompile Include="Utilities\Color.cpp" />
     <ClCompile Include="Utilities\FileReader.cpp" />
     <ClCompile Include="Utilities\stb_image\stb_image.cpp" />
     <ClCompile Include="Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\Animation.h" />
+    <ClInclude Include="Animation\Frame.h" />
     <ClInclude Include="BaseGame\BaseGame.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Entity\Entity.h" />
@@ -197,6 +201,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="Input\KeysEnum.h" />
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Textures\Importer\TextureImporter.h" />
+    <ClInclude Include="Textures\Texture.h" />
     <ClInclude Include="Utilities\Color.h" />
     <ClInclude Include="Utilities\Exporter.h" />
     <ClInclude Include="Utilities\FileReader.h" />

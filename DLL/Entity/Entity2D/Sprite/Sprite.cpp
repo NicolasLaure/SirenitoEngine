@@ -52,32 +52,47 @@ void Sprite::SetTexture(const char* path)
 	texture = TextureImporter::ImportTexture(path);
 }
 
-void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity)
+void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, bool canLoop)
 {
 	texture = TextureImporter::ImportTexture(path);
 	if (animation != nullptr)
 		delete animation;
 
-	animation = new Animation(initialCoords, frameWidth, frameHeight, framesQuantity);
+	animation = new Animation(&texture, initialCoords, frameWidth, frameHeight, framesQuantity, canLoop);
 }
 
 void Sprite::Draw()
 {
 	rendererInstance->SetData(trs, color, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
+	if (animation != nullptr)
+		rendererInstance->SetData(trs, color, true, GetVertices(width, height, animation->currentFrame.GetMin(), animation->currentFrame.GetMax()), 36, GetIndices(), 6, VAO, VBO, EBO);
+
 	rendererInstance->Draw(VAO, 6, texture.GetId());
 }
-
 
 float* Sprite::GetVertices(float width, float height)
 {
 	return new float[36]
 		{
-			width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-				width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-				-width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-				-width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f
+			width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, //Bottom Right
+				width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, //Top Right
+				-width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, //Top Left
+				-width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f  //Bottom Left
 		};
 }
+
+float* Sprite::GetVertices(float width, float height, Vector2f minCoords, Vector2f maxCoords)
+{
+	return new float[36]
+		{
+			width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, maxCoords.y, //Bottom Right
+				width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, minCoords.y, //Top Right
+				-width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, minCoords.y, //Top Left
+				-width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, maxCoords.y  //Bottom Left
+		};
+}
+
+
 
 unsigned int* Sprite::GetIndices()
 {
@@ -86,4 +101,9 @@ unsigned int* Sprite::GetIndices()
 			0, 1, 3,
 				1, 2, 3
 		};
+}
+
+void Sprite::SetUVCoords(Vector2f minCoords, Vector2f maxCoords)
+{
+
 }

@@ -6,7 +6,7 @@ Triangle::Triangle(glm::vec3 position, float width, float height, Color color, R
 	SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 
-	rendererInstance->SetData(trs,color, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(trs,color,false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
 
 float* Triangle::GetVertices(float width, float height)

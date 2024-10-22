@@ -63,12 +63,14 @@ void Renderer::SetData(glm::mat4 model, Color color, bool hasTexture, float* pos
 	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
 	glUseProgram(shaderProgram);
 	glm::mat4 mvp = MVP_Transformation(model);
-	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &mvp[0][0]);
+	glUniformMatrix4fv(mat4Uniform, 1,GL_FALSE, &mvp[0][0]);
 
 	int colorUniform = glGetUniformLocation(shaderProgram, "u_Tint");
 	glUseProgram(shaderProgram);
 	glm::vec4 tintColor = glm::vec4(color.r, color.g, color.b, color.a);
 	glUniform4fv(colorUniform, 1, &tintColor[0]);
+
+
 }
 
 void Renderer::AddVertices(Vector2f vertices[], int vertexQty)

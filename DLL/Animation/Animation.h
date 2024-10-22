@@ -9,13 +9,18 @@ SIRENITO_API class Animation
 {
 private:
 	std::vector<Frame> frames;
+	bool canLoop;
+	Texture* texture;
 
-	void CalculateFrames(Vector2f anchorPos, int frameWidth, int frameHeight, int quantity);
+	SIRENITO_API void CalculateFrames(Vector2f anchorPos, int frameWidth, int frameHeight, int quantity);
 public:
+	Frame currentFrame;
+	int currentIndex;
 
-	Animation(Vector2f anchorPos, int frameWidth, int frameHeight);
-	Animation(Vector2f anchorPos, int frameWidth, int frameHeight, int quantity);
+	SIRENITO_API Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, bool canLoop);
+	SIRENITO_API Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, int quantity, bool canLoop);
 
-	Frame GetFrame(int index);
-	std::vector<Frame> GetFrames();
+	SIRENITO_API void SetCanLoop(bool value);
+	SIRENITO_API void SetCurrentFrame(int index);
+	SIRENITO_API void NextFrame();
 };

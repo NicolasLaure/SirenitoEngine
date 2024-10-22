@@ -10,5 +10,8 @@ private:
 	Vector2f maxCoords;
 public:
 
-	Frame(Vector2f minCoords, Vector2f maxCoords);
+	SIRENITO_API Frame();
+	SIRENITO_API Frame(Vector2f minCoords, Vector2f maxCoords);
+	SIRENITO_API Vector2f GetMin();
+	SIRENITO_API Vector2f GetMax();
 };
