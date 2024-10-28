@@ -7,7 +7,7 @@ SIRENITO_API class Program : public BaseGame
 private:
 	Sprite* background;
 	Sprite* heart;
-	Sprite* sans;
+	Sprite* explosion;
 	float sansScaleRatio = 0.1f;
 	float heartSpeed = 5.0f;
 

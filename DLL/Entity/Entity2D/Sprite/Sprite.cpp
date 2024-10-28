@@ -2,29 +2,29 @@
 #include "Textures/Importer/TextureImporter.h"
 
 
-Sprite::Sprite(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance)
+Sprite::Sprite(const char* texturePath, int textureWidth, int textureHeight, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance)
 {
-	Init(texturePath, position, eulers, width, height, color, rendererInstance);
+	Init(texturePath, textureWidth, textureHeight, position, eulers, width, height, color, rendererInstance);
 }
 
-Sprite::Sprite(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Renderer* rendererInstance)
+Sprite::Sprite(const char* texturePath, int textureWidth, int textureHeight, glm::vec3 position, glm::vec3 eulers, float width, float height, Renderer* rendererInstance)
 {
-	Init(texturePath, position, eulers, width, height, Color::white(), rendererInstance);
+	Init(texturePath, textureWidth, textureHeight, position, eulers, width, height, Color::white(), rendererInstance);
 }
 
-Sprite::Sprite(const char* texturePath, float width, float height, Color color, Renderer* rendererInstance)
+Sprite::Sprite(const char* texturePath, int textureWidth, int textureHeight, float width, float height, Color color, Renderer* rendererInstance)
 {
-	Init(texturePath, glm::vec3(0), glm::vec3(0), width, height, color, rendererInstance);
+	Init(texturePath, textureWidth, textureHeight, glm::vec3(0), glm::vec3(0), width, height, color, rendererInstance);
 }
 
-Sprite::Sprite(const char* texturePath, float width, float height, Renderer* rendererInstance)
+Sprite::Sprite(const char* texturePath, int textureWidth, int textureHeight, float width, float height, Renderer* rendererInstance)
 {
-	Init(texturePath, glm::vec3(0), glm::vec3(0), width, height, Color::white(), rendererInstance);
+	Init(texturePath, textureWidth, textureHeight, glm::vec3(0), glm::vec3(0), width, height, Color::white(), rendererInstance);
 }
 
-void Sprite::Init(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance)
+void Sprite::Init(const char* texturePath, int textureWidth, int textureHeight, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance)
 {
-	this->texture = TextureImporter::ImportTexture(texturePath);
+	this->texture = TextureImporter::ImportTexture(texturePath, width, height);
 	this->width = width;
 	this->height = height;
 
@@ -47,14 +47,14 @@ Sprite::~Sprite()
 		delete animation;
 }
 
-void Sprite::SetTexture(const char* path)
+void Sprite::SetTexture(const char* path, int textureWidth, int textureHeight)
 {
-	texture = TextureImporter::ImportTexture(path);
+	texture = TextureImporter::ImportTexture(path, textureWidth, textureHeight);
 }
 
-void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, bool canLoop)
+void Sprite::SetAnimation(const char* path, int textureWidth, int textureHeight, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, bool canLoop)
 {
-	texture = TextureImporter::ImportTexture(path);
+	texture = TextureImporter::ImportTexture(path, textureWidth, textureHeight);
 	if (animation != nullptr)
 		delete animation;
 
@@ -63,9 +63,10 @@ void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWid
 
 void Sprite::Draw()
 {
-	rendererInstance->SetData(trs, color, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
 	if (animation != nullptr)
 		rendererInstance->SetData(trs, color, true, GetVertices(width, height, animation->currentFrame.GetMin(), animation->currentFrame.GetMax()), 36, GetIndices(), 6, VAO, VBO, EBO);
+	else
+		rendererInstance->SetData(trs, color, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
 
 	rendererInstance->Draw(VAO, 6, texture.GetId());
 }
@@ -101,9 +102,4 @@ unsigned int* Sprite::GetIndices()
 			0, 1, 3,
 				1, 2, 3
 		};
-}
-
-void Sprite::SetUVCoords(Vector2f minCoords, Vector2f maxCoords)
-{
-
 }

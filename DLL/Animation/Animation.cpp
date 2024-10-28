@@ -6,6 +6,8 @@ Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int f
 	currentIndex = 0;
 	this->canLoop = canLoop;
 	CalculateFrames(anchorPos, frameWidth, frameHeight, 1);
+	if (frames.size() > 0)
+		SetCurrentFrame(currentIndex);
 }
 
 Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, int quantity, bool canLoop)
@@ -14,6 +16,8 @@ Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int f
 	currentIndex = 0;
 	this->canLoop = canLoop;
 	CalculateFrames(anchorPos, frameWidth, frameHeight, quantity);
+	if (frames.size() > 0)
+		SetCurrentFrame(currentIndex);
 }
 
 void Animation::SetCanLoop(bool value)
@@ -36,13 +40,16 @@ void Animation::NextFrame()
 			currentIndex = 0;
 	}
 
+	currentFrame = frames[currentIndex];
 }
 
 void Animation::CalculateFrames(Vector2f anchorPos, int frameWidth, int frameHeight, int quantity)
 {
+	int textureWidth = texture->GetWidth();
+	int textureHeight = texture->GetHeight();
 	for (int i = 0; i < quantity; i++)
 	{
-		frames.push_back(Frame({ (anchorPos.x + frameWidth * i) / texture->GetWidth(), anchorPos.y / texture->GetHeight() },
-			{ (anchorPos.x + frameWidth + frameWidth * i) / texture->GetWidth(), (anchorPos.y + frameHeight) / texture->GetHeight() }));
+		frames.push_back(Frame({ (anchorPos.x + frameWidth * i) / textureWidth, anchorPos.y / textureHeight },
+			{ (anchorPos.x + frameWidth + (frameWidth * i)) / textureWidth, (anchorPos.y + frameHeight) / textureHeight }));
 	}
 }

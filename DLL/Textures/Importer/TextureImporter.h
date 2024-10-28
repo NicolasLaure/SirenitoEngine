@@ -6,5 +6,5 @@ SIRENITO_API class TextureImporter
 {
 public:
 	SIRENITO_API TextureImporter();
-	SIRENITO_API static Texture ImportTexture(const char* path);
+	SIRENITO_API static Texture ImportTexture(const char* path, int width, int height);
 };
