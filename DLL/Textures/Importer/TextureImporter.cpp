@@ -7,7 +7,7 @@ TextureImporter::TextureImporter()
 {
 }
 
-Texture TextureImporter::ImportTexture(const char* path, int width, int height)
+Texture TextureImporter::ImportTexture(const char* path)
 {
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
@@ -32,6 +32,6 @@ Texture TextureImporter::ImportTexture(const char* path, int width, int height)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	stbi_image_free(data);
-	return Texture(textureID, width, height);
+	return Texture(textureID, internalWidth, internalHeight);
 }
 

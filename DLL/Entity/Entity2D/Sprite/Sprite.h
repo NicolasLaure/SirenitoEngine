@@ -15,7 +15,7 @@ protected:
 	Color color;
 
 
-	SIRENITO_API void Init(const char* texturePath, int textureWidth, int textureHeight, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API void Init(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance);
 	SIRENITO_API float* GetVertices(float width, float height);
 	SIRENITO_API float* GetVertices(float width, float height, Vector2f minCoords, Vector2f maxCoords);
 	SIRENITO_API unsigned int* GetIndices();
@@ -23,13 +23,13 @@ protected:
 public:
 	Animation* animation;
 
-	SIRENITO_API Sprite(const char* texturePath, int textureWidth, int textureHeight, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance);
-	SIRENITO_API Sprite(const char* texturePath, int textureWidth, int textureHeight, glm::vec3 position, glm::vec3 eulers, float width, float height, Renderer* rendererInstance);
-	SIRENITO_API Sprite(const char* texturePath, int textureWidth, int textureHeight, float width, float height, Color color, Renderer* rendererInstance);
-	SIRENITO_API Sprite(const char* texturePath, int textureWidth, int textureHeight, float width, float height, Renderer* rendererInstance);
+	SIRENITO_API Sprite(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API Sprite(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Renderer* rendererInstance);
+	SIRENITO_API Sprite(const char* texturePath, float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API Sprite(const char* texturePath, float width, float height, Renderer* rendererInstance);
 	SIRENITO_API ~Sprite();
 
-	SIRENITO_API void SetTexture(const char* path, int textureWidth, int textureHeight);
-	SIRENITO_API void SetAnimation(const char* path, int textureWidth, int textureHeight, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, bool canLoop);
+	SIRENITO_API void SetTexture(const char* path);
+	SIRENITO_API void SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, bool canLoop);
 	SIRENITO_API void Draw() override;
 };

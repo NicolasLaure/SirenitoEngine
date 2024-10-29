@@ -5,13 +5,13 @@
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
 	float sansSize = 150;
-	explosion = new Sprite("res/textures/Explosion-Sheet.png",160,32, glm::vec3(width / 2.0f, height / 2.0f - sansSize, 0.0f), glm::vec3(0.0f), sansSize, sansSize, rendererInstance);
-	explosion->SetAnimation("res/textures/Explosion-Sheet.png", 160, 32, { 0,0 }, 32, 32, 5, true);
+	explosion = new Sprite("res/textures/Explosion-Sheet.png", glm::vec3(width / 2.0f, height / 2.0f - sansSize, 0.0f), glm::vec3(0.0f), sansSize, sansSize, rendererInstance);
+	explosion->SetAnimation("res/textures/Explosion-Sheet.png", { 0,0 }, 32, 32, 5, true);
 
 	float friskSize = 40;
-	heart = new Sprite("res/textures/heart.png", 400, 400, glm::vec3(width / 2.0f, height / 2.0f + friskSize, 0.0f), glm::vec3(0.0f), friskSize, friskSize, rendererInstance);
+	heart = new Sprite("res/textures/heart.png", glm::vec3(width / 2.0f, height / 2.0f + friskSize, 0.0f), glm::vec3(0.0f), friskSize, friskSize, rendererInstance);
 
-	background = new Sprite("res/textures/background.png", 1024, 576, glm::vec3(width / 2.0f, height / 2.0f, 0.0f), glm::vec3(0.0f), width, height, rendererInstance);
+	background = new Sprite("res/textures/background.png", glm::vec3(width / 2.0f, height / 2.0f, 0.0f), glm::vec3(0.0f), width, height, rendererInstance);
 }
 
 Program::~Program()
