@@ -1,6 +1,6 @@
-#include "Program.h"
+#include "src/Program.h"
 
-int main(void)
+int main()
 {
 	Program game = Program(640, 480, "SirenitoEngine");
 	game.RunProgram();

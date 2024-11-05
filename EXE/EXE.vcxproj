@@ -103,6 +103,9 @@ copy /y "$(SolutionDir)bin\DLL\Debug\glfw3.dll" "$(OutDir)"
 copy /y "$(SolutionDir)bin\DLL\Debug\glew32.dll" "$(OutDir)"
 xcopy /y /i /e "$(SolutionDir)res" "$(OutDir)res"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /y /i /e "$(SolutionDir)res" "$(ProjectDir)res"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -174,7 +177,7 @@ copy /y "$(SolutionDir)libs\DLL\Release\glew32.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Program.cpp" />
   </ItemGroup>
   <ItemGroup>
