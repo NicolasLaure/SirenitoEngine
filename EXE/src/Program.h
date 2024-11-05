@@ -1,6 +1,6 @@
 #pragma once
-#include "DLL/BaseGame/BaseGame.h"
-#include "DLL/Entity/Entity2D/Sprite/Sprite.h"
+#include "BaseGame/BaseGame.h"
+#include "Entity/Entity2D/Sprite/Sprite.h"
 
 SIRENITO_API class Program : public BaseGame
 {

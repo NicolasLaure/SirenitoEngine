@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;SIRENITO_EXPORT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)DLL;$(SolutionDir)libs\glm;$(SolutionDir)libs\stb_image</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glm;$(SolutionDir)libs\stb_image;$(ProjectDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,7 +98,8 @@
     </Link>
     <PostBuildEvent>
       <Command>copy /y "$(SolutionDir)libs\glfw-3.4\lib\glfw3.dll" "$(OutDir)"
-copy /y "$(SolutionDir)libs\glew-2.1.0\lib\32bit\glew32.dll" "$(OutDir)"</Command>
+copy /y "$(SolutionDir)libs\glew-2.1.0\lib\32bit\glew32.dll" "$(OutDir)"
+xcopy /y /i /s "$(ProjectDir)include" "$(OutDir)include"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -167,55 +168,55 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation\Animation.cpp" />
-    <ClCompile Include="Animation\Frame.cpp" />
-    <ClCompile Include="BaseGame\BaseGame.cpp" />
-    <ClCompile Include="Camera\Camera.cpp" />
-    <ClCompile Include="Entity\Entity.cpp" />
-    <ClCompile Include="Entity\Entity2D\Entity2D.cpp" />
-    <ClCompile Include="Entity\Entity2D\Shape\Shape.cpp" />
-    <ClCompile Include="Entity\Entity2D\Shape\Shapes\Rectangle.cpp" />
-    <ClCompile Include="Entity\Entity2D\Shape\Shapes\Triangle.cpp" />
-    <ClCompile Include="Entity\Entity2D\Sprite\Sprite.cpp" />
-    <ClCompile Include="Input\Input.cpp" />
-    <ClCompile Include="Renderer\Renderer.cpp" />
-    <ClCompile Include="Textures\Importer\TextureImporter.cpp" />
-    <ClCompile Include="Textures\Texture.cpp" />
-    <ClCompile Include="Utilities\Color.cpp" />
-    <ClCompile Include="Utilities\FileReader.cpp" />
-    <ClCompile Include="Utilities\Quaternion.cpp" />
-    <ClCompile Include="Utilities\stb_image\stb_image.cpp" />
-    <ClCompile Include="Utilities\Vector3.cpp" />
-    <ClCompile Include="Window\Window.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Animation\Animation.h" />
-    <ClInclude Include="Animation\Frame.h" />
-    <ClInclude Include="BaseGame\BaseGame.h" />
-    <ClInclude Include="Camera\Camera.h" />
-    <ClInclude Include="Entity\Entity.h" />
-    <ClInclude Include="Entity\Entity2D\Entity2D.h" />
-    <ClInclude Include="Entity\Entity2D\Shape\Shape.h" />
-    <ClInclude Include="Entity\Entity2D\Shape\Shapes\Rectangle.h" />
-    <ClInclude Include="Entity\Entity2D\Shape\Shapes\Triangle.h" />
-    <ClInclude Include="Entity\Entity2D\Sprite\Sprite.h" />
-    <ClInclude Include="Input\Input.h" />
-    <ClInclude Include="Input\KeysEnum.h" />
-    <ClInclude Include="Renderer\Renderer.h" />
-    <ClInclude Include="Textures\Importer\TextureImporter.h" />
-    <ClInclude Include="Textures\Texture.h" />
-    <ClInclude Include="Utilities\Color.h" />
-    <ClInclude Include="Utilities\Exporter.h" />
-    <ClInclude Include="Utilities\FileReader.h" />
-    <ClInclude Include="Utilities\List.h" />
-    <ClInclude Include="Utilities\Node.h" />
-    <ClInclude Include="Utilities\Quaternion.h" />
-    <ClInclude Include="Utilities\Vector2.h" />
-    <ClInclude Include="Utilities\Vector3.h" />
-    <ClInclude Include="Window\Window.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Animation\Animation.cpp" />
+    <ClCompile Include="src\Animation\Frame.cpp" />
+    <ClCompile Include="src\BaseGame\BaseGame.cpp" />
+    <ClCompile Include="src\Camera\Camera.cpp" />
+    <ClCompile Include="src\Entity\Entity.cpp" />
+    <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp" />
+    <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp" />
+    <ClCompile Include="src\Entity\Entity2D\Shape\Shapes\Rectangle.cpp" />
+    <ClCompile Include="src\Entity\Entity2D\Shape\Shapes\Triangle.cpp" />
+    <ClCompile Include="src\Entity\Entity2D\Sprite\Sprite.cpp" />
+    <ClCompile Include="src\Input\Input.cpp" />
+    <ClCompile Include="src\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Textures\Importer\TextureImporter.cpp" />
+    <ClCompile Include="src\Textures\Texture.cpp" />
+    <ClCompile Include="src\Utilities\Color.cpp" />
+    <ClCompile Include="src\Utilities\FileReader.cpp" />
+    <ClCompile Include="src\Utilities\Quaternion.cpp" />
+    <ClCompile Include="src\Utilities\stb_image\stb_image.cpp" />
+    <ClCompile Include="src\Utilities\Vector3.cpp" />
+    <ClCompile Include="src\Window\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Animation\Animation.h" />
+    <ClInclude Include="include\Animation\Frame.h" />
+    <ClInclude Include="include\BaseGame\BaseGame.h" />
+    <ClInclude Include="include\Camera\Camera.h" />
+    <ClInclude Include="include\Entity\Entity.h" />
+    <ClInclude Include="include\Entity\Entity2D\Entity2D.h" />
+    <ClInclude Include="include\Entity\Entity2D\Shape\Shape.h" />
+    <ClInclude Include="include\Entity\Entity2D\Shape\Shapes\Rectangle.h" />
+    <ClInclude Include="include\Entity\Entity2D\Shape\Shapes\Triangle.h" />
+    <ClInclude Include="include\Entity\Entity2D\Sprite\Sprite.h" />
+    <ClInclude Include="include\Input\Input.h" />
+    <ClInclude Include="include\Input\KeysEnum.h" />
+    <ClInclude Include="include\Renderer\Renderer.h" />
+    <ClInclude Include="include\Textures\Importer\TextureImporter.h" />
+    <ClInclude Include="include\Textures\Texture.h" />
+    <ClInclude Include="include\Utilities\Color.h" />
+    <ClInclude Include="include\Utilities\Exporter.h" />
+    <ClInclude Include="include\Utilities\FileReader.h" />
+    <ClInclude Include="include\Utilities\List.h" />
+    <ClInclude Include="include\Utilities\Node.h" />
+    <ClInclude Include="include\Utilities\Quaternion.h" />
+    <ClInclude Include="include\Utilities\Vector2.h" />
+    <ClInclude Include="include\Utilities\Vector3.h" />
+    <ClInclude Include="include\Window\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

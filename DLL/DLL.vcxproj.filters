@@ -1,142 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Animation\Animation.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseGame\BaseGame.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera\Camera.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\Color.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity\Entity.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity\Entity2D\Entity2D.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\FileReader.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation\Frame.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Input\Input.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity\Entity2D\Shape\Shapes\Rectangle.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Renderer.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity\Entity2D\Shape\Shape.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\stb_image\stb_image.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity\Entity2D\Sprite\Sprite.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Textures\Texture.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Textures\Importer\TextureImporter.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity\Entity2D\Shape\Shapes\Triangle.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\Window.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\Vector3.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\Quaternion.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Animation\Animation.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseGame\BaseGame.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\Camera.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\Color.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Entity.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Entity2D\Entity2D.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\Exporter.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\FileReader.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation\Frame.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Input\Input.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\List.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Input\KeysEnum.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\Node.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Entity2D\Shape\Shapes\Rectangle.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Renderer.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Entity2D\Shape\Shape.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Entity2D\Sprite\Sprite.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures\Texture.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures\Importer\TextureImporter.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Entity2D\Shape\Shapes\Triangle.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\Vector2.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Window\Window.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\Vector3.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\Quaternion.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
@@ -146,5 +10,141 @@
     <Filter Include="Source">
       <UniqueIdentifier>{eae9e986-b948-4007-b95a-1de9a8cd966a}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Window\Window.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\Vector3.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\FileReader.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\Quaternion.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\stb_image\stb_image.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Textures\Importer\TextureImporter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Textures\Texture.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity2D\Shape\Shapes\Triangle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\Frame.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Input.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity2D\Shape\Shapes\Rectangle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Renderer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity2D\Sprite\Sprite.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\Color.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera\Camera.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseGame\BaseGame.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\Animation.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Animation\Animation.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BaseGame\BaseGame.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera\Camera.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Color.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\FileReader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Input\Input.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Input\KeysEnum.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\List.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Node.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Quaternion.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity2D\Shape\Shapes\Rectangle.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity2D\Shape\Shape.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity2D\Sprite\Sprite.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Textures\Texture.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Textures\Importer\TextureImporter.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity2D\Shape\Shapes\Triangle.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Vector2.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Vector3.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Exporter.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Window\Window.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Renderer\Renderer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity2D\Entity2D.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Animation\Frame.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
