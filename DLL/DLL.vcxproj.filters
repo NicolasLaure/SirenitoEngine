@@ -1,48 +1,138 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="BaseGame\BaseGame.cpp" />
-    <ClCompile Include="Camera\Camera.cpp" />
-    <ClCompile Include="Entity\Entity.cpp" />
-    <ClCompile Include="Entity\Entity2D\Entity2D.cpp" />
-    <ClCompile Include="Entity\Entity2D\Shape\Shape.cpp" />
-    <ClCompile Include="Entity\Entity2D\Shape\Shapes\Rectangle.cpp" />
-    <ClCompile Include="Entity\Entity2D\Shape\Shapes\Triangle.cpp" />
-    <ClCompile Include="Entity\Entity2D\Sprite\Sprite.cpp" />
-    <ClCompile Include="Input\Input.cpp" />
-    <ClCompile Include="Renderer\Renderer.cpp" />
-    <ClCompile Include="Textures\Importer\TextureImporter.cpp" />
-    <ClCompile Include="Utilities\Color.cpp" />
-    <ClCompile Include="Utilities\FileReader.cpp" />
-    <ClCompile Include="Utilities\stb_image\stb_image.cpp" />
-    <ClCompile Include="Window\Window.cpp" />
-    <ClCompile Include="Animation\Animation.cpp" />
-    <ClCompile Include="Animation\Frame.cpp" />
+    <ClCompile Include="Animation\Animation.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseGame\BaseGame.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\Camera.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\Color.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Entity.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Entity2D\Entity2D.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\FileReader.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Frame.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Input.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Entity2D\Shape\Shapes\Rectangle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Renderer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Entity2D\Shape\Shape.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\stb_image\stb_image.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Entity2D\Sprite\Sprite.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures\Texture.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures\Importer\TextureImporter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity\Entity2D\Shape\Shapes\Triangle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\Window.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseGame\BaseGame.h" />
-    <ClInclude Include="Camera\Camera.h" />
-    <ClInclude Include="Entity\Entity.h" />
-    <ClInclude Include="Entity\Entity2D\Entity2D.h" />
-    <ClInclude Include="Entity\Entity2D\Shape\Shape.h" />
-    <ClInclude Include="Entity\Entity2D\Shape\Shapes\Rectangle.h" />
-    <ClInclude Include="Entity\Entity2D\Shape\Shapes\Triangle.h" />
-    <ClInclude Include="Entity\Entity2D\Sprite\Sprite.h" />
-    <ClInclude Include="Input\Input.h" />
-    <ClInclude Include="Input\KeysEnum.h" />
-    <ClInclude Include="Renderer\Renderer.h" />
-    <ClInclude Include="Textures\Importer\TextureImporter.h" />
-    <ClInclude Include="Utilities\Color.h" />
-    <ClInclude Include="Utilities\Exporter.h" />
-    <ClInclude Include="Utilities\FileReader.h" />
-    <ClInclude Include="Utilities\List.h" />
-    <ClInclude Include="Utilities\Node.h" />
-    <ClInclude Include="Utilities\Vector2.h" />
-    <ClInclude Include="Window\Window.h" />
-    <ClInclude Include="Animation\Animation.h" />
-    <ClInclude Include="Animation\Frame.h" />
+    <ClInclude Include="Animation\Animation.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGame\BaseGame.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\Camera.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Color.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Entity.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Entity2D\Entity2D.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Exporter.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\FileReader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Frame.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Input.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\List.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\KeysEnum.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Node.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Entity2D\Shape\Shapes\Rectangle.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Renderer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Entity2D\Shape\Shape.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Entity2D\Sprite\Sprite.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures\Texture.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures\Importer\TextureImporter.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Entity2D\Shape\Shapes\Triangle.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Vector2.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\Window.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{4ef96f07-4d49-441b-9f2c-be5b8be5c278}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{eae9e986-b948-4007-b95a-1de9a8cd966a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
