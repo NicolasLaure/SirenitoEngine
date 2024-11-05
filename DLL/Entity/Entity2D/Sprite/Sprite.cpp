@@ -2,27 +2,27 @@
 #include "Textures/Importer/TextureImporter.h"
 
 
-Sprite::Sprite(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance)
+Sprite::Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance)
 {
 	Init(texturePath, position, eulers, width, height, color, rendererInstance);
 }
 
-Sprite::Sprite(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Renderer* rendererInstance)
+Sprite::Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Renderer* rendererInstance)
 {
 	Init(texturePath, position, eulers, width, height, Color::white(), rendererInstance);
 }
 
 Sprite::Sprite(const char* texturePath, float width, float height, Color color, Renderer* rendererInstance)
 {
-	Init(texturePath, glm::vec3(0), glm::vec3(0), width, height, color, rendererInstance);
+	Init(texturePath, Vector3(), Vector3(), width, height, color, rendererInstance);
 }
 
 Sprite::Sprite(const char* texturePath, float width, float height, Renderer* rendererInstance)
 {
-	Init(texturePath, glm::vec3(0), glm::vec3(0), width, height, Color::white(), rendererInstance);
+	Init(texturePath, Vector3(), Vector3(), width, height, Color::white(), rendererInstance);
 }
 
-void Sprite::Init(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance)
+void Sprite::Init(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance)
 {
 	this->texture = TextureImporter::ImportTexture(texturePath);
 	this->width = width;
@@ -36,7 +36,7 @@ void Sprite::Init(const char* texturePath, glm::vec3 position, glm::vec3 eulers,
 
 	SetPosition(position);
 	SetRotation(eulers);
-	SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	SetScale(Vector3(1.0f, 1.0f, 1.0f));
 
 	rendererInstance->SetData(trs, color, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
 }

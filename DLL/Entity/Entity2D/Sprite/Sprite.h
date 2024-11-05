@@ -1,6 +1,7 @@
 #include "Entity/Entity2D/Entity2D.h"
 #include "glm.hpp"
 #include "Utilities/Vector2.h"
+#include "Utilities/Vector3.h"
 #include "Utilities/Exporter.h"
 #include "Utilities/Color.h"
 #include "Animation/Animation.h"
@@ -15,7 +16,7 @@ protected:
 	Color color;
 
 
-	SIRENITO_API void Init(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API void Init(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance);
 	SIRENITO_API float* GetVertices(float width, float height);
 	SIRENITO_API float* GetVertices(float width, float height, Vector2f minCoords, Vector2f maxCoords);
 	SIRENITO_API unsigned int* GetIndices();
@@ -23,8 +24,8 @@ protected:
 public:
 	Animation* animation;
 
-	SIRENITO_API Sprite(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Color color, Renderer* rendererInstance);
-	SIRENITO_API Sprite(const char* texturePath, glm::vec3 position, glm::vec3 eulers, float width, float height, Renderer* rendererInstance);
+	SIRENITO_API Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Renderer* rendererInstance);
 	SIRENITO_API Sprite(const char* texturePath, float width, float height, Color color, Renderer* rendererInstance);
 	SIRENITO_API Sprite(const char* texturePath, float width, float height, Renderer* rendererInstance);
 	SIRENITO_API ~Sprite();

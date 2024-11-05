@@ -55,6 +55,12 @@
     <ClCompile Include="Window\Window.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities\Vector3.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\Quaternion.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\Animation.h">
@@ -121,6 +127,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Window\Window.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Vector3.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Quaternion.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

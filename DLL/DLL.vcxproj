@@ -183,7 +183,9 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="Textures\Texture.cpp" />
     <ClCompile Include="Utilities\Color.cpp" />
     <ClCompile Include="Utilities\FileReader.cpp" />
+    <ClCompile Include="Utilities\Quaternion.cpp" />
     <ClCompile Include="Utilities\stb_image\stb_image.cpp" />
+    <ClCompile Include="Utilities\Vector3.cpp" />
     <ClCompile Include="Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -207,7 +209,9 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="Utilities\FileReader.h" />
     <ClInclude Include="Utilities\List.h" />
     <ClInclude Include="Utilities\Node.h" />
+    <ClInclude Include="Utilities\Quaternion.h" />
     <ClInclude Include="Utilities\Vector2.h" />
+    <ClInclude Include="Utilities\Vector3.h" />
     <ClInclude Include="Window\Window.h" />
   </ItemGroup>
   <ItemGroup>

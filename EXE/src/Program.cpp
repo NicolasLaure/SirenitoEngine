@@ -1,17 +1,18 @@
 #include "Program.h"
-#include "libs/glm/glm.hpp"
 #include "Textures/Importer/TextureImporter.h"
+#include "Utilities/Vector3.h"
+#include "Utilities/Quaternion.h"
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
 	float sansSize = 150;
-	explosion = new Sprite("res/textures/Explosion-Sheet.png", glm::vec3(width / 2.0f, height / 2.0f - sansSize, 0.0f), glm::vec3(0.0f), sansSize, sansSize, rendererInstance);
+	explosion = new Sprite("res/textures/Explosion-Sheet.png", Vector3(width / 2.0f, height / 2.0f - sansSize, 0.0f), Vector3(), sansSize, sansSize, rendererInstance);
 	explosion->SetAnimation("res/textures/Explosion-Sheet.png", { 0,0 }, 32, 32, 5, true);
 
 	float friskSize = 40;
-	heart = new Sprite("res/textures/heart.png", glm::vec3(width / 2.0f, height / 2.0f + friskSize, 0.0f), glm::vec3(0.0f), friskSize, friskSize, rendererInstance);
+	heart = new Sprite("res/textures/heart.png", Vector3(width / 2.0f, height / 2.0f + friskSize, 0.0f), Vector3(), friskSize, friskSize, rendererInstance);
 
-	background = new Sprite("res/textures/background.png", glm::vec3(width / 2.0f, height / 2.0f, 0.0f), glm::vec3(0.0f), width, height, rendererInstance);
+	background = new Sprite("res/textures/background.png", Vector3(width / 2.0f, height / 2.0f, 0.0f), Vector3(), width, height, rendererInstance);
 }
 
 Program::~Program()
@@ -23,7 +24,7 @@ Program::~Program()
 
 void Program::Update()
 {
-	glm::vec3 dir = glm::vec3(0.0f);
+	Vector3 dir = Vector3();
 	float xAxis = 0;
 	float yAxis = 0;
 	if (inputInstance->isKeyPressed(Keys::A))
@@ -36,7 +37,7 @@ void Program::Update()
 	if (inputInstance->isKeyPressed(Keys::S))
 		yAxis = 1.0f;
 
-	dir = glm::vec3(xAxis, yAxis, 0.0f);
+	dir = Vector3(xAxis, yAxis, 0.0f);
 
 	heart->Translate(dir * heartSpeed);
 	explosion->animation->NextFrame();

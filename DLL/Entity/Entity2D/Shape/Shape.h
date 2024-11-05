@@ -16,7 +16,7 @@ protected:
 	Color color;
 public:
 
-	SIRENITO_API Shape(glm::vec3 position, glm::vec3 eulers, Color color, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance);
+	SIRENITO_API Shape(Vector3 position, Vector3 eulers, Color color, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance);
 	SIRENITO_API Shape(Color color, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance);
 	SIRENITO_API ~Shape();
 

@@ -17,9 +17,9 @@ void Entity::Draw()
 {
 }
 
-glm::vec3 Entity::GetPosition()
+Vector3 Entity::GetPosition()
 {
-	return pos;
+	return Vector3::FromGlm(pos);
 }
 
 glm::quat Entity::GetRotation()
@@ -27,26 +27,26 @@ glm::quat Entity::GetRotation()
 	return rotation;
 }
 
-glm::vec3 Entity::GetEulerAngles()
+Vector3 Entity::GetEulerAngles()
 {
-	return glm::eulerAngles(rotation);
+	return Vector3::FromGlm(glm::eulerAngles(rotation));
 }
 
-glm::vec3 Entity::GetScale()
+Vector3 Entity::GetScale()
 {
-	return scale;
+	return Vector3::FromGlm(scale);
 }
 
-void Entity::SetPosition(glm::vec3 newPos)
+void Entity::SetPosition(Vector3 newPos)
 {
-	pos = newPos;
+	pos = newPos.ToGlm();
 	SetTRS(pos, rotation, scale);
 }
 
-void Entity::SetRotation(glm::vec3 eulers)
+void Entity::SetRotation(Vector3 eulers)
 {
 	//if fails, apply radians to each axis
-	SetRotation(glm::quat(eulers));
+	SetRotation(glm::quat(eulers.ToGlm()));
 }
 
 void Entity::SetRotation(glm::quat rotation)
@@ -55,21 +55,21 @@ void Entity::SetRotation(glm::quat rotation)
 	SetTRS(pos, this->rotation, scale);
 }
 
-void Entity::SetRotation(float angle, glm::vec3 axis)
+void Entity::SetRotation(float angle, Vector3 axis)
 {
-	rotation = glm::rotate(glm::mat4(1.0f), angle, axis);
+	rotation = glm::rotate(glm::mat4(1.0f), angle, axis.ToGlm());
 	SetTRS(pos, rotation, scale);
 }
 
-void Entity::SetScale(glm::vec3 newScale)
+void Entity::SetScale(Vector3 newScale)
 {
-	scale = newScale;
+	scale = newScale.ToGlm();
 	SetTRS(pos, rotation, scale);
 }
 
-void Entity::Translate(glm::vec3 translation)
+void Entity::Translate(Vector3 translation)
 {
-	SetPosition(pos + translation);
+	SetPosition(Vector3::FromGlm(pos) + translation);
 }
 
 void Entity::Rotate(glm::quat rotation)
@@ -77,13 +77,13 @@ void Entity::Rotate(glm::quat rotation)
 	SetRotation(this->rotation * rotation);
 }
 
-void Entity::Rotate(glm::vec3 eulers)
+void Entity::Rotate(Vector3 eulers)
 {
-	Rotate(glm::quat(eulers));
+	Rotate(glm::quat(eulers.ToGlm()));
 }
 
 
-void Entity::Scale(glm::vec3 scalation)
+void Entity::Scale(Vector3 scalation)
 {
-	SetScale(scale + scalation);
+	SetScale(Vector3::FromGlm(scale) + scalation);
 }

@@ -6,6 +6,8 @@
 #include "gtc/matrix_transform.hpp"
 #include "gtc/quaternion.hpp"
 
+#include "Utilities/Vector3.h"
+
 SIRENITO_API class Entity
 {
 private:
@@ -22,20 +24,20 @@ public:
 	SIRENITO_API virtual void Update();
 	SIRENITO_API virtual void Draw();
 
-	SIRENITO_API glm::vec3 GetPosition();
+	SIRENITO_API Vector3 GetPosition();
 	SIRENITO_API glm::quat GetRotation();
-	SIRENITO_API glm::vec3 GetEulerAngles();
-	SIRENITO_API glm::vec3 GetScale();
+	SIRENITO_API Vector3 GetEulerAngles();
+	SIRENITO_API Vector3 GetScale();
 
-	SIRENITO_API void SetPosition(glm::vec3 newPos);
-	SIRENITO_API void SetRotation(glm::vec3 eulers);
+	SIRENITO_API void SetPosition(Vector3 newPos);
+	SIRENITO_API void SetRotation(Vector3 eulers);
 	SIRENITO_API void SetRotation(glm::quat rotation);
 
-	SIRENITO_API void SetRotation(float angle, glm::vec3 axis);
-	SIRENITO_API void SetScale(glm::vec3 newScale);
+	SIRENITO_API void SetRotation(float angle, Vector3 axis);
+	SIRENITO_API void SetScale(Vector3 newScale);
 
-	SIRENITO_API void Translate(glm::vec3 translation);
-	SIRENITO_API void Rotate(glm::vec3 eulers);
+	SIRENITO_API void Translate(Vector3 translation);
+	SIRENITO_API void Rotate(Vector3 eulers);
 	SIRENITO_API void Rotate(glm::quat rotation);
-	SIRENITO_API void Scale(glm::vec3 scalation);
+	SIRENITO_API void Scale(Vector3 scalation);
 };
