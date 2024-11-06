@@ -76,8 +76,8 @@ void Animation::CalculateFrames(Vector2f anchorPos, int frameWidth, int frameHei
 	int textureHeight = texture->GetHeight();
 	for (int i = 0; i < quantity; i++)
 	{
-		frames.push_back(Frame({ (anchorPos.x + frameWidth * i) / textureWidth, anchorPos.y / textureHeight },
-			{ (anchorPos.x + frameWidth + (frameWidth * i)) / textureWidth, (anchorPos.y + frameHeight) / textureHeight }));
+		frames.push_back(Frame({ (anchorPos.x + (frameWidth * i)) / textureWidth, (anchorPos.y + frameHeight) / textureHeight },
+			{ (anchorPos.x + frameWidth + frameWidth * i) / textureWidth, anchorPos.y / textureHeight }));
 	}
 }
 
