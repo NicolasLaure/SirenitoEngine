@@ -8,6 +8,8 @@ private:
 	Sprite* background;
 	Sprite* heart;
 	Sprite* explosion;
+	Sprite* sonic;
+
 	float sansScaleRatio = 0.1f;
 	float heartSpeed = 5.0f;
 

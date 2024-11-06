@@ -10,6 +10,10 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	explosion->SetAnimation("res/textures/Explosion-Sheet.png", { 0,0 }, 32, 32, 5, 1, true);
 	explosion->animation->Play();
 
+	sonic = new Sprite("res/textures/sonic.png", Vector3(width / 2.0f, height / 2.0f - sansSize, 0.0f), Vector3(), sansSize, sansSize, rendererInstance);
+	sonic->SetAnimation("res/textures/sonic.png", { 5,0 }, 30, 37, 4, 1, true);
+	sonic->animation->Play();
+
 	float friskSize = 40;
 	heart = new Sprite("res/textures/heart.png", Vector3((float)width / 2.0f, (float)height / 2.0f + friskSize, 0.0f), Vector3(), friskSize, friskSize, rendererInstance);
 
@@ -20,6 +24,7 @@ Program::~Program()
 {
 	delete explosion;
 	delete heart;
+	delete sonic;
 	delete background;
 }
 
@@ -52,5 +57,6 @@ void Program::Draw()
 {
 	background->Draw();
 	heart->Draw();
+	sonic->Draw();
 	explosion->Draw();
 }
