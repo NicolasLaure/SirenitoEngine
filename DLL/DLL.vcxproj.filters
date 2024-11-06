@@ -72,6 +72,8 @@
     <ClCompile Include="src\Animation\Animation.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="include\Utilities\Time\Time.cpp" />
+    <ClCompile Include="include\Utilities\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -144,6 +146,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Animation\Frame.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Time\Time.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

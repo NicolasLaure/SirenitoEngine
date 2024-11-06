@@ -21,3 +21,13 @@ Vector2f Frame::GetMax()
 {
 	return maxCoords;
 }
+
+bool Frame::operator==(Frame other)
+{
+	return this->minCoords == other.minCoords && this->maxCoords == other.maxCoords;
+}
+
+bool Frame::operator!=(Frame other)
+{
+	return !(*this == other);
+}

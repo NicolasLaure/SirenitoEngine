@@ -1,4 +1,5 @@
 #include "Animation/Animation.h"
+#include "Utilities/Time/Time.h"
 
 Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, bool canLoop)
 {
@@ -10,11 +11,13 @@ Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int f
 		SetCurrentFrame(currentIndex);
 }
 
-Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, int quantity, bool canLoop)
+Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, int quantity, float duration, bool canLoop)
 {
 	this->texture = texture;
 	currentIndex = 0;
 	this->canLoop = canLoop;
+	_duration = duration;
+
 	CalculateFrames(anchorPos, frameWidth, frameHeight, quantity);
 	if (frames.size() > 0)
 		SetCurrentFrame(currentIndex);
@@ -43,6 +46,30 @@ void Animation::NextFrame()
 	currentFrame = frames[currentIndex];
 }
 
+void Animation::UpdateAnimation()
+{
+	if (!_isPlaying)
+		return;
+
+	float frameDuration = _duration / frames.size();
+	_currentTime = Time::GetTime() - _startTime;
+	if (_currentTime > _duration && !canLoop)
+	{
+		if (currentFrame != frames[frames.size() - 1])
+			currentFrame = frames[frames.size() - 1];
+		return;
+	}
+
+	while (_currentTime > _duration)
+	{
+		_currentTime -= _duration;
+	}
+
+	Frame nextFrame = frames[static_cast<int>(_currentTime / frameDuration)];
+	if (currentFrame != nextFrame)
+		currentFrame = nextFrame;
+}
+
 void Animation::CalculateFrames(Vector2f anchorPos, int frameWidth, int frameHeight, int quantity)
 {
 	int textureWidth = texture->GetWidth();
@@ -52,4 +79,30 @@ void Animation::CalculateFrames(Vector2f anchorPos, int frameWidth, int frameHei
 		frames.push_back(Frame({ (anchorPos.x + frameWidth * i) / textureWidth, anchorPos.y / textureHeight },
 			{ (anchorPos.x + frameWidth + (frameWidth * i)) / textureWidth, (anchorPos.y + frameHeight) / textureHeight }));
 	}
+}
+
+void Animation::Play()
+{
+	_isPlaying = true;
+	if (_startTime == 0.0f)
+		_startTime = Time::GetTime();
+	else
+		_startTime += Time::GetTime() - _pauseTime;
+}
+
+void Animation::Pause()
+{
+	_isPlaying = false;
+	_pauseTime = Time::GetTime();
+}
+void Animation::Stop()
+{
+	_isPlaying = false;
+	_startTime = 0.0f;
+}
+
+void Animation::PlayFromStart()
+{
+	_isPlaying = true;
+	_startTime = Time::GetTime();
 }

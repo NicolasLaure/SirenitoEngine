@@ -31,6 +31,6 @@ public:
 	SIRENITO_API ~Sprite();
 
 	SIRENITO_API void SetTexture(const char* path);
-	SIRENITO_API void SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, bool canLoop);
+	SIRENITO_API void SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, float animationDuration, bool canLoop);
 	SIRENITO_API void Draw() override;
 };

@@ -52,19 +52,22 @@ void Sprite::SetTexture(const char* path)
 	texture = TextureImporter::ImportTexture(path);
 }
 
-void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, bool canLoop)
+void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, float animationDuration, bool canLoop)
 {
 	texture = TextureImporter::ImportTexture(path);
 	if (animation != nullptr)
 		delete animation;
 
-	animation = new Animation(&texture, initialCoords, frameWidth, frameHeight, framesQuantity, canLoop);
+	animation = new Animation(&texture, initialCoords, frameWidth, frameHeight, framesQuantity, animationDuration, canLoop);
 }
 
 void Sprite::Draw()
 {
 	if (animation != nullptr)
+	{
+		animation->UpdateAnimation();
 		rendererInstance->SetData(trs, color, true, GetVertices(width, height, animation->currentFrame.GetMin(), animation->currentFrame.GetMax()), 36, GetIndices(), 6, VAO, VBO, EBO);
+	}
 	else
 		rendererInstance->SetData(trs, color, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
 

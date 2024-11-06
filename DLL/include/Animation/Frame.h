@@ -14,4 +14,7 @@ public:
 	SIRENITO_API Frame(Vector2f minCoords, Vector2f maxCoords);
 	SIRENITO_API Vector2f GetMin();
 	SIRENITO_API Vector2f GetMax();
+
+	SIRENITO_API bool operator ==(Frame other);
+	SIRENITO_API bool operator !=(Frame other);
 };
