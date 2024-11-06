@@ -13,7 +13,6 @@ BaseGame::BaseGame(int width, int height, const char* title)
 	if (!glfwInit())
 		return;
 
-
 	windowInstance = new Window(width, height, title);
 	mainCamera = new Camera();
 	rendererInstance = new Renderer(width, height, mainCamera);

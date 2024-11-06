@@ -11,7 +11,7 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	explosion->animation->Play();
 
 	float friskSize = 40;
-	heart = new Sprite("res/textures/heart.png", Vector3(width / 2.0f, height / 2.0f + friskSize, 0.0f), Vector3(), friskSize, friskSize, rendererInstance);
+	heart = new Sprite("res/textures/heart.png", Vector3((float)width / 2.0f, (float)height / 2.0f + friskSize, 0.0f), Vector3(), friskSize, friskSize, rendererInstance);
 
 	background = new Sprite("res/textures/background.png", Vector3(width / 2.0f, height / 2.0f, 0.0f), Vector3(), width, height, rendererInstance);
 }

@@ -2,9 +2,9 @@
 
 Vector3::Vector3()
 {
-	x = 0;
-	y = 0;
-	z = 0;
+	x = 0.0f;
+	y = 0.0f;
+	z = 0.0f;
 }
 
 Vector3::Vector3(float x, float y, float z)
@@ -30,15 +30,15 @@ Vector3 Vector3::FromGlm(glm::vec3 vec3)
 
 Vector3 Vector3::operator+(Vector3 right)
 {
-	return Vector3();
+	return Vector3(this->x + right.x, this->y + right.y, this->z + right.z);
 }
 
 Vector3 Vector3::operator-(Vector3 right)
 {
-	return Vector3();
+	return Vector3(this->x - right.x, this->y - right.y, this->z - right.z);
 }
 
 Vector3 Vector3::operator*(float scale)
 {
-	return Vector3();
+	return Vector3(x * scale, y * scale, z * scale);
 }
