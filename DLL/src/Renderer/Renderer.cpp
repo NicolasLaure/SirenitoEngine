@@ -16,6 +16,9 @@ Renderer::Renderer(float screenWidth, float screenHeight, Camera* camera)
 	glewInit();
 	projection = glm::ortho(0.0f, screenWidth, screenHeight, 0.0f, -1.0f, 1.0f);
 	mainCamera = camera;
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 unsigned int Renderer::CreateBuffer()
@@ -63,7 +66,7 @@ void Renderer::SetData(glm::mat4 model, Color color, bool hasTexture, float* pos
 	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
 	glUseProgram(shaderProgram);
 	glm::mat4 mvp = MVP_Transformation(model);
-	glUniformMatrix4fv(mat4Uniform, 1,GL_FALSE, &mvp[0][0]);
+	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &mvp[0][0]);
 
 	int colorUniform = glGetUniformLocation(shaderProgram, "u_Tint");
 	glUseProgram(shaderProgram);
