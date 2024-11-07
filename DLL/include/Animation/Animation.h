@@ -23,7 +23,7 @@ public:
 	Frame currentFrame;
 	int currentIndex;
 
-	SIRENITO_API Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, bool canLoop);
+	SIRENITO_API Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight);
 	SIRENITO_API Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, int quantity, float duration, bool canLoop);
 
 	SIRENITO_API void SetCanLoop(bool value);

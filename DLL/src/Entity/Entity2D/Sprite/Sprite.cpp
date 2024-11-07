@@ -60,6 +60,14 @@ void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWid
 
 	animation = new Animation(&texture, initialCoords, frameWidth, frameHeight, framesQuantity, animationDuration, canLoop);
 }
+void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight)
+{
+	texture = TextureImporter::ImportTexture(path);
+	if (animation != nullptr)
+		delete animation;
+
+	animation = new Animation(&texture, initialCoords, frameWidth, frameHeight);
+}
 
 void Sprite::Draw()
 {

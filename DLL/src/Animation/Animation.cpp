@@ -1,11 +1,11 @@
 #include "Animation/Animation.h"
 #include "Utilities/Time/Time.h"
 
-Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, bool canLoop)
+Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight)
 {
 	this->texture = texture;
+	_isPlaying = false;
 	currentIndex = 0;
-	this->canLoop = canLoop;
 	CalculateFrames(anchorPos, frameWidth, frameHeight, 1);
 	if (frames.size() > 0)
 		SetCurrentFrame(currentIndex);
