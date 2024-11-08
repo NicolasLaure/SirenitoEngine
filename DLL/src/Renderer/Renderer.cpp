@@ -91,9 +91,14 @@ void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
 
 void Renderer::Draw(unsigned int& VAO, int indexQty)
 {
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, (void*)0);
+}
+void Renderer::DrawWire(unsigned int& VAO, int indexQty)
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	Draw(VAO, indexQty);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void Renderer::Draw(unsigned int& VAO, int indexQty, unsigned int texture)

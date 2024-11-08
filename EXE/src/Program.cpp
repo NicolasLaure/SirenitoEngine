@@ -85,8 +85,8 @@ void Program::Draw()
 	sonic->Draw();
 	explosion->Draw();
 
-	leftWall->Draw();
-	rightWall->Draw();
-	upperWall->Draw();
-	lowerWall->Draw();
+	leftWall->DrawWire();
+	rightWall->DrawWire();
+	upperWall->DrawWire();
+	lowerWall->DrawWire();
 }

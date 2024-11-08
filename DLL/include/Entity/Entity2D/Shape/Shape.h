@@ -21,4 +21,5 @@ public:
 	SIRENITO_API ~Shape();
 
 	SIRENITO_API void Draw() override;
+	SIRENITO_API void DrawWire();
 };

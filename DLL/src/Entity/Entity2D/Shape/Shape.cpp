@@ -43,3 +43,9 @@ void Shape::Draw()
 	rendererInstance->SetData(trs, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 	rendererInstance->Draw(VAO, indexQty);
 }
+
+void Shape::DrawWire()
+{
+	rendererInstance->SetData(trs, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->DrawWire(VAO, indexQty);
+}

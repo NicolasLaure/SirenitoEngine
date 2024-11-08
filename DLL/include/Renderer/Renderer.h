@@ -32,6 +32,7 @@ public:
 
 	SIRENITO_API void AddVertices(Vector2f vertices[], int vertexQty);
 	SIRENITO_API void Draw(unsigned int& VAO, int indexQty);
+	SIRENITO_API void DrawWire(unsigned int& VAO, int indexQty);
 	SIRENITO_API void Draw(unsigned int& VAO, int indexQty, unsigned int texture);
 	SIRENITO_API glm::mat4 MVP_Transformation(glm::mat4 model);
 
