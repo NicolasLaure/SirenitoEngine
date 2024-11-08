@@ -22,15 +22,15 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	float wallHeight = 300;
 	float wallWidth = 75;
 	//right
-	leftWall = new Sprite("", Vector3(190, height / 2.0f, 0.0f), Vector3(), wallWidth, wallHeight, rendererInstance);
-	rightWall = new Sprite("", Vector3(444, height / 2.0f, 0.0f), Vector3(), wallWidth, wallHeight, rendererInstance);
+	leftWall = new Rectangle(Vector3(190, height / 2.0f, 0.0f), wallWidth, wallHeight, Color::green(), rendererInstance);
+	rightWall = new Rectangle(Vector3(444, height / 2.0f, 0.0f), wallWidth, wallHeight, Color::green(), rendererInstance);
 
 	//upper
 	wallHeight = 75;
 	wallWidth = 400;
-	upperWall = new Sprite("", Vector3(width / 2, 170, 0.0f), Vector3(), wallWidth, wallHeight, rendererInstance);
+	upperWall = new Rectangle(Vector3(width / 2, 170, 0.0f), wallWidth, wallHeight, Color::green(), rendererInstance);
 	//lower
-	lowerWall = new Sprite("", Vector3(width / 2, 425, 0.0f), Vector3(), wallWidth, wallHeight, rendererInstance);
+	lowerWall = new Rectangle(Vector3(width / 2, 425, 0.0f), wallWidth, wallHeight, Color::green(), rendererInstance);
 }
 
 Program::~Program()
@@ -39,7 +39,7 @@ Program::~Program()
 	delete heart;
 	delete sonic;
 	delete background;
-	
+
 	delete leftWall;
 	delete rightWall;
 	delete lowerWall;
@@ -69,7 +69,7 @@ void Program::Update()
 	dir = Vector3(xAxis, yAxis, 0.0f);
 
 	heart->Translate(dir * heartSpeed);
-	
+
 	heart->HandleCollision(*lowerWall);
 	heart->HandleCollision(*leftWall);
 	heart->HandleCollision(*rightWall);
@@ -84,4 +84,9 @@ void Program::Draw()
 	heart->Draw();
 	sonic->Draw();
 	explosion->Draw();
+
+	//leftWall->Draw();
+	//rightWall->Draw();
+	//upperWall->Draw();
+	//lowerWall->Draw();
 }

@@ -5,8 +5,10 @@ Rectangle::Rectangle(Vector3 position, float width, float height, Color color, R
 	SetPosition(position);
 	SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	SetScale(Vector3(1.0f, 1.0f, 1.0f));
+	collider.width = width;
+	collider.height = height;
 
-	rendererInstance->SetData(trs, color,false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(trs, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
 
 float* Rectangle::GetVertices(float width, float height)

@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseGame/BaseGame.h"
 #include "Entity/Entity2D/Sprite/Sprite.h"
+#include "Entity/Entity2D/Shape/Shapes/Rectangle.h"
 #include <vector>
 
 SIRENITO_API class Program : public BaseGame
@@ -10,10 +11,10 @@ private:
 	Sprite* heart;
 	Sprite* explosion;
 	Sprite* sonic;
-	Sprite* leftWall;
-	Sprite* rightWall;
-	Sprite* lowerWall;
-	Sprite* upperWall;
+	Rectangle* leftWall;
+	Rectangle* rightWall;
+	Rectangle* lowerWall;
+	Rectangle* upperWall;
 
 	float sansScaleRatio = 0.1f;
 	float heartSpeed = 5.0f;
