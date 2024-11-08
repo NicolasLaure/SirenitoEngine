@@ -63,6 +63,10 @@ void Renderer::SetData(glm::mat4 model, Color color, bool hasTexture, float* pos
 		glEnableVertexAttribArray(2);
 	}
 
+	unsigned int shaderProgram = basicShaderProgram;
+	if (hasTexture)
+		shaderProgram = textureShaderProgram;
+
 	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
 	glUseProgram(shaderProgram);
 	glm::mat4 mvp = MVP_Transformation(model);
@@ -88,7 +92,6 @@ void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
 void Renderer::Draw(unsigned int& VAO, int indexQty)
 {
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, indexQty, GL_UNSIGNED_INT, (void*)0);
 }
@@ -107,7 +110,7 @@ glm::mat4 Renderer::MVP_Transformation(glm::mat4 model)
 	return projection * mainCamera->GetViewMatrix() * model;
 }
 
-void Renderer::CompileBasicShader(string vertexSource, string fragmentSource)
+void Renderer::CompileShader(string vertexSource, string fragmentSource, unsigned int* shaderProgram)
 {
 	unsigned int vertexShader;
 
@@ -127,11 +130,11 @@ void Renderer::CompileBasicShader(string vertexSource, string fragmentSource)
 	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
 	glCompileShader(fragmentShader);
 
-	shaderProgram = glCreateProgram();
+	*shaderProgram = glCreateProgram();
 
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
+	glAttachShader(*shaderProgram, vertexShader);
+	glAttachShader(*shaderProgram, fragmentShader);
+	glLinkProgram(*shaderProgram);
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);

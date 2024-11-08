@@ -19,7 +19,8 @@ private:
 	Camera* mainCamera;
 
 public:
-	unsigned int shaderProgram;
+	unsigned int basicShaderProgram;
+	unsigned int textureShaderProgram;
 
 	SIRENITO_API Renderer(float screenWidth, float screenHeight, Camera* camera);
 
@@ -34,5 +35,5 @@ public:
 	SIRENITO_API void Draw(unsigned int& VAO, int indexQty, unsigned int texture);
 	SIRENITO_API glm::mat4 MVP_Transformation(glm::mat4 model);
 
-	SIRENITO_API void CompileBasicShader(string vertexSource, string fragmentSource);
+	SIRENITO_API void CompileShader(string vertexSource, string fragmentSource, unsigned int* shaderProgram);
 };
