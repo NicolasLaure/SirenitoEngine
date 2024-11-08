@@ -171,8 +171,6 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\Utilities\Time\Time.cpp" />
-    <ClCompile Include="include\Utilities\Vector2.cpp" />
     <ClCompile Include="src\Animation\Animation.cpp" />
     <ClCompile Include="src\Animation\Frame.cpp" />
     <ClCompile Include="src\BaseGame\BaseGame.cpp" />
@@ -191,6 +189,8 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\Utilities\FileReader.cpp" />
     <ClCompile Include="src\Utilities\Quaternion.cpp" />
     <ClCompile Include="src\Utilities\stb_image\stb_image.cpp" />
+    <ClCompile Include="src\Utilities\Time\Time.cpp" />
+    <ClCompile Include="src\Utilities\Vector2.cpp" />
     <ClCompile Include="src\Utilities\Vector3.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>

@@ -72,8 +72,12 @@
     <ClCompile Include="src\Animation\Animation.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="include\Utilities\Time\Time.cpp" />
-    <ClCompile Include="include\Utilities\Vector2.cpp" />
+    <ClCompile Include="src\Utilities\Vector2.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\Time\Time.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
