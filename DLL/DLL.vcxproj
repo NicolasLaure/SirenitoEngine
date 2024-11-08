@@ -175,6 +175,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\Animation\Frame.cpp" />
     <ClCompile Include="src\BaseGame\BaseGame.cpp" />
     <ClCompile Include="src\Camera\Camera.cpp" />
+    <ClCompile Include="src\Collisions\CollisionManager.cpp" />
     <ClCompile Include="src\Entity\Entity.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp" />
@@ -199,6 +200,8 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\Animation\Frame.h" />
     <ClInclude Include="include\BaseGame\BaseGame.h" />
     <ClInclude Include="include\Camera\Camera.h" />
+    <ClInclude Include="include\Collisions\Collider.h" />
+    <ClInclude Include="include\Collisions\CollisionManager.h" />
     <ClInclude Include="include\Entity\Entity.h" />
     <ClInclude Include="include\Entity\Entity2D\Entity2D.h" />
     <ClInclude Include="include\Entity\Entity2D\Shape\Shape.h" />

@@ -27,6 +27,8 @@ void Sprite::Init(const char* texturePath, Vector3 position, Vector3 eulers, flo
 	this->texture = TextureImporter::ImportTexture(texturePath);
 	this->width = width;
 	this->height = height;
+	this->collider.width = width;
+	this->collider.height = height;
 
 	this->rendererInstance = rendererInstance;
 	this->color = color;

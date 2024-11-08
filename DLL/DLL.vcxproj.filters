@@ -78,6 +78,9 @@
     <ClCompile Include="src\Utilities\Time\Time.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Collisions\CollisionManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -153,6 +156,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Utilities\Time\Time.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Collisions\CollisionManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Collisions\Collider.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
