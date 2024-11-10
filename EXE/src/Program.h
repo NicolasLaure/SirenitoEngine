@@ -11,6 +11,7 @@ private:
 	Sprite* heart;
 	Sprite* explosion;
 	Sprite* sonic;
+
 	Rectangle* leftWall;
 	Rectangle* rightWall;
 	Rectangle* lowerWall;

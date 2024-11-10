@@ -15,14 +15,33 @@ Texture TextureImporter::ImportTexture(const char* path)
 	int internalWidth, internalHeight, colorChannels;
 	unsigned char* data = stbi_load(path, &internalWidth, &internalHeight, &colorChannels, 0);
 
-	GLenum format = GL_RGB;
-	if (colorChannels == 1)
-		format = GL_RED;
-	else if (colorChannels == 4)
-		format = GL_RGBA;
-
 	glBindTexture(GL_TEXTURE_2D, textureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, format, internalWidth, internalHeight, 0, format, GL_UNSIGNED_BYTE, data);
+
+	GLenum format = GL_RGB;
+	switch (colorChannels)
+	{
+	case 1:
+		format = GL_RED;
+		glTexImage2D(GL_TEXTURE_2D, 0, format, internalWidth, internalHeight, 0, format, GL_UNSIGNED_BYTE, data);
+		break;
+	case 2:
+		format = GL_RG;
+		glTexImage2D(GL_TEXTURE_2D, 0, format, internalWidth, internalHeight, 0, format, GL_UNSIGNED_BYTE, data);
+		break;
+	case 3:
+		format = GL_RGB;
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, internalWidth, internalHeight, 0, format, GL_UNSIGNED_BYTE, data);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+		break;
+	case 4:
+		format = GL_RGBA;
+		glTexImage2D(GL_TEXTURE_2D, 0, format, internalWidth, internalHeight, 0, format, GL_UNSIGNED_BYTE, data);
+		break;
+	default:
+		break;
+	}
+
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 
