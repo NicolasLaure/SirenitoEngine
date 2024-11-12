@@ -1,3 +1,4 @@
+#pragma once
 #include "Entity/Entity2D/Entity2D.h"
 #include "glm.hpp"
 #include "Utilities/Vector2.h"
