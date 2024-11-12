@@ -9,6 +9,8 @@ SIRENITO_API class Program : public BaseGame
 private:
 	Knuckles* knuckles;
 	Rock* rock;
+	Sprite* background;
+
 public:
 	Program(int width, int height, const char* title);
 	~Program();
