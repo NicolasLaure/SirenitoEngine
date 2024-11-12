@@ -113,7 +113,4 @@ void Program::Draw()
 
 	if (hectorAlive)
 		hector->Draw();
-
-	eirika->Draw();
-	hector->Draw();
 }
