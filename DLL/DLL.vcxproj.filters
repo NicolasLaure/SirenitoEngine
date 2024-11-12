@@ -122,9 +122,6 @@
     <ClInclude Include="include\Entity\Entity2D\Shape\Shape.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\Entity\Entity2D\Sprite\Sprite.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="include\Textures\Texture.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -162,6 +159,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Collisions\Collider.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity2D\Sprite\Sprite.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
