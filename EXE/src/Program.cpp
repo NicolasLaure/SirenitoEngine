@@ -5,88 +5,115 @@
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
-	float sansSize = 150;
-	explosion = new Sprite("res/textures/Explosion-Sheet.png", Vector3(width / 2.0f, height / 2.0f - sansSize, 0.0f), Vector3(), sansSize, sansSize, rendererInstance);
-	explosion->SetAnimation("res/textures/Explosion-Sheet.png", { 0,0 }, 32, 32, 5, 1, true);
-	explosion->animation->Play();
+	float spriteSize = 150;
 
-	sonic = new Sprite("res/textures/sonic.png", Vector3(width / 2.0f, height / 2.0f - sansSize, 0.0f), Vector3(), sansSize, sansSize, rendererInstance);
-	sonic->SetAnimation("res/textures/sonic.png", { 5,0 }, 30, 37, 4, 1, true);
-	sonic->animation->Play();
+	eirika = new Sprite("res/textures/Eirika.gif", Vector3(width / 4.0f * 3, height / 2.0f - spriteSize, 0.0f), Vector3(), spriteSize, spriteSize, rendererInstance);
+	eirika->SetAnimation("res/textures/Eirika.gif", { 0, 191 }, 44, 61, 3, 1, true);
 
-	float friskSize = 40;
-	heart = new Sprite("res/textures/heart.png", Vector3((float)width / 2.0f, (float)height / 2.0f + friskSize, 0.0f), Vector3(), friskSize, friskSize, rendererInstance);
-
-	background = new Sprite("res/textures/background.png", Vector3(width / 2.0f, height / 2.0f, 0.0f), Vector3(), width, height, rendererInstance);
-
-	float wallHeight = 300;
-	float wallWidth = 75;
-	//right
-	leftWall = new Rectangle(Vector3(190, height / 2.0f, 0.0f), wallWidth, wallHeight, Color::green(), rendererInstance);
-	rightWall = new Rectangle(Vector3(444, height / 2.0f, 0.0f), wallWidth, wallHeight, Color::green(), rendererInstance);
-
-	//upper
-	wallHeight = 75;
-	wallWidth = 400;
-	upperWall = new Rectangle(Vector3(width / 2, 170, 0.0f), wallWidth, wallHeight, Color::green(), rendererInstance);
-	//lower
-	lowerWall = new Rectangle(Vector3(width / 2, 425, 0.0f), wallWidth, wallHeight, Color::green(), rendererInstance);
+	hector = new Sprite("res/textures/Hector.gif", Vector3(width / 4.0f, height / 2.0f - spriteSize, 0.0f), Vector3(), spriteSize, spriteSize, rendererInstance);
+	hector->SetAnimation("res/textures/Hector.gif", { 8, 289 }, 38, 58, 3, 1, true);
 }
 
 Program::~Program()
 {
-	delete explosion;
-	delete heart;
-	delete sonic;
-	delete background;
-
-	delete leftWall;
-	delete rightWall;
-	delete lowerWall;
-	delete upperWall;
+	delete eirika;
+	delete hector;
 }
 
 void Program::Update()
 {
-	Vector3 dir = Vector3();
-	float xAxis = 0;
-	float yAxis = 0;
+	Vector3 eirikaDir = Vector3();
+	float xAxisEirika = 0;
+	float yAxisEirika = 0;
+
+	Vector3 hectorDir = Vector3();
+	float xAxisHector = 0;
+	float yAxisHector = 0;
+
+	bool eirikaAttacking = false;
+	bool hectorAttacking = false;
+
+	//-------------------------------------------------------------
+
 	if (inputInstance->isKeyPressed(Keys::A))
-		xAxis = -1.0f;
+		xAxisEirika = -1.0f;
+
 	if (inputInstance->isKeyPressed(Keys::D))
-		xAxis = 1.0f;
+		xAxisEirika = 1.0f;
 
 	if (inputInstance->isKeyPressed(Keys::W))
-		yAxis = -1.0f;
+		yAxisEirika = -1.0f;
+
 	if (inputInstance->isKeyPressed(Keys::S))
-		yAxis = 1.0f;
+		yAxisEirika = 1.0f;
 
-	if (inputInstance->isKeyDown(Keys::P))
-		explosion->animation->Pause();
-	if (inputInstance->isKeyDown(Keys::U))
-		explosion->animation->Play();
+	//----------------------------------------------------------------
 
-	dir = Vector3(xAxis, yAxis, 0.0f);
+	if (inputInstance->isKeyPressed(Keys::LEFT))
+		xAxisHector = -1.0f;
 
-	heart->Translate(dir * heartSpeed);
+	if (inputInstance->isKeyPressed(Keys::RIGHT))
+		xAxisHector = 1.0f;
 
-	heart->HandleCollision(*lowerWall);
-	heart->HandleCollision(*leftWall);
-	heart->HandleCollision(*rightWall);
-	heart->HandleCollision(*upperWall);
+	if (inputInstance->isKeyPressed(Keys::UP))
+		yAxisHector = -1.0f;
 
-	heart->SetPrevPos(heart->GetPosition());
+	if (inputInstance->isKeyPressed(Keys::DOWN))
+		yAxisHector = 1.0f;
+
+	eirikaDir = Vector3(xAxisEirika, yAxisEirika, 0.0f);
+	hectorDir = Vector3(xAxisHector, yAxisHector, 0.0f);
+
+	eirika->Translate(eirikaDir * 10);
+	hector->Translate(hectorDir * 10);
+
+	eirika->animation->Pause();
+	hector->animation->Pause();
+
+	if (inputInstance->isKeyPressed(Keys::P))
+	{
+		eirika->animation->Play();
+		eirikaAttacking = true;
+	}
+
+	if (inputInstance->isKeyPressed(Keys::U))
+	{
+		hector->animation->Play();
+		hectorAttacking = true;
+	}
+
+	//-------------------------------------------------------------
+
+	if(hectorAlive)
+		eirika->HandleCollision(*hector);
+
+	if(eirikaAlive)
+		hector->HandleCollision(*eirika);
+
+	eirika->SetPrevPos(eirika->GetPosition());
+	hector->SetPrevPos(hector->GetPosition());
+
+	if (eirika->IsColliding())
+	{
+		if(eirikaAttacking && hectorAlive)
+			hectorAlive = false;
+	}
+
+	if (hector->IsColliding())
+	{
+		if (hectorAttacking && eirikaAlive)
+			eirikaAlive = false;
+	}
 }
 
 void Program::Draw()
 {
-	background->Draw();
-	heart->Draw();
-	sonic->Draw();
-	explosion->Draw();
+	if (eirikaAlive)
+		eirika->Draw();
 
-	leftWall->DrawWire();
-	rightWall->DrawWire();
-	upperWall->DrawWire();
-	lowerWall->DrawWire();
+	if (hectorAlive)
+		hector->Draw();
+
+	eirika->Draw();
+	hector->Draw();
 }

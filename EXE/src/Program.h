@@ -7,18 +7,17 @@
 SIRENITO_API class Program : public BaseGame
 {
 private:
-	Sprite* background;
-	Sprite* heart;
-	Sprite* explosion;
-	Sprite* sonic;
+	Sprite* eirika;
+	Sprite* hector;
 
-	Rectangle* leftWall;
-	Rectangle* rightWall;
-	Rectangle* lowerWall;
-	Rectangle* upperWall;
+	bool eirikaAlive = true;
+	bool hectorAlive = true;
 
-	float sansScaleRatio = 0.1f;
-	float heartSpeed = 5.0f;
+	int eirikaBlinkMax = 40;
+	int eirikaBlinkCount = 0;
+
+	int hectorBlinkMax = 5;
+	int hectorBlinkCount = 0;
 
 public:
 	Program(int width, int height, const char* title);
