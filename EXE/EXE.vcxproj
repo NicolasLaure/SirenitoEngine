@@ -181,11 +181,13 @@ copy /y "$(SolutionDir)libs\DLL\Release\glew32.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\Environment\Rock.cpp" />
     <ClCompile Include="src\Knuckles\Knuckles.cpp" />
     <ClCompile Include="src\Program.cpp" />
+    <ClCompile Include="src\Utilities\FirstPersonController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Environment\Rock.h" />
     <ClInclude Include="src\Knuckles\Knuckles.h" />
     <ClInclude Include="src\Program.h" />
+    <ClInclude Include="src\Utilities\FirstPersonController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

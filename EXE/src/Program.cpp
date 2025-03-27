@@ -6,6 +6,8 @@
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
+	camera = new FirstPersonController(Vector3(0, 0, 500), mainCamera);
+
 	float knucklesSize = 100;
 	float rockSize = 70;
 	float knucklesVerticalOffset = -25;
@@ -22,12 +24,19 @@ Program::~Program()
 	delete knuckles;
 	delete rock;
 	delete background;
+	delete camera;
 }
 
 void Program::Update()
 {
-	knuckles->Update(inputInstance);
 	knuckles->CheckCollision(*rock->GetEntity());
+	camera->Update(inputInstance);
+
+	if (inputInstance->isKeyDown(Keys::F2))
+	{
+		hasPerspective = !hasPerspective;
+		rendererInstance->SetProjection(hasPerspective);
+	}
 }
 
 void Program::Draw()

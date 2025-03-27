@@ -14,15 +14,16 @@ using namespace std;
 SIRENITO_API class Renderer
 {
 private:
-	//vector<float> verticesToDraw;
 	glm::mat4 projection;
 	Camera* mainCamera;
+	float width;
+	float height;
 
 public:
 	unsigned int basicShaderProgram;
 	unsigned int textureShaderProgram;
 
-	SIRENITO_API Renderer(float screenWidth, float screenHeight, Camera* camera);
+	SIRENITO_API Renderer(float screenWidth, float screenHeight, bool hasPerspective, Camera* camera);
 
 	SIRENITO_API void Clear();
 
@@ -37,4 +38,6 @@ public:
 	SIRENITO_API glm::mat4 MVP_Transformation(glm::mat4 model);
 
 	SIRENITO_API void CompileShader(string vertexSource, string fragmentSource, unsigned int* shaderProgram);
+
+	SIRENITO_API void SetProjection(bool shouldBePerspective);
 };

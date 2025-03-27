@@ -12,7 +12,7 @@
 SIRENITO_API class BaseGame
 {
 protected:
-
+	bool hasPerspective = false;
 public:
 	float deltaTime = 0;
 	Camera* mainCamera = nullptr;

@@ -15,7 +15,7 @@ BaseGame::BaseGame(int width, int height, const char* title)
 
 	windowInstance = new Window(width, height, title);
 	mainCamera = new Camera();
-	rendererInstance = new Renderer(width, height, mainCamera);
+	rendererInstance = new Renderer(width, height, hasPerspective, mainCamera);
 	inputInstance = new Input(windowInstance->GetWindow());
 
 	FileReader fileReader;

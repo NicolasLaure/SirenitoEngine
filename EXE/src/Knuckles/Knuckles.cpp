@@ -12,6 +12,7 @@ void Knuckles::Update(Input* inputInstance)
 	Vector3 dir = Vector3();
 	float xAxis = 0;
 	float yAxis = 0;
+	float zAxis = 0;
 	if (inputInstance->isKeyPressed(Keys::A))
 	{
 		float prevX = xAxis;
@@ -23,6 +24,21 @@ void Knuckles::Update(Input* inputInstance)
 	{
 		float prevX = xAxis;
 		xAxis = 1.0f;
+		if (currentState != KnucklesStates::Run && (currentState != KnucklesStates::Push))
+			SetNewState(KnucklesStates::Run);
+	}
+
+	if (inputInstance->isKeyPressed(Keys::W))
+	{
+		float prevZ = zAxis;
+		zAxis = 1.0f;
+		if (currentState != KnucklesStates::Run && (currentState != KnucklesStates::Push))
+			SetNewState(KnucklesStates::Run);
+	}
+	if (inputInstance->isKeyPressed(Keys::S))
+	{
+		float prevZ = zAxis;
+		zAxis = -1.0f;
 		if (currentState != KnucklesStates::Run && (currentState != KnucklesStates::Push))
 			SetNewState(KnucklesStates::Run);
 	}
@@ -40,7 +56,7 @@ void Knuckles::Update(Input* inputInstance)
 			SetNewState(KnucklesStates::Idle);
 	}
 
-	dir = Vector3(xAxis, yAxis, 0.0f);
+	dir = Vector3(xAxis, yAxis, zAxis);
 
 	knuckles->Translate(dir * knucklesSpeed);
 }

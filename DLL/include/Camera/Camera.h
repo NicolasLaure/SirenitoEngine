@@ -1,15 +1,16 @@
 #pragma once
+#include "Utilities/Exporter.h"
 #include "glm.hpp"
 
-class Camera
+SIRENITO_API class Camera
 {
 private:
 	glm::mat4 view;
 
 public:
-	Camera();
+	SIRENITO_API Camera();
 
-	glm::mat4 GetViewMatrix();
-	void SetViewMatrix(glm::mat4 newView);
-	void Translate(glm::vec3 translation);
+	SIRENITO_API glm::mat4 GetViewMatrix();
+	SIRENITO_API void SetViewMatrix(glm::mat4 newView);
+	SIRENITO_API void Translate(glm::vec3 translation);
 };

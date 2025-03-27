@@ -11,10 +11,13 @@ void Renderer::Clear()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-Renderer::Renderer(float screenWidth, float screenHeight, Camera* camera)
+Renderer::Renderer(float screenWidth, float screenHeight, bool hasPerspective, Camera* camera)
 {
 	glewInit();
-	projection = glm::ortho(0.0f, screenWidth, screenHeight, 0.0f, -1.0f, 1.0f);
+	width = screenWidth;
+	height = screenHeight;
+	SetProjection(hasPerspective);
+
 	mainCamera = camera;
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
@@ -143,4 +146,14 @@ void Renderer::CompileShader(string vertexSource, string fragmentSource, unsigne
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
+}
+
+void Renderer::SetProjection(bool shouldBePerspective)
+{
+	if (!shouldBePerspective)
+	{
+		projection = glm::ortho(0.0f, width, 0.0f, height, -1.0f, 1000.0f);
+		return;
+	}
+	projection = glm::perspective(glm::radians(80.0f), (float)width / (float)height, 0.1f, 1000.0f);
 }
