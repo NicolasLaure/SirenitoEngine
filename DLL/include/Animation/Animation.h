@@ -18,13 +18,13 @@ private:
 	float _duration;
 	Frame _previousFrame;
 
-	SIRENITO_API void CalculateFrames(Vector2f anchorPos, int frameWidth, int frameHeight, int quantity);
+	SIRENITO_API void CalculateFrames(Vector2 anchorPos, int frameWidth, int frameHeight, int quantity);
 public:
 	Frame currentFrame;
 	int currentIndex;
 
-	SIRENITO_API Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight);
-	SIRENITO_API Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, int quantity, float duration, bool canLoop);
+	SIRENITO_API Animation(Texture* texture, Vector2 anchorPos, int frameWidth, int frameHeight);
+	SIRENITO_API Animation(Texture* texture, Vector2 anchorPos, int frameWidth, int frameHeight, int quantity, float duration, bool canLoop);
 
 	SIRENITO_API void SetCanLoop(bool value);
 	SIRENITO_API void SetCurrentFrame(int index);

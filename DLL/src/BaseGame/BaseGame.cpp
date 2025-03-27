@@ -16,7 +16,7 @@ BaseGame::BaseGame(int width, int height, const char* title)
 	windowInstance = new Window(width, height, title);
 	mainCamera = new Camera();
 	rendererInstance = new Renderer(width, height, hasPerspective, mainCamera);
-	inputInstance = new Input(windowInstance->GetWindow());
+	inputInstance = new Input(windowInstance);
 
 	FileReader fileReader;
 	const char* basicVertexPath = "res/shaders/BasicVertex.txt";

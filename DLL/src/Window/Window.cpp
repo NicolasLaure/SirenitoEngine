@@ -23,3 +23,11 @@ bool Window::IsWindowOpen()
 {
 	return window;
 }
+
+Vector2 Window::GetWindowSize()
+{
+	int width = 0;
+	int height = 0;
+	glfwGetWindowSize(window, &width, &height);
+	return Vector2(width, height);
+}

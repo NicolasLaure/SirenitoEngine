@@ -6,14 +6,14 @@
 SIRENITO_API class Frame
 {
 private:
-	Vector2f minCoords;
-	Vector2f maxCoords;
+	Vector2 minCoords;
+	Vector2 maxCoords;
 public:
 
 	SIRENITO_API Frame();
-	SIRENITO_API Frame(Vector2f minCoords, Vector2f maxCoords);
-	SIRENITO_API Vector2f GetMin();
-	SIRENITO_API Vector2f GetMax();
+	SIRENITO_API Frame(Vector2 minCoords, Vector2 maxCoords);
+	SIRENITO_API Vector2 GetMin();
+	SIRENITO_API Vector2 GetMax();
 
 	SIRENITO_API bool operator ==(Frame other);
 	SIRENITO_API bool operator !=(Frame other);

@@ -1,7 +1,7 @@
 #include "Animation/Animation.h"
 #include "Utilities/Time/Time.h"
 
-Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight)
+Animation::Animation(Texture* texture, Vector2 anchorPos, int frameWidth, int frameHeight)
 {
 	this->texture = texture;
 	_isPlaying = false;
@@ -11,7 +11,7 @@ Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int f
 		SetCurrentFrame(currentIndex);
 }
 
-Animation::Animation(Texture* texture, Vector2f anchorPos, int frameWidth, int frameHeight, int quantity, float duration, bool canLoop)
+Animation::Animation(Texture* texture, Vector2 anchorPos, int frameWidth, int frameHeight, int quantity, float duration, bool canLoop)
 {
 	this->texture = texture;
 	currentIndex = 0;
@@ -70,14 +70,14 @@ void Animation::UpdateAnimation()
 		currentFrame = nextFrame;
 }
 
-void Animation::CalculateFrames(Vector2f anchorPos, int frameWidth, int frameHeight, int quantity)
+void Animation::CalculateFrames(Vector2 anchorPos, int frameWidth, int frameHeight, int quantity)
 {
 	int textureWidth = texture->GetWidth();
 	int textureHeight = texture->GetHeight();
 	for (int i = 0; i < quantity; i++)
 	{
-		frames.push_back(Frame({ (anchorPos.x + (frameWidth * i)) / textureWidth, (anchorPos.y + frameHeight) / textureHeight },
-			{ (anchorPos.x + frameWidth + frameWidth * i) / textureWidth, anchorPos.y / textureHeight }));
+		frames.push_back(Frame(Vector2((anchorPos.x + (frameWidth * i)) / textureWidth, (anchorPos.y + frameHeight) / textureHeight),
+			Vector2((anchorPos.x + frameWidth + frameWidth * i) / textureWidth, anchorPos.y / textureHeight)));
 	}
 }
 

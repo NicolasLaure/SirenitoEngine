@@ -13,48 +13,7 @@ void Knuckles::Update(Input* inputInstance)
 	float xAxis = 0;
 	float yAxis = 0;
 	float zAxis = 0;
-	if (inputInstance->isKeyPressed(Keys::A))
-	{
-		float prevX = xAxis;
-		xAxis = -1.0f;
-		if (currentState != KnucklesStates::Run && (currentState != KnucklesStates::Push))
-			SetNewState(KnucklesStates::Run);
-	}
-	if (inputInstance->isKeyPressed(Keys::D))
-	{
-		float prevX = xAxis;
-		xAxis = 1.0f;
-		if (currentState != KnucklesStates::Run && (currentState != KnucklesStates::Push))
-			SetNewState(KnucklesStates::Run);
-	}
-
-	if (inputInstance->isKeyPressed(Keys::W))
-	{
-		float prevZ = zAxis;
-		zAxis = 1.0f;
-		if (currentState != KnucklesStates::Run && (currentState != KnucklesStates::Push))
-			SetNewState(KnucklesStates::Run);
-	}
-	if (inputInstance->isKeyPressed(Keys::S))
-	{
-		float prevZ = zAxis;
-		zAxis = -1.0f;
-		if (currentState != KnucklesStates::Run && (currentState != KnucklesStates::Push))
-			SetNewState(KnucklesStates::Run);
-	}
-
-	if (xAxis != 0)
-		knuckles->SetScale(Vector3(xAxis, 1, 1));
-	else if (currentState != KnucklesStates::Idle && currentState != KnucklesStates::Spin)
-		SetNewState(KnucklesStates::Idle);
-
-	if (inputInstance->isKeyDown(Keys::SPACE))
-	{
-		if (currentState != KnucklesStates::Spin)
-			SetNewState(KnucklesStates::Spin);
-		else
-			SetNewState(KnucklesStates::Idle);
-	}
+	
 
 	dir = Vector3(xAxis, yAxis, zAxis);
 

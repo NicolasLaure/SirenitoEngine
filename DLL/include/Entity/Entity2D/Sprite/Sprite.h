@@ -19,11 +19,11 @@ protected:
 
 	SIRENITO_API void Init(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance);
 	SIRENITO_API float* GetVertices(float width, float height);
-	SIRENITO_API float* GetVertices(float width, float height, Vector2f minCoords, Vector2f maxCoords);
+	SIRENITO_API float* GetVertices(float width, float height, Vector2 minCoords, Vector2 maxCoords);
 	SIRENITO_API unsigned int* GetIndices();
-	SIRENITO_API void SetUVCoords(Vector2f minCoords, Vector2f maxCoords);
+	SIRENITO_API void SetUVCoords(Vector2 minCoords, Vector2 maxCoords);
 public:
-	Animation* animation;
+	Animation* animation = nullptr;
 
 	SIRENITO_API Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance);
 	SIRENITO_API Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Renderer* rendererInstance);
@@ -32,7 +32,7 @@ public:
 	SIRENITO_API ~Sprite();
 
 	SIRENITO_API void SetTexture(const char* path);
-	SIRENITO_API void SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, float animationDuration, bool canLoop);
-	SIRENITO_API void SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight);
+	SIRENITO_API void SetAnimation(const char* path, Vector2 initialCoords, int frameWidth, int frameHeight, int framesQuantity, float animationDuration, bool canLoop);
+	SIRENITO_API void SetAnimation(const char* path, Vector2 initialCoords, int frameWidth, int frameHeight);
 	SIRENITO_API void Draw() override;
 };

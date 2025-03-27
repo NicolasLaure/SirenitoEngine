@@ -54,7 +54,7 @@ void Sprite::SetTexture(const char* path)
 	texture = TextureImporter::ImportTexture(path);
 }
 
-void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight, int framesQuantity, float animationDuration, bool canLoop)
+void Sprite::SetAnimation(const char* path, Vector2 initialCoords, int frameWidth, int frameHeight, int framesQuantity, float animationDuration, bool canLoop)
 {
 	texture = TextureImporter::ImportTexture(path);
 	if (animation != nullptr)
@@ -62,7 +62,7 @@ void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWid
 
 	animation = new Animation(&texture, initialCoords, frameWidth, frameHeight, framesQuantity, animationDuration, canLoop);
 }
-void Sprite::SetAnimation(const char* path, Vector2f initialCoords, int frameWidth, int frameHeight)
+void Sprite::SetAnimation(const char* path, Vector2 initialCoords, int frameWidth, int frameHeight)
 {
 	texture = TextureImporter::ImportTexture(path);
 	if (animation != nullptr)
@@ -86,16 +86,10 @@ void Sprite::Draw()
 
 float* Sprite::GetVertices(float width, float height)
 {
-	return new float[36]
-		{
-			width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, //Top Right
-				width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, //Bottom Right
-				-width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,  //Bottom Left
-				-width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f //Top Left
-		};
+	return GetVertices(width, height, Vector2(0, 0), Vector2(1, 1));
 }
 
-float* Sprite::GetVertices(float width, float height, Vector2f minCoords, Vector2f maxCoords)
+float* Sprite::GetVertices(float width, float height, Vector2 minCoords, Vector2 maxCoords)
 {
 	return new float[36]
 		{

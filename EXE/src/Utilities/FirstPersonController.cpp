@@ -29,4 +29,5 @@ void FirstPersonController::Update(Input* inputInstance)
 
 	glm::vec3 dir = glm::vec3(dirX, dirY, dirZ);
 	camera->Translate(dir * speed);
+
 }

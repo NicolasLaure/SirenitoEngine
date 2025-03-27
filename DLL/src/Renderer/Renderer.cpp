@@ -83,7 +83,7 @@ void Renderer::SetData(glm::mat4 model, Color color, bool hasTexture, float* pos
 
 }
 
-void Renderer::AddVertices(Vector2f vertices[], int vertexQty)
+void Renderer::AddVertices(Vector2 vertices[], int vertexQty)
 {
 	/*for (int i = 0; i < vertexQty; i++)
 	{

@@ -1,9 +1,9 @@
 #include "Input/Input.h"
 
-Input::Input(GLFWwindow* window)
+Input::Input(Window* window)
 {
 	this->window = window;
-	glfwSetInputMode(this->window, GLFW_STICKY_KEYS, GLFW_FALSE);
+	glfwSetInputMode(window->GetWindow(), GLFW_STICKY_KEYS, GLFW_FALSE);
 }
 
 Input::~Input()
@@ -34,7 +34,7 @@ void Input::UpdateInput()
 
 bool Input::isKeyDown(Keys key)
 {
-	if (glfwGetKey(window, (int)key) == GLFW_PRESS)
+	if (glfwGetKey(window->GetWindow(), (int)key) == GLFW_PRESS)
 	{
 		for (int i = 0; i < pressedKeys.GetCount(); i++)
 		{
@@ -48,12 +48,29 @@ bool Input::isKeyDown(Keys key)
 
 bool Input::isKeyPressed(Keys key)
 {
-	int keyChecked = glfwGetKey(window, (int)key);
+	int keyChecked = glfwGetKey(window->GetWindow(), (int)key);
 	return keyChecked == GLFW_PRESS || keyChecked == GLFW_REPEAT;
 }
 
 bool Input::isKeyUp(Keys key)
 {
-	int keyChecked = glfwGetKey(window, (int)key);
+	int keyChecked = glfwGetKey(window->GetWindow(), (int)key);
 	return keyChecked == GLFW_RELEASE;
 }
+
+void Input::updateMouse()
+{
+	double xpos = 0;
+	double ypos = 0;
+	glfwGetCursorPos(window->GetWindow(), &xpos, &ypos);
+	mouseDir = Vector2((float)xpos, (float)ypos);
+
+	Vector2 windowSize = window->GetWindowSize();
+	glfwSetCursorPos(window->GetWindow(), windowSize.x / 2, windowSize.y / 2);
+}
+
+Vector2 Input::GetMouseDir()
+{
+	return mouseDir;
+}
+

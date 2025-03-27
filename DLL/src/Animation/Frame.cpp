@@ -2,22 +2,22 @@
 
 Frame::Frame()
 {
-	minCoords = { 0.0f,0.0f };
-	maxCoords = { 1.0f,1.0f };
+	minCoords = Vector2(0.0f, 0.0f);
+	maxCoords = Vector2(1.0f, 1.0f);
 }
 
-Frame::Frame(Vector2f minCoords, Vector2f maxCoords)
+Frame::Frame(Vector2 minCoords, Vector2 maxCoords)
 {
 	this->minCoords = minCoords;
 	this->maxCoords = maxCoords;
 }
 
-Vector2f Frame::GetMin()
+Vector2 Frame::GetMin()
 {
 	return minCoords;
 }
 
-Vector2f Frame::GetMax()
+Vector2 Frame::GetMax()
 {
 	return maxCoords;
 }
