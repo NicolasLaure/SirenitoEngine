@@ -12,6 +12,7 @@ private:
 	Window* window;
 	List<Keys> pressedKeys;
 	Vector2 mouseDir;
+	Vector2 prevPos;
 
 	SIRENITO_API void ClearReleasedKeys();
 public:

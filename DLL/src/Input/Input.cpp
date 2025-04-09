@@ -30,6 +30,7 @@ void Input::UpdateInput()
 {
 	glfwPollEvents();
 	ClearReleasedKeys();
+	updateMouse();
 }
 
 bool Input::isKeyDown(Keys key)
@@ -62,10 +63,17 @@ void Input::updateMouse()
 {
 	double xpos = 0;
 	double ypos = 0;
-	glfwGetCursorPos(window->GetWindow(), &xpos, &ypos);
-	mouseDir = Vector2((float)xpos, (float)ypos);
-
 	Vector2 windowSize = window->GetWindowSize();
+
+	glfwGetCursorPos(window->GetWindow(), &xpos, &ypos);
+	Vector2 mouseDisplace = Vector2((float)xpos / windowSize.x, (float)ypos / windowSize.y);
+	if (prevPos == mouseDisplace)
+		mouseDir = Vector2(0.0f, 0.0f);
+	else
+		mouseDir = mouseDisplace;
+
+	prevPos = mouseDisplace;
+
 	glfwSetCursorPos(window->GetWindow(), windowSize.x / 2, windowSize.y / 2);
 }
 

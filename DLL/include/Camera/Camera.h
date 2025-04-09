@@ -13,4 +13,5 @@ public:
 	SIRENITO_API glm::mat4 GetViewMatrix();
 	SIRENITO_API void SetViewMatrix(glm::mat4 newView);
 	SIRENITO_API void Translate(glm::vec3 translation);
+	SIRENITO_API void Rotate(float angle, glm::vec3 axis);
 };

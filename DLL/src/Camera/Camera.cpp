@@ -21,3 +21,8 @@ void Camera::Translate(glm::vec3 translation)
 {
 	view = glm::translate(view, -translation);
 }
+
+void Camera::Rotate(float angle, glm::vec3 axis)
+{
+	view = glm::rotate(view, angle, axis);
+}

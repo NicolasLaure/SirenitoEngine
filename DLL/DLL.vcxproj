@@ -188,11 +188,13 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\Textures\Texture.cpp" />
     <ClCompile Include="src\Utilities\Color.cpp" />
     <ClCompile Include="src\Utilities\FileReader.cpp" />
+    <ClCompile Include="src\Utilities\MY4X4.cpp" />
     <ClCompile Include="src\Utilities\Quaternion.cpp" />
     <ClCompile Include="src\Utilities\stb_image\stb_image.cpp" />
     <ClCompile Include="src\Utilities\Time\Time.cpp" />
     <ClCompile Include="src\Utilities\Vector2.cpp" />
     <ClCompile Include="src\Utilities\Vector3.cpp" />
+    <ClCompile Include="src\Utilities\Vector4.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -217,11 +219,15 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\Utilities\Exporter.h" />
     <ClInclude Include="include\Utilities\FileReader.h" />
     <ClInclude Include="include\Utilities\List.h" />
+    <ClInclude Include="include\Utilities\MathConstants.h" />
+    <ClInclude Include="include\Utilities\MY4X4.h" />
     <ClInclude Include="include\Utilities\Node.h" />
     <ClInclude Include="include\Utilities\Quaternion.h" />
     <ClInclude Include="include\Utilities\Time\Time.h" />
+    <ClInclude Include="include\Utilities\TRS.h" />
     <ClInclude Include="include\Utilities\Vector2.h" />
     <ClInclude Include="include\Utilities\Vector3.h" />
+    <ClInclude Include="include\Utilities\Vector4.h" />
     <ClInclude Include="include\Window\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

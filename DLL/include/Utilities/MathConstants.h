@@ -1,0 +1,6 @@
+#pragma once
+
+#define PI 3.14159265358979323846f
+#define KEpsilon 1E-06F
+#define Rad2Deg 57.295779513082320876798154814105f
+#define Deg2Rad 0.017453292f

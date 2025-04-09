@@ -27,7 +27,10 @@ void FirstPersonController::Update(Input* inputInstance)
 	else if (inputInstance->isKeyPressed(Keys::LEFT_CONTROL))
 		dirY = -1;
 
+	Vector2 rotationDir = inputInstance->GetMouseDir();
+
 	glm::vec3 dir = glm::vec3(dirX, dirY, dirZ);
 	camera->Translate(dir * speed);
-
+	camera->Rotate(rotationDir.y, glm::vec3(1,0,0));
+	camera->Rotate(rotationDir.x, glm::vec3(0,1,0));
 }

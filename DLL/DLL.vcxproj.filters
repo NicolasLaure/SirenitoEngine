@@ -21,9 +21,6 @@
     <ClCompile Include="src\Utilities\FileReader.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utilities\Quaternion.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="src\Utilities\stb_image\stb_image.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -81,6 +78,15 @@
     <ClCompile Include="src\Collisions\CollisionManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utilities\MY4X4.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\Quaternion.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\Vector4.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -111,9 +117,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Utilities\Node.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utilities\Quaternion.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Entity\Entity2D\Shape\Shapes\Rectangle.h">
@@ -162,6 +165,21 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Entity\Entity2D\Sprite\Sprite.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\MY4X4.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Vector4.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\MathConstants.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\TRS.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Quaternion.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
