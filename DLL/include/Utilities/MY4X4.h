@@ -263,7 +263,7 @@ public:
 
 	SIRENITO_API static MY4X4 TRS(Vector3 pos, Quaternion q, Vector3 s)
 	{
-		return Translate(pos) * Rotate(q) * Scale(s);
+		return Scale(s) * Rotate(q) * Translate(pos);
 	}
 
 	SIRENITO_API static float Determinant(MY4X4 m)
@@ -639,6 +639,13 @@ public:
 	SIRENITO_API glm::mat4 ToGlm()
 	{
 		return glm::mat4(GetColumn(0).ToGlm(), GetColumn(1).ToGlm(), GetColumn(2).ToGlm(), GetColumn(3).ToGlm());
+	}
+	SIRENITO_API static MY4X4 FromGlm(glm::mat4 mat)
+	{
+		return MY4X4(Vector4(mat[0].x, mat[0].y, mat[0].z, mat[0].w),
+			Vector4(mat[1].x, mat[1].y, mat[1].z, mat[1].w),
+			Vector4(mat[2].x, mat[2].y, mat[2].z, mat[2].w),
+			Vector4(mat[3].x, mat[3].y, mat[3].z, mat[3].w));
 	}
 #pragma endregion
 };

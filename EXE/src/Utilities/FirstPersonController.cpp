@@ -36,6 +36,6 @@ void FirstPersonController::Update(Input* inputInstance)
 	Vector3 dir = Vector3(dirX, dirY, dirZ);
 	camera->Translate(dir * speed);
 	//transform = MY4X4::TRS(pos, Quaternion::Euler(angleX, angleY, 0), Vector3::One());
-	camera->Rotate(camera->view->GetUp(), rotationDir.x * mouseSensitivity);
-	//camera->view->SetLocalRotation(Quaternion::Euler(angleX, angleY, 0));
+	camera->Rotate(camera->view->GetRight(), rotationDir.y * mouseSensitivity);
+	camera->Rotate(Vector3::Up(), rotationDir.x * mouseSensitivity);
 }

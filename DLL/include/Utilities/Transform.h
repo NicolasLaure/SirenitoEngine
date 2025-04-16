@@ -20,8 +20,8 @@ private:
 	Vector3 rotationEulers;
 	Quaternion localRotation = Quaternion::identity();
 	Vector3 scale;
-	Transform* parent;
-	Transform* root;
+	Transform* parent = nullptr;
+	Transform* root = nullptr;
 
 	Vector3 _worldPosition;
 	Quaternion _worldRotation = Quaternion::identity();
