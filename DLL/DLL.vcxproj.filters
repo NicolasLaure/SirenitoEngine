@@ -87,6 +87,9 @@
     <ClCompile Include="src\Utilities\Vector4.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utilities\Transform.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -176,10 +179,10 @@
     <ClInclude Include="include\Utilities\MathConstants.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utilities\TRS.h">
+    <ClInclude Include="include\Utilities\Quaternion.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utilities\Quaternion.h">
+    <ClInclude Include="include\Utilities\Transform.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

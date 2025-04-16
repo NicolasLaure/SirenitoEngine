@@ -4,6 +4,8 @@
 #include "Utilities/Vector3.h"
 #include "Utilities/Vector4.h"
 #include "glm.hpp"
+#include "gtc/matrix_transform.hpp"
+#include "gtc/quaternion.hpp"
 #include <math.h>
 #include "Utilities/MathConstants.h"
 
@@ -471,6 +473,11 @@ public:
 	SIRENITO_API static Quaternion Conjugated(Quaternion q)
 	{
 		return Quaternion(-q.x, -q.y, -q.z, q.w);
+	}
+
+	SIRENITO_API glm::quat ToGlm()
+	{
+		return glm::quat(w, x, y, z);
 	}
 #pragma endregion
 

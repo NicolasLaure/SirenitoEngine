@@ -42,6 +42,11 @@ float Vector4::magnitude()
 	return sqrtf(sqrMagnitude());
 }
 
+glm::vec4 Vector4::ToGlm()
+{
+	return glm::vec4(x, y, z, w);
+}
+
 Vector4 Vector4::zero()
 {
 	return Vector4(0.0f, 0.0f, 0.0f, 0.0f);

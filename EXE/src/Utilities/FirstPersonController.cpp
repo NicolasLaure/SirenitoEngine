@@ -1,9 +1,10 @@
 #include "FirstPersonController.h"
+#include "math.h"
+#include <iostream>
 
 FirstPersonController::FirstPersonController(Vector3 initialPosition, Camera* camera)
 {
 	this->camera = camera;
-	camera->Translate(initialPosition.ToGlm());
 }
 
 void FirstPersonController::Update(Input* inputInstance)
@@ -29,8 +30,12 @@ void FirstPersonController::Update(Input* inputInstance)
 
 	Vector2 rotationDir = inputInstance->GetMouseDir();
 
-	glm::vec3 dir = glm::vec3(dirX, dirY, dirZ);
+	angleX += rotationDir.y * mouseSensitivity;
+	angleY += rotationDir.x * mouseSensitivity;
+
+	Vector3 dir = Vector3(dirX, dirY, dirZ);
 	camera->Translate(dir * speed);
-	camera->Rotate(rotationDir.y, glm::vec3(1,0,0));
-	camera->Rotate(rotationDir.x, glm::vec3(0,1,0));
+	//transform = MY4X4::TRS(pos, Quaternion::Euler(angleX, angleY, 0), Vector3::One());
+	camera->Rotate(camera->view->GetUp(), rotationDir.x * mouseSensitivity);
+	//camera->view->SetLocalRotation(Quaternion::Euler(angleX, angleY, 0));
 }

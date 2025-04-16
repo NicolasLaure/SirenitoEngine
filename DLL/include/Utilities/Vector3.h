@@ -113,6 +113,12 @@ public:
 		this->z = 0.0f;
 	}
 
+	SIRENITO_API Vector3(glm::vec3 v3)
+	{
+		x = v3.x;
+		y = v3.y;
+		z = v3.z;
+	}
 #pragma endregion
 
 #pragma region Operators

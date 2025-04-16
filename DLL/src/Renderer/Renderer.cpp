@@ -37,7 +37,7 @@ unsigned int Renderer::CreateVertexArray()
 	return VAO;
 }
 
-void Renderer::SetData(glm::mat4 model, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
+void Renderer::SetData(MY4X4 model, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -113,9 +113,9 @@ void Renderer::Draw(unsigned int& VAO, int indexQty, unsigned int texture)
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-glm::mat4 Renderer::MVP_Transformation(glm::mat4 model)
+glm::mat4 Renderer::MVP_Transformation(MY4X4 model)
 {
-	return projection * mainCamera->GetViewMatrix() * model;
+	return projection * (mainCamera->view->LocalToWorldMatrix() * model).ToGlm();
 }
 
 void Renderer::CompileShader(string vertexSource, string fragmentSource, unsigned int* shaderProgram)

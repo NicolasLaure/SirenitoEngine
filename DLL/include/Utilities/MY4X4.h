@@ -4,6 +4,7 @@
 #include "Utilities/MathConstants.h"
 #include "Utilities/Vector3.h"
 #include "Utilities/Vector4.h"
+#include "Utilities/Quaternion.h"
 #include <math.h>
 
 SIRENITO_API class MY4X4
@@ -45,6 +46,33 @@ public:
 		return *this == identity();
 	}
 
+	SIRENITO_API Quaternion rotation()
+	{
+		Quaternion q = Quaternion::identity();
+		MY4X4 m = MY4X4(GetColumn(0), GetColumn(1), GetColumn(2), GetColumn(3));
+		Vector3 scale = GetlossyScale();
+
+		float m00 = *GetPointerAt(0, 0) /= scale.x;
+		float m01 = *GetPointerAt(0, 1) /= scale.y;
+		float m02 = *GetPointerAt(0, 2) /= scale.z;
+		float m10 = *GetPointerAt(1, 0) /= scale.x;
+		float m11 = *GetPointerAt(1, 1) /= scale.y;
+		float m12 = *GetPointerAt(1, 2) /= scale.z;
+		float m20 = *GetPointerAt(2, 0) /= scale.x;
+		float m21 = *GetPointerAt(2, 1) /= scale.y;
+		float m22 = *GetPointerAt(2, 2) /= scale.z;
+
+		q.w = glm::sqrt(glm::max(0.0f, 1 + m00 + m11 + m22)) / 2;
+		q.x = glm::sqrt(glm::max(0.0f, 1 + m00 - m11 - m22)) / 2;
+		q.y = glm::sqrt(glm::max(0.0f, 1 - m00 + m11 - m22)) / 2;
+		q.z = glm::sqrt(glm::max(0.0f, 1 - m00 - m11 + m22)) / 2;
+
+		q.x *= glm::sign(q.x * m21 - m12);
+		q.y *= glm::sign(q.y * m02 - m20);
+		q.z *= glm::sign(q.z * m10 - m01);
+
+		return q.normalized();
+	}
 
 	//
 	// Summary:
@@ -184,6 +212,10 @@ public:
 
 		return newMatrix;
 	}
+	SIRENITO_API void operator *=(MY4X4 rhs)
+	{
+		*this = *this * rhs;
+	}
 
 	SIRENITO_API bool operator ==(MY4X4 rhs)
 	{
@@ -228,6 +260,11 @@ public:
 #pragma endregion 
 
 #pragma region  Functions
+
+	SIRENITO_API static MY4X4 TRS(Vector3 pos, Quaternion q, Vector3 s)
+	{
+		return Translate(pos) * Rotate(q) * Scale(s);
+	}
 
 	SIRENITO_API static float Determinant(MY4X4 m)
 	{
@@ -334,6 +371,30 @@ public:
 		return res;
 	}
 
+	SIRENITO_API static MY4X4 Rotate(Quaternion q)
+	{
+		Quaternion rotation = q;
+		rotation.Normalize();
+
+		Vector4 firstColumn = Vector4(2.0f * (rotation.w * rotation.w + rotation.x * rotation.x) - 1,
+			2.0f * (rotation.x * rotation.y + rotation.w * rotation.z),
+			2.0f * (rotation.x * rotation.z - rotation.w * rotation.y),
+			0.0f);
+
+		Vector4 secondColumn = Vector4(2.0f * (rotation.x * rotation.y - rotation.w * rotation.z),
+			2.0f * (rotation.w * rotation.w + rotation.y * rotation.y) - 1,
+			2.0f * (rotation.y * rotation.z + rotation.w * rotation.x),
+			0.0f);
+
+		Vector4 thirdColumn = Vector4(2.0f * (rotation.x * rotation.z + rotation.w * rotation.y),
+			2.0f * (rotation.y * rotation.z - rotation.w * rotation.x),
+			2.0f * (rotation.w * rotation.w + rotation.z * rotation.z) - 1,
+			0.0f);
+
+		Vector4 fourthColumn = Vector4(0.0f, 0.0f, 0.0f, 1.0f);
+
+		return MY4X4(firstColumn, secondColumn, thirdColumn, fourthColumn);
+	}
 
 	//
 	// Summary:
@@ -373,6 +434,11 @@ public:
 		Vector4 row3 = m.GetRow(3);
 
 		return MY4X4(row0, row1, row2, row3);
+	}
+
+	SIRENITO_API static MY4X4 LookAt(Vector3 from, Vector3 to, Vector3 up)
+	{
+		return TRS(from, Quaternion::LookRotation(to - from, up), Vector3::One());
 	}
 
 	//
@@ -501,16 +567,15 @@ public:
 		*GetPointerAt(index, 3) = row.w;
 	}
 
-	//
-	// Summary:
-	//     Returns a formatted string for this matrix.
-	//
-	// Parameters:
-	//   format:
-	//     A numeric format string.
-	//
-	//   formatProvider:
-	//     An object that specifies culture-specific formatting.
+	SIRENITO_API void SetTRS(Vector3 pos, Quaternion q, Vector3 s)
+	{
+		MY4X4 trs = TRS(pos, q, s);
+
+		for (int i = 0; i < 4; i++)
+		{
+			SetColumn(i, trs.GetColumn(i));
+		}
+	}
 
 	//
 	// Summary:
@@ -569,6 +634,11 @@ public:
 	SIRENITO_API void SetValueAt(int row, int column, float value)
 	{
 		SetValueAt(column + row * 4, value);
+	}
+
+	SIRENITO_API glm::mat4 ToGlm()
+	{
+		return glm::mat4(GetColumn(0).ToGlm(), GetColumn(1).ToGlm(), GetColumn(2).ToGlm(), GetColumn(3).ToGlm());
 	}
 #pragma endregion
 };

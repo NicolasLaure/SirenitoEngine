@@ -1,28 +1,31 @@
 #include "Camera/Camera.h"
 
-#include "gtc/matrix_transform.hpp"
-
 Camera::Camera()
 {
-	view = glm::identity<glm::mat4>();
+	view = new Transform("Camera");
+}
+
+Camera::~Camera()
+{
+	delete view;
 }
 
 glm::mat4 Camera::GetViewMatrix()
 {
-	return view;
+	return view->LocalToWorldMatrix().ToGlm();
 }
 
-void Camera::SetViewMatrix(glm::mat4 newView)
+void Camera::Translate(Vector3 translation)
 {
-	view = newView;
+	view->Translate(translation * -1);
 }
 
-void Camera::Translate(glm::vec3 translation)
+void Camera::Rotate(Vector3 eulers)
 {
-	view = glm::translate(view, -translation);
+	view->Rotate(eulers);
 }
 
-void Camera::Rotate(float angle, glm::vec3 axis)
+void Camera::Rotate(Vector3 axis, float angle)
 {
-	view = glm::rotate(view, angle, axis);
+	view->Rotate(axis, angle);
 }

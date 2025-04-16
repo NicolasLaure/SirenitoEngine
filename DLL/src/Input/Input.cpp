@@ -66,7 +66,7 @@ void Input::updateMouse()
 	Vector2 windowSize = window->GetWindowSize();
 
 	glfwGetCursorPos(window->GetWindow(), &xpos, &ypos);
-	Vector2 mouseDisplace = Vector2((float)xpos / windowSize.x, (float)ypos / windowSize.y);
+	Vector2 mouseDisplace = Vector2((float)(xpos / windowSize.x) - 0.5f, (float)(ypos / windowSize.y) - 0.5f);
 	if (prevPos == mouseDisplace)
 		mouseDir = Vector2(0.0f, 0.0f);
 	else

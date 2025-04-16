@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "Utilities/Vector2.h"
+#include "Utilities/MY4X4.h"
 #include "Utilities/Exporter.h"
 #include "Utilities/Color.h"
 
@@ -29,13 +30,13 @@ public:
 
 	SIRENITO_API unsigned int CreateBuffer();
 	SIRENITO_API unsigned int CreateVertexArray();
-	SIRENITO_API void SetData(glm::mat4 model, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
+	SIRENITO_API void SetData(MY4X4 model, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
 
 	SIRENITO_API void AddVertices(Vector2 vertices[], int vertexQty);
 	SIRENITO_API void Draw(unsigned int& VAO, int indexQty);
 	SIRENITO_API void DrawWire(unsigned int& VAO, int indexQty);
 	SIRENITO_API void Draw(unsigned int& VAO, int indexQty, unsigned int texture);
-	SIRENITO_API glm::mat4 MVP_Transformation(glm::mat4 model);
+	SIRENITO_API glm::mat4 MVP_Transformation(MY4X4 model);
 
 	SIRENITO_API void CompileShader(string vertexSource, string fragmentSource, unsigned int* shaderProgram);
 

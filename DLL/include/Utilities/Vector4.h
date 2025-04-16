@@ -1,6 +1,7 @@
 #pragma once
 #include "Utilities/Exporter.h"
 #include <math.h>
+#include "glm.hpp"
 
 SIRENITO_API class Vector4
 {
@@ -17,6 +18,7 @@ public:
 
 	SIRENITO_API float sqrMagnitude();
 	SIRENITO_API float magnitude();
+	SIRENITO_API glm::vec4 ToGlm();
 
 	SIRENITO_API static Vector4 zero();
 	SIRENITO_API static Vector4 one();

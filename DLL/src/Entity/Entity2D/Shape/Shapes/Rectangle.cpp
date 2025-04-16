@@ -3,7 +3,7 @@
 Rectangle::Rectangle(Vector3 position, float width, float height, Color color, Renderer* renderer) : Shape(color, GetVertices(width, height), 28, GetIndices(), 6, renderer)
 {
 	SetPosition(position);
-	SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	SetRotation(Vector3(0.0f, 0.0f, 0.0f));
 	SetScale(Vector3(1.0f, 1.0f, 1.0f));
 	collider.width = width;
 	collider.height = height;
