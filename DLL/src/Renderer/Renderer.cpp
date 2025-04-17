@@ -8,7 +8,7 @@
 
 void Renderer::Clear()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 Renderer::Renderer(float screenWidth, float screenHeight, bool hasPerspective, Camera* camera)
@@ -19,8 +19,21 @@ Renderer::Renderer(float screenWidth, float screenHeight, bool hasPerspective, C
 	SetProjection(hasPerspective);
 
 	mainCamera = camera;
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+
+	glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
+	glEnable(GL_SAMPLE_ALPHA_TO_ONE);
+	glFrontFace(GL_CCW);
+	glEnable(GL_BLEND); //Transparency
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+	//glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER, 0.1f);
+
+	/*glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);*/
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
@@ -115,7 +128,8 @@ void Renderer::Draw(unsigned int& VAO, int indexQty, unsigned int texture)
 
 glm::mat4 Renderer::MVP_Transformation(MY4X4 model)
 {
-	return projection * (mainCamera->view->LocalToWorldMatrix() * model).ToGlm();
+	glm::mat4 view = glm::lookAt(mainCamera->view->GetLocalPosition().ToGlm(), (mainCamera->view->GetLocalPosition() + mainCamera->view->GetForward()).ToGlm(), mainCamera->view->GetUp().ToGlm());
+	return projection * view * model.ToGlm();
 }
 
 void Renderer::CompileShader(string vertexSource, string fragmentSource, unsigned int* shaderProgram)

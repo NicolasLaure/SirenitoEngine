@@ -263,7 +263,7 @@ public:
 
 	SIRENITO_API static MY4X4 TRS(Vector3 pos, Quaternion q, Vector3 s)
 	{
-		return Scale(s) * Rotate(q) * Translate(pos);
+		return Translate(pos) * Rotate(q) * Scale(s);
 	}
 
 	SIRENITO_API static float Determinant(MY4X4 m)
@@ -528,7 +528,7 @@ public:
 	//   vector:
 	SIRENITO_API Vector3 MultiplyVector(Vector3 vector)
 	{
-		Vector3 res;
+		Vector3 res = Vector3();
 		res.x = m00 * vector.x + m01 * vector.y + m02 * vector.z;
 		res.y = m10 * vector.x + m11 * vector.y + m12 * vector.z;
 		res.z = m20 * vector.x + m21 * vector.y + m22 * vector.z;

@@ -2,18 +2,21 @@
 #include "Input/Input.h"
 #include "Utilities/Vector3.h"
 #include "Camera/Camera.h"
+#include "Entity/Entity2D/Sprite/Sprite.h"
 
 class FirstPersonController
 {
 private:
-	float speed = 10.0f;
+	float speed = 0.5f;
 	float mouseSensitivity = 10.0f;
 	Camera* camera;
 
-	float angleX = 0;
-	float angleY = 0;
+	float pitch = 0;
+	float yaw = 0;
 public:
-	FirstPersonController(Vector3 initialPosition, Camera* camera);
+	Sprite3D* sprite;
 
+	FirstPersonController(Vector3 initialPosition, Camera* camera, Renderer* rendererInstance);
+	~FirstPersonController();
 	void Update(Input* inputInstance);
 };

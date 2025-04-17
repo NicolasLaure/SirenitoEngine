@@ -188,6 +188,7 @@ copy /y "$(SolutionDir)libs\DLL\Release\glew32.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\Knuckles\Knuckles.h" />
     <ClInclude Include="src\Program.h" />
     <ClInclude Include="src\Utilities\FirstPersonController.h" />
+    <ClInclude Include="src\Utilities\ThirdPersonController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

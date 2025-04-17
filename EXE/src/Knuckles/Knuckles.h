@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity/Entity2D/Sprite/Sprite.h"
+#include "D:\Software\IMAGE\Graficos I\SirenitoEngine\bin\DLL\Debug\include\Entity\Entity2D\Sprite\Sprite.h"
 #include "Entity/Entity2D/Shape/Shapes/Rectangle.h"
 #include "Input/Input.h"
 
@@ -15,7 +15,7 @@ enum class KnucklesStates
 class Knuckles
 {
 private:
-	Sprite* knuckles;
+	Sprite3D* knuckles;
 	float knucklesSpeed = 10.0f;
 
 	KnucklesStates currentState;
@@ -26,10 +26,5 @@ public:
 	void Update(Input* inputInstance);
 	void Draw();
 
-	void OnCollision();
-	void SetNewState(KnucklesStates state);
-
-	Sprite* GetEntity();
-
-	void CheckCollision(Entity2D other);
+	Sprite3D* GetEntity();
 };

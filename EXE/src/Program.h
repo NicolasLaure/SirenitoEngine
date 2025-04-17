@@ -9,7 +9,6 @@ SIRENITO_API class Program : public BaseGame
 {
 private:
 	Knuckles* knuckles;
-	Rock* rock;
 	Sprite* background;
 	Sprite* ground;
 	FirstPersonController* camera;

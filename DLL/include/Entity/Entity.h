@@ -13,9 +13,9 @@
 SIRENITO_API class entity
 {
 private:
-	Vector3 pos = glm::vec3(0.0f, 0.0f, 0.0f);
+	Vector3 pos = Vector3(0.0f, 0.0f, 0.0f);
 	Quaternion rotation = Quaternion(0, 0, 0, 1);
-	Vector3 scale = glm::vec3(1.0f, 1.0f, 1.0f);;
+	Vector3 scale = Vector3(1.0f, 1.0f, 1.0f);;
 
 	SIRENITO_API void SetTRS(Vector3 pos, Quaternion rot, Vector3 scale);
 protected:

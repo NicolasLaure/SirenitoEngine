@@ -39,7 +39,7 @@ Vector3 entity::GetScale()
 
 void entity::SetPosition(Vector3 newPos)
 {
-	pos = newPos.ToGlm();
+	pos = newPos;
 	SetTRS(pos, rotation, scale);
 }
 

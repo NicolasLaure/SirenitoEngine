@@ -2,9 +2,8 @@
 
 Knuckles::Knuckles(float size, Vector3 initialPosition, Renderer* rendererInstance)
 {
-	knuckles = new Sprite("res/textures/Knuckles_Sprite_Sheet.png", initialPosition, Vector3(), size, size, rendererInstance);
+	knuckles = new Sprite3D("res/textures/sans-dance.jpg", initialPosition, Vector3(), size, size, rendererInstance);
 	knuckles->collider = { size,size, false };
-	SetNewState(KnucklesStates::Idle);
 }
 
 void Knuckles::Update(Input* inputInstance)
@@ -13,7 +12,7 @@ void Knuckles::Update(Input* inputInstance)
 	float xAxis = 0;
 	float yAxis = 0;
 	float zAxis = 0;
-	
+
 
 	dir = Vector3(xAxis, yAxis, zAxis);
 
@@ -25,53 +24,8 @@ void Knuckles::Draw()
 	knuckles->Draw();
 }
 
-void Knuckles::OnCollision()
-{
-	if (currentState != KnucklesStates::Push)
-		SetNewState(KnucklesStates::Push);
-}
-
-void Knuckles::SetNewState(KnucklesStates state)
-{
-	currentState = state;
-
-	switch (currentState)
-	{
-	case KnucklesStates::Idle:
-		knuckles->SetAnimation("res/textures/Knuckles_Sprite_Sheet.png", { 0,0 }, 36, 39);
-		break;
-	case KnucklesStates::Run:
-		knuckles->SetAnimation("res/textures/Knuckles_Sprite_Sheet.png", { 339,48 }, 40, 38, 4, 1, true);
-		knuckles->animation->Play();
-		break;
-	case KnucklesStates::Spin:
-		knuckles->SetAnimation("res/textures/Knuckles_Sprite_Sheet.png", { 1,130 }, 32, 32, 6, 1, true);
-		knuckles->animation->Play();
-		break;
-	case KnucklesStates::Push:
-		knuckles->SetAnimation("res/textures/Knuckles_Sprite_Sheet.png", { 426,96 }, 35, 35, 4, 1, true);
-		knuckles->animation->Play();
-		break;
-	}
-}
-
-Sprite* Knuckles::GetEntity()
+Sprite3D* Knuckles::GetEntity()
 {
 	return knuckles;
-}
-
-void Knuckles::CheckCollision(Entity2D other)
-{
-	Vector3 triedPosition = knuckles->GetPosition();
-	knuckles->HandleCollision(other);
-	knuckles->SetPrevPos(knuckles->GetPosition());
-
-	Vector3 actualPosition = knuckles->GetPosition();
-	if ((triedPosition.x != actualPosition.x ||
-		triedPosition.y != actualPosition.y) && currentState != KnucklesStates::Push)
-	{
-		SetNewState(KnucklesStates::Push);
-	}
-
 }
 
