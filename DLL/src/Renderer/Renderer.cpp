@@ -128,7 +128,7 @@ void Renderer::Draw(unsigned int& VAO, int indexQty, unsigned int texture)
 
 glm::mat4 Renderer::MVP_Transformation(MY4X4 model)
 {
-	glm::mat4 view = glm::lookAt(mainCamera->view->GetLocalPosition().ToGlm(), (mainCamera->view->GetLocalPosition() + mainCamera->view->GetForward()).ToGlm(), mainCamera->view->GetUp().ToGlm());
+	glm::mat4 view = glm::lookAt(mainCamera->view->GetPosition().ToGlm(), (mainCamera->view->GetPosition() + mainCamera->view->GetForward()).ToGlm(), mainCamera->view->GetUp().ToGlm());
 	return projection * view * model.ToGlm();
 }
 

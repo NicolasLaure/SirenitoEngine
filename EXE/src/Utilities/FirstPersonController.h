@@ -10,6 +10,7 @@ private:
 	float speed = 0.5f;
 	float mouseSensitivity = 10.0f;
 	Camera* camera;
+	Transform* pivot;
 
 	float pitch = 0;
 	float yaw = 0;

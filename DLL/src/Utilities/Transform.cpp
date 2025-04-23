@@ -119,10 +119,7 @@ void Transform::SetUp(Vector3 value)
 
 Vector3 Transform::GetForward()
 {
-	Vector4 asda = LocalToWorldMatrix().GetColumn(2);
-	Vector3 a = Vector3(-asda.x, -asda.y, -asda.z);
-	return a.normalized();
-	//return LocalToWorldMatrix().GetColumn(2)(Vector3::Back());
+	return LocalToWorldMatrix().MultiplyVector(Vector3::Forward());
 }
 void Transform::SetForward(Vector3 value)
 {

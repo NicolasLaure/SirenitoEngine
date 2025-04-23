@@ -6,6 +6,9 @@ FirstPersonController::FirstPersonController(Vector3 initialPosition, Camera* ca
 {
 	this->camera = camera;
 	sprite = new Sprite3D("res/textures/sans-dance.jpg", initialPosition, Vector3(), 32, 32, rendererInstance);
+	pivot = new Transform("camera", initialPosition, Quaternion::identity(), Vector3::One());
+	camera->view->SetParent(pivot);
+
 }
 
 FirstPersonController::~FirstPersonController()
@@ -31,26 +34,14 @@ void FirstPersonController::Update(Input* inputInstance)
 
 	Vector2 mouseDir = inputInstance->GetMouseDir();
 
-	pitch += mouseDir.y * mouseSensitivity;
-	yaw += mouseDir.x * mouseSensitivity;
+	pitch = mouseDir.y * mouseSensitivity;
+	yaw = -mouseDir.x * mouseSensitivity;
 
-	Vector3 movementDir = camera->view->GetForward() * dirZ;
+	Vector3 movementDir = pivot->GetForward() * dirZ + pivot->GetRight() * dirX;
 
 	if (movementDir != Vector3::Zero())
-	{
-		camera->view->Translate(movementDir * speed);
-	}
-	Quaternion xRot = Quaternion::AngleAxis(pitch, camera->view->GetRight());
-	Quaternion yRot = Quaternion::AngleAxis(yaw, camera->view->GetUp());
+		pivot->Translate(movementDir * speed);
 
-	camera->view->SetRotation(yRot * xRot);
-
-	//sprite->SetPosition(transform->GetPosition());
-
-	//if (inputInstance->isKeyPressed(Keys::Q))
-	//	camera->view->Rotate(camera->view->GetUp(), 15);
-	//else if (inputInstance->isKeyPressed(Keys::E))
-	//	camera->view->Rotate(camera->view->GetUp(), -15);
-
-	//sprite->SetRotation(transform->GetRotation());
+	pivot->Rotate(pivot->GetUp(), yaw);
+	camera->view->Rotate(Vector3::Right(), pitch);
 }
