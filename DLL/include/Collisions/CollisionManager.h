@@ -6,5 +6,5 @@
 SIRENITO_API class CollisionManager
 {
 public:
-	SIRENITO_API static bool CheckCollision(Entity2D entity, Entity2D other);
+	SIRENITO_API static bool CheckCollision(Entity2D Entity, Entity2D other);
 };

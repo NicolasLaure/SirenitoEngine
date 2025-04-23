@@ -50,8 +50,9 @@ unsigned int Renderer::CreateVertexArray()
 	return VAO;
 }
 
-void Renderer::SetData(MY4X4 model, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
+void Renderer::SetData(Transform transform, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
+	MY4X4 model = transform.LocalToWorldMatrix();
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, positionsSize * sizeof(float), positions, GL_STATIC_DRAW);

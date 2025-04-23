@@ -11,12 +11,9 @@ Shape::Shape(Vector3 position, Vector3 eulers, Color color, float* vertices, int
 	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
+	transform.SetPositionAndRotation(position, Quaternion::Euler(eulers));
 
-	SetPosition(position);
-	SetRotation(eulers);
-	SetScale(Vector3(1.0f, 1.0f, 1.0f));
-
-	rendererInstance->SetData(trs, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(transform, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
 
 Shape::Shape(Color color, float* vertices, int vertexQty, unsigned int* indices, int indexQty, Renderer* rendererInstance)
@@ -40,12 +37,12 @@ Shape::~Shape()
 
 void Shape::Draw()
 {
-	rendererInstance->SetData(trs, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(transform, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 	rendererInstance->Draw(VAO, indexQty);
 }
 
 void Shape::DrawWire()
 {
-	rendererInstance->SetData(trs, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(transform, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 	rendererInstance->DrawWire(VAO, indexQty);
 }

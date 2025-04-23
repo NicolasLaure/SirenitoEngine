@@ -5,15 +5,13 @@
 FirstPersonController::FirstPersonController(Vector3 initialPosition, Camera* camera, Renderer* rendererInstance)
 {
 	this->camera = camera;
-	sprite = new Sprite3D("res/textures/sans-dance.jpg", initialPosition, Vector3(), 32, 32, rendererInstance);
 	pivot = new Transform("camera", initialPosition, Quaternion::identity(), Vector3::One());
 	camera->view->SetParent(pivot);
-
 }
 
 FirstPersonController::~FirstPersonController()
 {
-	delete sprite;
+	delete pivot;
 }
 
 void FirstPersonController::Update(Input* inputInstance)

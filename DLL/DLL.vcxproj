@@ -171,6 +171,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\Entity\Entity3D\Mesh.cpp" />
     <ClCompile Include="src\Animation\Animation.cpp" />
     <ClCompile Include="src\Animation\Frame.cpp" />
     <ClCompile Include="src\BaseGame\BaseGame.cpp" />
@@ -182,6 +183,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\Entity\Entity2D\Shape\Shapes\Rectangle.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Shapes\Triangle.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Sprite\Sprite.cpp" />
+    <ClCompile Include="src\Entity\Entity3D\Entity3D.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Textures\Importer\TextureImporter.cpp" />
@@ -211,6 +213,8 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\Entity\Entity2D\Shape\Shapes\Rectangle.h" />
     <ClInclude Include="include\Entity\Entity2D\Shape\Shapes\Triangle.h" />
     <ClInclude Include="include\Entity\Entity2D\Sprite\Sprite.h" />
+    <ClInclude Include="include\Entity\Entity3D\Entity3D.h" />
+    <ClInclude Include="include\Entity\Entity3D\Mesh.h" />
     <ClInclude Include="include\Input\Input.h" />
     <ClInclude Include="include\Input\KeysEnum.h" />
     <ClInclude Include="include\Renderer\Renderer.h" />

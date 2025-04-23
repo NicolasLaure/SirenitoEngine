@@ -10,6 +10,7 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 
 	background = new Sprite("res/textures/Background.jpg", Vector3(0, 30.0f, -60.0f), Vector3(), -width, -height, rendererInstance);
 	ground = new Sprite("res/textures/Background.jpg", Vector3(0, -30.0f, 15.0f), Vector3(90.0f, 0, 0), -width, -height, rendererInstance);
+	cube = new Mesh("res/textures/sans-dance.jpg", Vector3(), Vector3(), 32, 32, rendererInstance);
 }
 
 Program::~Program()
@@ -17,6 +18,7 @@ Program::~Program()
 	delete background;
 	delete ground;
 	delete camera;
+	delete cube;
 }
 
 void Program::Update()
@@ -34,5 +36,5 @@ void Program::Draw()
 {
 	background->Draw();
 	ground->Draw();
-	camera->sprite->Draw();
+	cube->Draw();
 }

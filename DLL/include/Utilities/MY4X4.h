@@ -569,11 +569,11 @@ public:
 
 	SIRENITO_API void SetTRS(Vector3 pos, Quaternion q, Vector3 s)
 	{
-		MY4X4 trs = TRS(pos, q, s);
+		MY4X4 transform = TRS(pos, q, s);
 
 		for (int i = 0; i < 4; i++)
 		{
-			SetColumn(i, trs.GetColumn(i));
+			SetColumn(i, transform.GetColumn(i));
 		}
 	}
 

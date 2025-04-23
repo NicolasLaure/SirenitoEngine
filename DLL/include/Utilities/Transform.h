@@ -35,8 +35,8 @@ private:
 public:
 #pragma region Constructors
 
+	SIRENITO_API Transform();
 	SIRENITO_API Transform(const char* name);
-
 	SIRENITO_API Transform(const char* name, Vector3 pos, Quaternion q, Vector3 s);
 
 #pragma endregion

@@ -5,7 +5,7 @@
 #include "Utilities/Exporter.h"
 #include "Collisions/Collider.h"
 
-SIRENITO_API class Entity2D : public entity
+SIRENITO_API class Entity2D : public Entity
 {
 protected:
 	Renderer* rendererInstance;

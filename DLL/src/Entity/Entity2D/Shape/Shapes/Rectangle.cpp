@@ -2,13 +2,11 @@
 
 Rectangle::Rectangle(Vector3 position, float width, float height, Color color, Renderer* renderer) : Shape(color, GetVertices(width, height), 28, GetIndices(), 6, renderer)
 {
-	SetPosition(position);
-	SetRotation(Vector3(0.0f, 0.0f, 0.0f));
-	SetScale(Vector3(1.0f, 1.0f, 1.0f));
+	transform.SetPosition(position);
 	collider.width = width;
 	collider.height = height;
 
-	rendererInstance->SetData(trs, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(transform, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
 
 float* Rectangle::GetVertices(float width, float height)

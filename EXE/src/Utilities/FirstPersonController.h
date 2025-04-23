@@ -15,8 +15,6 @@ private:
 	float pitch = 0;
 	float yaw = 0;
 public:
-	Sprite3D* sprite;
-
 	FirstPersonController(Vector3 initialPosition, Camera* camera, Renderer* rendererInstance);
 	~FirstPersonController();
 	void Update(Input* inputInstance);

@@ -90,6 +90,12 @@
     <ClCompile Include="src\Utilities\Transform.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Entity\Entity3D\Entity3D.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Entity\Entity3D\Mesh.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -183,6 +189,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Utilities\Transform.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity3D\Mesh.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity3D\Entity3D.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

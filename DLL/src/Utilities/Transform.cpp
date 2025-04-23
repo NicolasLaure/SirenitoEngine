@@ -3,6 +3,21 @@
 
 #pragma region Constructors
 
+Transform::Transform()
+{
+	localPosition = Vector3::Zero();
+	localRotation = Quaternion::identity();
+	scale = Vector3::One();
+
+	_worldPosition = localPosition;
+	_worldRotation = localRotation;
+	_localScale = scale;
+	_lossyScale = scale;
+
+	matrixTRS = MY4X4::TRS(localPosition, localRotation, scale);
+	_name = "";
+}
+
 Transform::Transform(const char* name)
 {
 	localPosition = Vector3::Zero();

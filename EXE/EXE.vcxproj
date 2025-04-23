@@ -179,13 +179,12 @@ copy /y "$(SolutionDir)libs\DLL\Release\glew32.dll" "$(OutDir)"</Command>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Environment\Rock.cpp" />
-    <ClCompile Include="src\Knuckles\Knuckles.cpp" />
     <ClCompile Include="src\Program.cpp" />
     <ClCompile Include="src\Utilities\FirstPersonController.cpp" />
+    <ClCompile Include="src\Utilities\ThirdPersonController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Environment\Rock.h" />
-    <ClInclude Include="src\Knuckles\Knuckles.h" />
     <ClInclude Include="src\Program.h" />
     <ClInclude Include="src\Utilities\FirstPersonController.h" />
     <ClInclude Include="src\Utilities\ThirdPersonController.h" />
