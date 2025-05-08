@@ -16,7 +16,7 @@ void Entity2D::HandleCollision(Entity2D other)
 		isColliding = true;
 		if (!collider.isTrigger)
 		{
-			transform.SetPosition(prevpos);
+			transform->SetPosition(prevpos);
 		}
 	}
 	else

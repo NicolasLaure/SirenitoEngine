@@ -2,8 +2,14 @@
 
 Triangle::Triangle(Vector3 position, float width, float height, Color color, Renderer* renderer) : Shape(color, GetVertices(width, height), 21, GetIndices(), 3, renderer)
 {
-	transform.SetPosition(position);
+	transform = new Transform();
+	transform->SetPosition(position);
 	rendererInstance->SetData(transform, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+}
+
+Triangle::~Triangle()
+{
+	delete transform;
 }
 
 float* Triangle::GetVertices(float width, float height)

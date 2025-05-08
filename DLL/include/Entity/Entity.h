@@ -11,7 +11,7 @@
 SIRENITO_API class Entity
 {
 public:
-	Transform transform;
+	Transform* transform;
 
 	SIRENITO_API virtual void Update();
 	SIRENITO_API virtual void Draw();

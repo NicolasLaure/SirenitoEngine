@@ -1,10 +1,10 @@
 #pragma once
 #include "Utilities/Exporter.h"
-#include "Entity/Entity2D/Entity2D.h"
+#include "Entity/Entity3D/Entity3D.h"
 #include "Textures/Texture.h"
 #include "Textures/Importer/TextureImporter.h"
 
-SIRENITO_API class Mesh : public Entity2D
+SIRENITO_API class Mesh : public Entity3D
 {
 protected:
 	float width;

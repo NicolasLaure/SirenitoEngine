@@ -16,7 +16,9 @@ private:
 public:
 	Mesh* mesh;
 
-	ThirdPersonController(Vector3 initialPosition, Camera* camera, Renderer* rendererInstance);
+	ThirdPersonController(Vector3 initialPosition, Camera* camera,Renderer* rendererInstance);
 	~ThirdPersonController();
 	void Update(Input* inputInstance);
+
+	void SetThirdPerson(Vector3 offset);
 };

@@ -31,7 +31,7 @@ public:
 
 	SIRENITO_API unsigned int CreateBuffer();
 	SIRENITO_API unsigned int CreateVertexArray();
-	SIRENITO_API void SetData(Transform transform, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
+	SIRENITO_API void SetData(Transform* transform, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
 
 	SIRENITO_API void AddVertices(Vector2 vertices[], int vertexQty);
 	SIRENITO_API void Draw(unsigned int& VAO, int indexQty);

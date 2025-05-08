@@ -36,13 +36,16 @@ void Sprite::Init(const char* texturePath, Vector3 position, Vector3 eulers, flo
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
 
-	transform.SetPositionAndRotation(position, Quaternion::Euler(eulers));
+	transform = new Transform();
+	transform->SetPositionAndRotation(position, Quaternion::Euler(eulers));
 
 	rendererInstance->SetData(transform, color, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
 }
 
 Sprite::~Sprite()
 {
+	delete transform;
+
 	if (animation != nullptr)
 		delete animation;
 }

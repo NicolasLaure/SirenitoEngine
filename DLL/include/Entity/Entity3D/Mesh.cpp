@@ -25,8 +25,6 @@ void Mesh::Init(const char* texturePath, Vector3 position, Vector3 eulers, float
 	this->texture = TextureImporter::ImportTexture(texturePath);
 	this->width = width;
 	this->height = height;
-	this->collider.width = width;
-	this->collider.height = height;
 
 	this->rendererInstance = rendererInstance;
 	this->color = color;
@@ -34,12 +32,14 @@ void Mesh::Init(const char* texturePath, Vector3 position, Vector3 eulers, float
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
 
-	transform.SetPositionAndRotation(position, Quaternion::Euler(eulers));
+	transform = new Transform();
+	transform->SetPositionAndRotation(position, Quaternion::Euler(eulers));
 	rendererInstance->SetData(transform, color, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
 }
 
 Mesh::~Mesh()
 {
+	delete transform;
 }
 
 void Mesh::SetTexture(const char* path)

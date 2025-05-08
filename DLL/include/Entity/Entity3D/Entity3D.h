@@ -4,7 +4,7 @@
 #include "Renderer/Renderer.h"
 
 
-SIRENITO_API class Entity3D : Entity
+SIRENITO_API class Entity3D : public Entity
 {
 protected:
 	Renderer* rendererInstance;

@@ -18,4 +18,5 @@ public:
 	FirstPersonController(Vector3 initialPosition, Camera* camera, Renderer* rendererInstance);
 	~FirstPersonController();
 	void Update(Input* inputInstance);
+	void SetFirstPerson();
 };

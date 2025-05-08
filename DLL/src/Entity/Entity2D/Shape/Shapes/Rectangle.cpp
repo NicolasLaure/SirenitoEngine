@@ -2,11 +2,17 @@
 
 Rectangle::Rectangle(Vector3 position, float width, float height, Color color, Renderer* renderer) : Shape(color, GetVertices(width, height), 28, GetIndices(), 6, renderer)
 {
-	transform.SetPosition(position);
+	transform = new Transform();
+	transform->SetPosition(position);
 	collider.width = width;
 	collider.height = height;
 
 	rendererInstance->SetData(transform, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+}
+
+Rectangle::~Rectangle()
+{
+	delete transform;
 }
 
 float* Rectangle::GetVertices(float width, float height)

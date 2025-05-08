@@ -11,7 +11,8 @@ Shape::Shape(Vector3 position, Vector3 eulers, Color color, float* vertices, int
 	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
-	transform.SetPositionAndRotation(position, Quaternion::Euler(eulers));
+	transform = new Transform();
+	transform->SetPositionAndRotation(position, Quaternion::Euler(eulers));
 
 	rendererInstance->SetData(transform, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
@@ -31,6 +32,8 @@ Shape::Shape(Color color, float* vertices, int vertexQty, unsigned int* indices,
 
 Shape::~Shape()
 {
+	delete transform;
+
 	delete[] vertices;
 	delete[] indices;
 }

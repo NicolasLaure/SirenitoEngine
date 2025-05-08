@@ -43,3 +43,8 @@ void FirstPersonController::Update(Input* inputInstance)
 	pivot->Rotate(pivot->GetUp(), yaw);
 	camera->view->Rotate(Vector3::Right(), pitch);
 }
+
+void FirstPersonController::SetFirstPerson()
+{
+	camera->view->SetParent(pivot);
+}
