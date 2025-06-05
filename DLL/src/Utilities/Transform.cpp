@@ -231,6 +231,9 @@ void Transform::SetParent(Transform* newParent)
 		parent->RemoveChild(this);
 
 	parent = newParent;
+	matrixTRS.SetTRS(localPosition, localRotation, scale);
+	_worldPosition = GetPosition();
+	_worldRotation = GetRotation();
 
 	if (parent != nullptr)
 		parent->AddChild(this);
@@ -440,15 +443,15 @@ void Transform::Rotate(Vector3 axis, float angle)
 
 void Transform::RotateAround(Vector3 point, Vector3 axis, float angle)
 {
-	SetRotation(GetRotation() * Quaternion::AngleAxis(angle, axis));
 
-	Transform* pivotTransform = new Transform("pivot", point, Quaternion::AngleAxis(angle, axis), Vector3::One());
+	Transform* originalParent = GetParent();
+	Transform pivotTransform = Transform("pivot", point, Quaternion::AngleAxis(angle, axis), Vector3::One());
 	Transform relativeTransform = Transform("relative", Vector3::Zero(), Quaternion::identity(), Vector3::One());
-	relativeTransform.SetParent(pivotTransform);
+	relativeTransform.SetParent(&pivotTransform);
 	relativeTransform.SetLocalPosition(GetPosition() - point);
 
 	SetPosition(relativeTransform.GetPosition());
-	delete pivotTransform;
+	SetRotation(relativeTransform.GetRotation());
 }
 
 void Transform::LookAt(Transform target, Vector3 worldUp)

@@ -29,19 +29,33 @@ void ThirdPersonController::Update(Input* inputInstance)
 
 	Vector2 mouseDir = inputInstance->GetMouseDir();
 
-	pitch = mouseDir.y * mouseSensitivity;
-	yaw = -mouseDir.x * mouseSensitivity;
+	pitch += mouseDir.y * mouseSensitivity;
+	yaw -= mouseDir.x * mouseSensitivity;
 
-	Vector3 movementDir = camera->view->GetForward() * dirZ + camera->view->GetRight() * dirX;
 
-	if (movementDir != Vector3::Zero())
-		mesh->transform->Translate(movementDir * speed);
+	if (dirZ != 0)
+		mesh->transform->Translate(mesh->transform->GetForward() * dirZ * speed);
+	if (dirX != 0)
+	{
+		meshAngle += dirX * speed * 10;
+		mesh->transform->Rotate(mesh->transform->GetUp() * meshAngle);
+	}
 
-	camera->view->RotateAround(mesh->transform->GetPosition(), mesh->transform->GetUp(), yaw);
+	UpdateCameraPosition();
 }
 
 void ThirdPersonController::SetThirdPerson(Vector3 offset)
 {
-	camera->view->SetParent(mesh->transform);
-	camera->view->SetLocalPosition(mesh->transform->GetPosition() + offset);
+	cameraOffset = offset;
+	UpdateCameraPosition();
+}
+
+
+void ThirdPersonController::UpdateCameraPosition()
+{
+	camera->view->SetPosition(mesh->transform->GetPosition() + cameraOffset);
+
+	camera->view->RotateAround(mesh->transform->GetPosition(), Vector3::Up(), yaw);
+	camera->view->RotateAround(mesh->transform->GetPosition(), camera->view->GetRight(), pitch);
+	camera->view->LookAt(Transform("Point", mesh->transform->GetPosition(), Quaternion::identity(), Vector3::One()));
 }

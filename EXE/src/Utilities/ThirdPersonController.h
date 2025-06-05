@@ -13,10 +13,16 @@ private:
 
 	float pitch = 0;
 	float yaw = 0;
+
+	float meshAngle = 0;
+
+	Vector3 cameraOffset;
+
+	void UpdateCameraPosition();
 public:
 	Mesh* mesh;
 
-	ThirdPersonController(Vector3 initialPosition, Camera* camera,Renderer* rendererInstance);
+	ThirdPersonController(Vector3 initialPosition, Camera* camera, Renderer* rendererInstance);
 	~ThirdPersonController();
 	void Update(Input* inputInstance);
 
