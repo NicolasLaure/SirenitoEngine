@@ -19,6 +19,7 @@ Renderer::Renderer(float screenWidth, float screenHeight, bool hasPerspective, C
 	SetProjection(hasPerspective);
 
 	mainCamera = camera;
+	globalLight = nullptr;
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
@@ -94,7 +95,10 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 	glm::vec4 tintColor = glm::vec4(color.r, color.g, color.b, color.a);
 	glUniform4fv(colorUniform, 1, &tintColor[0]);
 
-
+	int lightColorUniform = glGetUniformLocation(shaderProgram, "u_LightColor");
+	glUseProgram(shaderProgram);
+	glm::vec4 lightColor = globalLight == nullptr ? glm::vec4(1.0f, 1.0f, 1.0f, 1.0f) : glm::vec4(globalLight->color.r, globalLight->color.g, globalLight->color.b, 1.0f);
+	glUniform4fv(lightColorUniform, 1, &lightColor[0]);
 }
 
 void Renderer::AddVertices(Vector2 vertices[], int vertexQty)

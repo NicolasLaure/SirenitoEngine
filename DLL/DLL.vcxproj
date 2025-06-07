@@ -185,6 +185,9 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\Entity\Entity2D\Sprite\Sprite.cpp" />
     <ClCompile Include="src\Entity\Entity3D\Entity3D.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
+    <ClCompile Include="src\Lightning\BaseLight.cpp" />
+    <ClCompile Include="src\Lightning\DirectionalLight.cpp" />
+    <ClCompile Include="src\Lightning\GlobalLight.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Textures\Importer\TextureImporter.cpp" />
     <ClCompile Include="src\Textures\Texture.cpp" />
@@ -217,6 +220,9 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\Entity\Entity3D\Mesh.h" />
     <ClInclude Include="include\Input\Input.h" />
     <ClInclude Include="include\Input\KeysEnum.h" />
+    <ClInclude Include="include\Lightning\BaseLight.h" />
+    <ClInclude Include="include\Lightning\DirectionalLight.h" />
+    <ClInclude Include="include\Lightning\GlobalLight.h" />
     <ClInclude Include="include\Renderer\Renderer.h" />
     <ClInclude Include="include\Textures\Importer\TextureImporter.h" />
     <ClInclude Include="include\Textures\Texture.h" />

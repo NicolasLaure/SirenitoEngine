@@ -3,9 +3,11 @@
 #include "Utilities/Vector3.h"
 #include "Utilities/Quaternion.h"
 #include "Collisions/CollisionManager.h"
+#include "Lightning/GlobalLight.h"
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
+	rendererInstance->globalLight = new GlobalLight(Color::red());
 	firstPersonCamera = new FirstPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
 	thirdPersonCamera = new ThirdPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
 	isFirstPerson = true;

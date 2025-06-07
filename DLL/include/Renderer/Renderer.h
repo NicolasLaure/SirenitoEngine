@@ -10,6 +10,7 @@
 
 #include "glm.hpp"
 #include "Camera/Camera.h"
+#include "Lightning/GlobalLight.h"
 
 using namespace std;
 
@@ -24,6 +25,8 @@ private:
 public:
 	unsigned int basicShaderProgram;
 	unsigned int textureShaderProgram;
+
+	GlobalLight* globalLight;
 
 	SIRENITO_API Renderer(float screenWidth, float screenHeight, bool hasPerspective, Camera* camera);
 

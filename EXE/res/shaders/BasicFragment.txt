@@ -3,7 +3,10 @@ out vec4 FragColor;
 
 in vec4 ourColor;
 
+uniform vec3 u_LightColor;
+
 void main()
 {
-    FragColor = ourColor;
+     float alpha = ourColor.a;
+     FragColor = vec4(u_LightColor * ourColor, alpha);
 };
