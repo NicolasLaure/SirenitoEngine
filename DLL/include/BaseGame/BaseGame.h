@@ -6,6 +6,7 @@
 #include "GLFW/glfw3.h"
 #include "Window/Window.h"
 #include "Camera/Camera.h"
+#include "Lightning/LightManager.h"
 #include "Renderer/Renderer.h"
 #include "Input/Input.h"
 
@@ -16,6 +17,7 @@ protected:
 public:
 	float deltaTime = 0;
 	Camera* mainCamera = nullptr;
+	LightManager* lightManager = nullptr;
 	Window* windowInstance = nullptr;
 	Renderer* rendererInstance = nullptr;
 	Input* inputInstance = nullptr;

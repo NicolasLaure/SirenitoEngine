@@ -11,7 +11,7 @@ void Renderer::Clear()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-Renderer::Renderer(float screenWidth, float screenHeight, bool hasPerspective, Camera* camera)
+Renderer::Renderer(float screenWidth, float screenHeight, bool hasPerspective, Camera* camera, LightManager* light)
 {
 	glewInit();
 	width = screenWidth;
@@ -19,7 +19,7 @@ Renderer::Renderer(float screenWidth, float screenHeight, bool hasPerspective, C
 	SetProjection(hasPerspective);
 
 	mainCamera = camera;
-	globalLight = nullptr;
+	this->lightManager = light;
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
@@ -97,7 +97,8 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 
 	int lightColorUniform = glGetUniformLocation(shaderProgram, "u_LightColor");
 	glUseProgram(shaderProgram);
-	glm::vec4 lightColor = globalLight == nullptr ? glm::vec4(1.0f, 1.0f, 1.0f, 1.0f) : glm::vec4(globalLight->color.r, globalLight->color.g, globalLight->color.b, 1.0f);
+	GlobalLight* ambientLight = lightManager->GetAmbientLight();
+	glm::vec4 lightColor = ambientLight == nullptr ? glm::vec4(0.0f, 0.0f, 0.0f, 1.0f) : glm::vec4(ambientLight->color.r, ambientLight->color.g, ambientLight->color.b, 1.0f);
 	glUniform4fv(lightColorUniform, 1, &lightColor[0]);
 }
 

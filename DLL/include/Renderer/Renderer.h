@@ -10,7 +10,7 @@
 
 #include "glm.hpp"
 #include "Camera/Camera.h"
-#include "Lightning/GlobalLight.h"
+#include "Lightning/LightManager.h"
 
 using namespace std;
 
@@ -19,6 +19,7 @@ SIRENITO_API class Renderer
 private:
 	glm::mat4 projection;
 	Camera* mainCamera;
+	LightManager* lightManager;
 	float width;
 	float height;
 
@@ -26,10 +27,8 @@ public:
 	unsigned int basicShaderProgram;
 	unsigned int textureShaderProgram;
 
-	GlobalLight* globalLight;
 
-	SIRENITO_API Renderer(float screenWidth, float screenHeight, bool hasPerspective, Camera* camera);
-
+	SIRENITO_API Renderer(float screenWidth, float screenHeight, bool hasPerspective, Camera* camera, LightManager* light);
 	SIRENITO_API void Clear();
 
 	SIRENITO_API unsigned int CreateBuffer();

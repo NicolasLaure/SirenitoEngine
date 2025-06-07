@@ -15,7 +15,8 @@ BaseGame::BaseGame(int width, int height, const char* title)
 
 	windowInstance = new Window(width, height, title);
 	mainCamera = new Camera();
-	rendererInstance = new Renderer(width, height, hasPerspective, mainCamera);
+	lightManager = new LightManager();
+	rendererInstance = new Renderer(width, height, hasPerspective, mainCamera, lightManager);
 	inputInstance = new Input(windowInstance);
 
 	FileReader fileReader;
@@ -60,6 +61,7 @@ void BaseGame::RunProgram()
 	}
 
 	delete mainCamera;
+	delete lightManager;
 	delete windowInstance;
 	delete rendererInstance;
 	delete inputInstance;
