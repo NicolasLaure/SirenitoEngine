@@ -49,7 +49,7 @@ void Mesh::SetTexture(const char* path)
 
 void Mesh::Draw()
 {
-	rendererInstance->SetData(transform, color, true, GetVertices(width, height), 324, GetIndices(), 36, VAO, VBO, EBO);
+	rendererInstance->SetData(transform, color, true, GetVertices(width, height), 432, GetIndices(), 36, VAO, VBO, EBO);
 	rendererInstance->Draw(VAO, 36, texture.GetId());
 }
 
@@ -60,74 +60,72 @@ float* Mesh::GetVertices(float width, float height)
 
 float* Mesh::GetVertices(float width, float height, Vector2 minCoords, Vector2 maxCoords)
 {
-	return new float[324]
-		{
-			-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,
-				0.5f, -0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
-				0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,
-				0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,
-				-0.5f, 0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,
-				-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,
+	return new float[432]
+	{
+		-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y, 0.0f,  0.0f, -1.0f,
+			0.5f, -0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y, 0.0f,  0.0f, -1.0f,
+			0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y, 0.0f,  0.0f, -1.0f,
+			0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y, 0.0f,  0.0f, -1.0f,
+			-0.5f, 0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y, 0.0f,  0.0f, -1.0f,
+			-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y, 0.0f,  0.0f, -1.0f,
 
-				// Front face
-				-0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,
-				0.5f, -0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
-				0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,
-				0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,
-				-0.5f, 0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,
-				-0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,
+			// Front face												     
+			-0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y, 0.0f,  0.0f, 1.0f,
+			0.5f, -0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y, 0.0f,  0.0f, 1.0f,
+			0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,	0.0f,  0.0f, 1.0f,
+			0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,	0.0f,  0.0f, 1.0f,
+			-0.5f, 0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y, 0.0f,  0.0f, 1.0f,
+			-0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y, 0.0f,  0.0f, 1.0f,
 
-				// Left face
-				-0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
-				-0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,
-				-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,
-				-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,
-				-0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,
-				-0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
+			// Left face												    
+			-0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,	-1.0f,  0.0f,  0.0f,
+			-0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,	-1.0f,  0.0f,  0.0f,
+			-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,	-1.0f,  0.0f,  0.0f,
+			-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,	-1.0f,  0.0f,  0.0f,
+			-0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,	-1.0f,  0.0f,  0.0f,
+			-0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,	-1.0f,  0.0f,  0.0f,
 
-				// Right face
-				0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
-				0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,
-				0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,
-				0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,
-				0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,
-				0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
+			// Right face												     
+			0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,		1.0f,  0.0f,  0.0f,
+			0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,	1.0f,  0.0f,  0.0f,
+			0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,	1.0f,  0.0f,  0.0f,
+			0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,	1.0f,  0.0f,  0.0f,
+			0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,	1.0f,  0.0f,  0.0f,
+			0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,		1.0f,  0.0f,  0.0f,
 
-				// Bottom face
-				-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,
-				0.5f, -0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,
-				0.5f, -0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
-				0.5f, -0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
-				-0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,
-				-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,
+			// Bottom face												     
+			-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,	0.0f, -1.0f,  0.0f,
+			0.5f, -0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,	0.0f, -1.0f,  0.0f,
+			0.5f, -0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,	0.0f, -1.0f,  0.0f,
+			0.5f, -0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,	0.0f, -1.0f,  0.0f,
+			-0.5f, -0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,	0.0f, -1.0f,  0.0f,
+			-0.5f, -0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,	0.0f, -1.0f,  0.0f,
 
-				// Top face
-				-0.5f, 0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,
-				0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,
-				0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
-				0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,
-				-0.5f, 0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,
-				-0.5f, 0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y
-		};
+			// Top face													     
+			-0.5f, 0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y, 0.0f,  1.0f,  0.0f,
+			0.5f, 0.5f, -0.5f, 1, 1, 1, 1, maxCoords.x, maxCoords.y,  0.0f,  1.0f,  0.0f,
+			0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,	  0.0f,  1.0f,  0.0f,
+			0.5f, 0.5f, 0.5f, 1, 1, 1, 1, maxCoords.x, minCoords.y,	  0.0f,  1.0f,  0.0f,
+			-0.5f, 0.5f, 0.5f, 1, 1, 1, 1, minCoords.x, minCoords.y,  0.0f,  1.0f,  0.0f,
+			-0.5f, 0.5f, -0.5f, 1, 1, 1, 1, minCoords.x, maxCoords.y,  0.0f,  1.0f,  0.0f
+	};
 }
-
-
 
 unsigned int* Mesh::GetIndices()
 {
 	return new unsigned int[36]
-		{
-			0, 1, 2,
-				3, 4, 5,
-				6, 7, 8,
-				9, 10, 11,
-				12, 13, 14,
-				15, 16, 17,
-				18, 19, 20,
-				21, 22, 23,
-				24, 25, 26,
-				27, 28, 29,
-				30, 31, 32,
-				33, 34, 35
-		};
+	{
+		0, 1, 2,
+			3, 4, 5,
+			6, 7, 8,
+			9, 10, 11,
+			12, 13, 14,
+			15, 16, 17,
+			18, 19, 20,
+			21, 22, 23,
+			24, 25, 26,
+			27, 28, 29,
+			30, 31, 32,
+			33, 34, 35
+	};
 }

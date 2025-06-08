@@ -7,6 +7,7 @@
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
+	//lightManager->SetAmbientLight(new GlobalLight(Color(10, 10, 10, 1)));
 	firstPersonCamera = new FirstPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
 	thirdPersonCamera = new ThirdPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
 	isFirstPerson = true;
@@ -28,6 +29,8 @@ Program::~Program()
 
 void Program::Update()
 {
+	cube->transform->Rotate(Vector3::Up(), 3.0f);
+
 	if (isFirstPerson)
 		firstPersonCamera->Update(inputInstance);
 	else
@@ -53,5 +56,6 @@ void Program::Draw()
 	background->Draw();
 	ground->Draw();
 	cube->Draw();
-	thirdPersonCamera->mesh->Draw();
+	if (!isFirstPerson)
+		thirdPersonCamera->mesh->Draw();
 }

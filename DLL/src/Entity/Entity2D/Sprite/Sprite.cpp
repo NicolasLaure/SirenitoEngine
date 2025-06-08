@@ -77,10 +77,10 @@ void Sprite::Draw()
 	if (animation != nullptr)
 	{
 		animation->UpdateAnimation();
-		rendererInstance->SetData(transform, color, true, GetVertices(width, height, animation->currentFrame.GetMin(), animation->currentFrame.GetMax()), 36, GetIndices(), 6, VAO, VBO, EBO);
+		rendererInstance->SetData(transform, color, true, GetVertices(width, height, animation->currentFrame.GetMin(), animation->currentFrame.GetMax()), 48, GetIndices(), 6, VAO, VBO, EBO);
 	}
 	else
-		rendererInstance->SetData(transform, color, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
+		rendererInstance->SetData(transform, color, true, GetVertices(width, height), 48, GetIndices(), 6, VAO, VBO, EBO);
 
 	rendererInstance->Draw(VAO, 6, texture.GetId());
 }
@@ -92,25 +92,24 @@ float* Sprite::GetVertices(float width, float height)
 
 float* Sprite::GetVertices(float width, float height, Vector2 minCoords, Vector2 maxCoords)
 {
-	return new float[36]
-		{
-			width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, maxCoords.y, //Top Right
-				width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, minCoords.y, //Bottom Right
-				-width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, minCoords.y,  //Bottom Left
-				-width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, maxCoords.y //Top Left
-		};
+	return new float[48]
+	{
+		//Top Right
+		width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, maxCoords.y, 0.0f,  1.0f,  0.0f,
+		//Bottom Right
+		width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, minCoords.y, 0.0f,  1.0f,  0.0f,
+		//Bottom Left
+		-width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, minCoords.y, 0.0f,  1.0f,  0.0f,
+		//Top Left
+		-width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, maxCoords.y, 0.0f,  1.0f,  0.0f
+	};
 }
-
-/// <summary>
-///  adasdad
-/// </summary>
-/// <returns></returns>
 
 unsigned int* Sprite::GetIndices()
 {
 	return new unsigned int[6]
-		{
-			0, 1, 3,
-				1, 2, 3
-		};
+	{
+		0, 1, 3,
+			1, 2, 3
+	};
 }

@@ -68,38 +68,44 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 
 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)(sizeof(float) * 3));
 		glEnableVertexAttribArray(1);
+
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 10, (void*)(sizeof(float) * 7));
+		glEnableVertexAttribArray(2);
 	}
 	else
 	{
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (void*)0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 12, (void*)0);
 		glEnableVertexAttribArray(0);
 
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (void*)(sizeof(float) * 3));
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 12, (void*)(sizeof(float) * 3));
 		glEnableVertexAttribArray(1);
 
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (void*)(sizeof(float) * 7));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 12, (void*)(sizeof(float) * 7));
 		glEnableVertexAttribArray(2);
+
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 12, (void*)(sizeof(float) * 9));
+		glEnableVertexAttribArray(3);
 	}
 
 	unsigned int shaderProgram = basicShaderProgram;
 	if (hasTexture)
 		shaderProgram = textureShaderProgram;
 
-	int mat4Uniform = glGetUniformLocation(shaderProgram, "u_MVP");
-	glUseProgram(shaderProgram);
-	glm::mat4 mvp = MVP_Transformation(model);
-	glUniformMatrix4fv(mat4Uniform, 1, GL_FALSE, &mvp[0][0]);
+	//Setting MVP Uniforms
+	SetShaderMatrix(shaderProgram, "u_Model", model);
+	SetShaderMatrix(shaderProgram, "u_View", GetView());
+	SetShaderMatrix(shaderProgram, "u_Projection", projection);
 
-	int colorUniform = glGetUniformLocation(shaderProgram, "u_Tint");
-	glUseProgram(shaderProgram);
-	glm::vec4 tintColor = glm::vec4(color.r, color.g, color.b, color.a);
-	glUniform4fv(colorUniform, 1, &tintColor[0]);
+	//Setting Tint Color
+	SetShaderVector4(shaderProgram, "u_Tint", Vector4(color.r, color.g, color.b, color.a));
 
-	int lightColorUniform = glGetUniformLocation(shaderProgram, "u_LightColor");
-	glUseProgram(shaderProgram);
+	//SettingAmbientLight
 	GlobalLight* ambientLight = lightManager->GetAmbientLight();
-	glm::vec4 lightColor = ambientLight == nullptr ? glm::vec4(0.0f, 0.0f, 0.0f, 1.0f) : glm::vec4(ambientLight->color.r, ambientLight->color.g, ambientLight->color.b, 1.0f);
-	glUniform4fv(lightColorUniform, 1, &lightColor[0]);
+	Vector3 lightColor = ambientLight == nullptr ? Vector3(0.0f, 0.0f, 0.0f) : Vector3(ambientLight->color.r, ambientLight->color.g, ambientLight->color.b);
+	SetShaderVector3(shaderProgram, "u_AmbientLightColor", lightColor);
+
+	SetShaderVector3(shaderProgram, "u_PointLightColor", Vector3(1.0f, 1.0f, 1.0f));
+	SetShaderVector3(shaderProgram, "u_PointLightPos", Vector3(1.0f, 0.0f, 0.0f));
 }
 
 void Renderer::AddVertices(Vector2 vertices[], int vertexQty)
@@ -134,8 +140,12 @@ void Renderer::Draw(unsigned int& VAO, int indexQty, unsigned int texture)
 
 glm::mat4 Renderer::MVP_Transformation(MY4X4 model)
 {
-	glm::mat4 view = glm::lookAt(mainCamera->view->GetPosition().ToGlm(), (mainCamera->view->GetPosition() + mainCamera->view->GetForward()).ToGlm(), mainCamera->view->GetUp().ToGlm());
-	return projection * view * model.ToGlm();
+	return projection * GetView() * model.ToGlm();
+}
+
+glm::mat4 Renderer::GetView()
+{
+	return glm::lookAt(mainCamera->view->GetPosition().ToGlm(), (mainCamera->view->GetPosition() + mainCamera->view->GetForward()).ToGlm(), mainCamera->view->GetUp().ToGlm());
 }
 
 void Renderer::CompileShader(string vertexSource, string fragmentSource, unsigned int* shaderProgram)
@@ -176,4 +186,55 @@ void Renderer::SetProjection(bool shouldBePerspective)
 		return;
 	}
 	projection = glm::perspective(glm::radians(80.0f), (float)width / (float)height, 0.1f, 1000.0f);
+}
+
+void Renderer::SetShaderBool(unsigned int shader, const char* name, bool value) const
+{
+	glUseProgram(shader);
+	glUniform1i(glGetUniformLocation(shader, name), (int)value);
+}
+
+void Renderer::SetShaderInt(unsigned int shader, const char* name, int value) const
+{
+	glUseProgram(shader);
+	glUniform1i(glGetUniformLocation(shader, name), value);
+}
+
+void Renderer::SetShaderFloat(unsigned int shader, const char* name, float value) const
+{
+	glUseProgram(shader);
+	glUniform1f(glGetUniformLocation(shader, name), value);
+}
+
+void Renderer::SetShaderVector2(unsigned int shader, const char* name, Vector2 value) const
+{
+	glUseProgram(shader);
+	glm::vec2 vec2 = value.ToGlm();
+	glUniform2fv(glGetUniformLocation(shader, name), 1, &vec2[0]);
+}
+
+void Renderer::SetShaderVector3(unsigned int shader, const char* name, Vector3 value) const
+{
+	glUseProgram(shader);
+	glm::vec3 vec3 = value.ToGlm();
+	glUniform3fv(glGetUniformLocation(shader, name), 1, &vec3[0]);
+}
+
+void Renderer::SetShaderVector4(unsigned int shader, const char* name, Vector4 value) const
+{
+	glUseProgram(shader);
+	glm::vec4 vec4 = value.ToGlm();
+	glUniform4fv(glGetUniformLocation(shader, name), 1, &vec4[0]);
+}
+
+void Renderer::SetShaderMatrix(unsigned int shader, const char* name, MY4X4 value) const
+{
+	glUseProgram(shader);
+	glm::mat4 mvp = value.ToGlm();
+	glUniformMatrix4fv(glGetUniformLocation(shader, name), 1, GL_FALSE, &mvp[0][0]);
+}
+void Renderer::SetShaderMatrix(unsigned int shader, const char* name, glm::mat4 value) const
+{
+	glUseProgram(shader);
+	glUniformMatrix4fv(glGetUniformLocation(shader, name), 1, GL_FALSE, &value[0][0]);
 }

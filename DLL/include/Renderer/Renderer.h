@@ -27,7 +27,6 @@ public:
 	unsigned int basicShaderProgram;
 	unsigned int textureShaderProgram;
 
-
 	SIRENITO_API Renderer(float screenWidth, float screenHeight, bool hasPerspective, Camera* camera, LightManager* light);
 	SIRENITO_API void Clear();
 
@@ -40,8 +39,19 @@ public:
 	SIRENITO_API void DrawWire(unsigned int& VAO, int indexQty);
 	SIRENITO_API void Draw(unsigned int& VAO, int indexQty, unsigned int texture);
 	SIRENITO_API glm::mat4 MVP_Transformation(MY4X4 model);
+	SIRENITO_API glm::mat4 GetView();
 
 	SIRENITO_API void CompileShader(string vertexSource, string fragmentSource, unsigned int* shaderProgram);
 
 	SIRENITO_API void SetProjection(bool shouldBePerspective);
+
+	SIRENITO_API void SetShaderBool(unsigned int shader, const char* name, bool value) const;
+	SIRENITO_API void SetShaderInt(unsigned int shader, const char* name, int value) const;
+	SIRENITO_API void SetShaderFloat(unsigned int shader, const char* name, float value) const;
+	SIRENITO_API void SetShaderVector2(unsigned int shader, const char* name, Vector2  value) const;
+	SIRENITO_API void SetShaderVector3(unsigned int shader, const char* name, Vector3  value) const;
+	SIRENITO_API void SetShaderVector4(unsigned int shader, const char* name, Vector4 value) const;
+	SIRENITO_API void SetShaderMatrix(unsigned int shader, const char* name, MY4X4 value) const;
+	SIRENITO_API void SetShaderMatrix(unsigned int shader, const char* name, glm::mat4 value) const;
+
 };
