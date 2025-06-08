@@ -108,6 +108,9 @@
     <ClCompile Include="src\Lightning\LightManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lightning\PointLight.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -219,6 +222,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Lightning\LightManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Lightning\PointLight.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

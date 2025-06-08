@@ -23,3 +23,16 @@ void LightManager::SetAmbientLight(GlobalLight* newLight)
 
 	ambientLight = newLight;
 }
+
+PointLight* LightManager::GetPointLight()
+{
+	return pointLight;
+}
+
+void LightManager::SetPointLight(PointLight* newLight)
+{
+	if (pointLight != nullptr)
+		delete pointLight;
+
+	pointLight = newLight;
+}

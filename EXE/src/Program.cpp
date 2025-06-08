@@ -3,18 +3,17 @@
 #include "Utilities/Vector3.h"
 #include "Utilities/Quaternion.h"
 #include "Collisions/CollisionManager.h"
-#include "Lightning/GlobalLight.h"
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
-	//lightManager->SetAmbientLight(new GlobalLight(Color(10, 10, 10, 1)));
+	lightManager->SetPointLight(new PointLight(Color(1.0f, 0.3f, 0.8f, 1.0f), Vector3(1.0f, 0.0f, 0.0f)));
 	firstPersonCamera = new FirstPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
 	thirdPersonCamera = new ThirdPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
 	isFirstPerson = true;
 
 	background = new Sprite("res/textures/Background.jpg", Vector3(0, 30.0f, -60.0f), Vector3(), -width, -height, rendererInstance);
 	ground = new Sprite("res/textures/Background.jpg", Vector3(0, -30.0f, 15.0f), Vector3(90.0f, 0, 0), -width, -height, rendererInstance);
-	cube = new Mesh("res/textures/sans-dance.jpg", Vector3(), Vector3(), 32, 32, Color(1.0f, 0.0f, 0.0f, 1.0f), rendererInstance);
+	cube = new Mesh("res/textures/sans-dance.jpg", Vector3(), Vector3(), 32, 32, Color(1.0f, 1.0f, 1.0f, 1.0f), rendererInstance);
 
 }
 
@@ -29,7 +28,7 @@ Program::~Program()
 
 void Program::Update()
 {
-	cube->transform->Rotate(Vector3::Up(), 3.0f);
+	lightManager->GetPointLight()->transform.RotateAround(Vector3(), Vector3::Up(), pointLightRotationIncrease);
 
 	if (isFirstPerson)
 		firstPersonCamera->Update(inputInstance);

@@ -104,8 +104,12 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 	Vector3 lightColor = ambientLight == nullptr ? Vector3(0.0f, 0.0f, 0.0f) : Vector3(ambientLight->color.r, ambientLight->color.g, ambientLight->color.b);
 	SetShaderVector3(shaderProgram, "u_AmbientLightColor", lightColor);
 
-	SetShaderVector3(shaderProgram, "u_PointLightColor", Vector3(1.0f, 1.0f, 1.0f));
-	SetShaderVector3(shaderProgram, "u_PointLightPos", Vector3(1.0f, 0.0f, 0.0f));
+	PointLight* pointLight = lightManager->GetPointLight();
+	if (pointLight != nullptr)
+	{
+		SetShaderVector3(shaderProgram, "u_PointLightColor", Vector3(pointLight->color.r, pointLight->color.g, pointLight->color.b));
+		SetShaderVector3(shaderProgram, "u_PointLightPos", pointLight->transform.GetPosition());
+	}
 }
 
 void Renderer::AddVertices(Vector2 vertices[], int vertexQty)
