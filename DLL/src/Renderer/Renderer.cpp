@@ -51,7 +51,7 @@ unsigned int Renderer::CreateVertexArray()
 	return VAO;
 }
 
-void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
+void Renderer::SetData(Transform* transform, Material material, bool hasTexture, float* positions, int positionsSize, unsigned int* indices, float indicesSize, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 {
 	MY4X4 model = transform->LocalToWorldMatrix();
 	glBindVertexArray(VAO);
@@ -88,7 +88,7 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 	}
 
 	unsigned int shaderProgram = basicShaderProgram;
-	
+
 	if (hasTexture)
 		shaderProgram = textureShaderProgram;
 
@@ -98,7 +98,9 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 	SetShaderMatrix(shaderProgram, "u_Projection", projection);
 
 	//Setting Tint Color
-	SetShaderVector4(shaderProgram, "u_Tint", Vector4(color.r, color.g, color.b, color.a));
+	SetShaderVector4(shaderProgram, "u_Tint", Vector4(material.tint.r, material.tint.g, material.tint.b, material.tint.a));
+	//Setting Glossiness
+	SetShaderFloat(shaderProgram, "u_ObjectGlossiness", material.glossiness);
 
 	//SettingAmbientLight
 	GlobalLight* ambientLight = lightManager->GetAmbientLight();
@@ -108,8 +110,15 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 	PointLight* pointLight = lightManager->GetPointLight();
 	if (pointLight != nullptr)
 	{
-		SetShaderVector3(shaderProgram, "u_PointLightColor", Vector3(pointLight->color.r, pointLight->color.g, pointLight->color.b));
-		SetShaderVector3(shaderProgram, "u_PointLightPos", pointLight->transform.GetPosition());
+		SetShaderVector3(shaderProgram, "u_PointLight.color", Vector3(pointLight->color.r, pointLight->color.g, pointLight->color.b));
+		SetShaderVector3(shaderProgram, "u_PointLight.position", pointLight->transform.GetPosition());
+	}
+
+	DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
+	if (directionalLight != nullptr)
+	{
+		SetShaderVector3(shaderProgram, "u_DirectionalLight.color", Vector3(directionalLight->color.r, directionalLight->color.g, directionalLight->color.b));
+		SetShaderVector3(shaderProgram, "u_DirectionalLight.direction", directionalLight->GetDirection());
 	}
 
 	SetShaderVector3(shaderProgram, "u_ViewPos", mainCamera->view->GetPosition());

@@ -20,16 +20,16 @@ BaseGame::BaseGame(int width, int height, const char* title)
 	inputInstance = new Input(windowInstance);
 
 	FileReader fileReader;
-	const char* basicVertexPath = "res/shaders/BasicVertex.txt";
-	const char* basicFragmentPath = "res/shaders/BasicFragment.txt";
+	const char* basicVertexPath = "res/shaders/BasicVertex.vert";
+	const char* basicFragmentPath = "res/shaders/BasicFragment.frag";
 
 	string basicVertexSource = fileReader.ParseText(basicVertexPath);
 	string basicFragmentSource = fileReader.ParseText(basicFragmentPath);
 
 	rendererInstance->CompileShader(basicVertexSource, basicFragmentSource, &rendererInstance->basicShaderProgram);
 
-	const char* textureVertexPath = "res/shaders/vertex_texture.txt";
-	const char* textureFragmentPath = "res/shaders/fragment_texture.txt";
+	const char* textureVertexPath = "res/shaders/vertex_texture.vert";
+	const char* textureFragmentPath = "res/shaders/fragment_texture.frag";
 
 	string textureVertexSource = fileReader.ParseText(textureVertexPath);
 	string textureFragmentSource = fileReader.ParseText(textureFragmentPath);

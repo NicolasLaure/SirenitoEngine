@@ -3,6 +3,7 @@
 LightManager::LightManager()
 {
 	ambientLight = new GlobalLight(Color(0.1f, 0.1f, 0.1f, 1.0f));
+	directionalLight = new DirectionalLight(Color::white(), Vector3(-35.0f, 90.0f, 0.0f));
 }
 
 LightManager::~LightManager()
@@ -35,4 +36,17 @@ void LightManager::SetPointLight(PointLight* newLight)
 		delete pointLight;
 
 	pointLight = newLight;
+}
+
+DirectionalLight* LightManager::GetDirectionalLight()
+{
+	return directionalLight;
+}
+
+void LightManager::SetDirectionalLight(DirectionalLight* newLight)
+{
+	if (directionalLight != nullptr)
+		delete directionalLight;
+
+	directionalLight = newLight;
 }

@@ -1,13 +1,13 @@
 #include "Entity/Entity3D/Mesh.h"
 
-Mesh::Mesh(Vector3 position, Vector3 eulers, Color color, Renderer* rendererInstance)
+Mesh::Mesh(Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance)
 {
-	Init(position, eulers, color, rendererInstance);
+	Init(position, eulers, material, rendererInstance);
 }
 
-Mesh::Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Color color, Renderer* rendererInstance)
+Mesh::Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance)
 {
-	Init(texturePath, position, eulers, color, rendererInstance);
+	Init(texturePath, position, eulers, material, rendererInstance);
 }
 
 Mesh::Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Renderer* rendererInstance)
@@ -15,9 +15,9 @@ Mesh::Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Renderer* 
 	Init(texturePath, position, eulers, Color::white(), rendererInstance);
 }
 
-Mesh::Mesh(const char* texturePath, Color color, Renderer* rendererInstance)
+Mesh::Mesh(const char* texturePath, Material material, Renderer* rendererInstance)
 {
-	Init(texturePath, Vector3(), Vector3(), color, rendererInstance);
+	Init(texturePath, Vector3(), Vector3(), material, rendererInstance);
 }
 
 Mesh::Mesh(const char* texturePath, Renderer* rendererInstance)
@@ -25,10 +25,10 @@ Mesh::Mesh(const char* texturePath, Renderer* rendererInstance)
 	Init(texturePath, Vector3(), Vector3(), Color::white(), rendererInstance);
 }
 
-void Mesh::Init(Vector3 position, Vector3 eulers, Color color, Renderer* rendererInstance)
+void Mesh::Init(Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance)
 {
 	this->rendererInstance = rendererInstance;
-	this->color = color;
+	this->material = material;
 	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
@@ -37,10 +37,10 @@ void Mesh::Init(Vector3 position, Vector3 eulers, Color color, Renderer* rendere
 	transform->SetPositionAndRotation(position, Quaternion::Euler(eulers));
 }
 
-void Mesh::Init(const char* texturePath, Vector3 position, Vector3 eulers, Color color, Renderer* rendererInstance)
+void Mesh::Init(const char* texturePath, Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance)
 {
 	this->texture = TextureImporter::ImportTexture(texturePath);
-	Init(position, eulers, color, rendererInstance);
+	Init(position, eulers, material, rendererInstance);
 }
 
 Mesh::~Mesh()
@@ -57,12 +57,12 @@ void Mesh::Draw()
 {
 	if (texture.GetId() == 0)
 	{
-		rendererInstance->SetData(transform, color, false, GetVertices(), 360, GetIndices(), 36, VAO, VBO, EBO);
+		rendererInstance->SetData(transform, material, false, GetVertices(), 360, GetIndices(), 36, VAO, VBO, EBO);
 		rendererInstance->Draw(VAO, 36);
 	}
 	else
 	{
-		rendererInstance->SetData(transform, color, true, GetVertices(Vector2(0, 0), Vector2(1, 1)), 432, GetIndices(), 36, VAO, VBO, EBO);
+		rendererInstance->SetData(transform, material, true, GetVertices(Vector2(0, 0), Vector2(1, 1)), 432, GetIndices(), 36, VAO, VBO, EBO);
 		rendererInstance->Draw(VAO, 36, texture.GetId());
 	}
 }

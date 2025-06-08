@@ -1,5 +1,4 @@
 #include "Program.h"
-#include "Collisions/CollisionManager.h"
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
@@ -11,7 +10,7 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	background = new Sprite("res/textures/Background.jpg", Vector3(0, 30.0f, -60.0f), Vector3(), -width, -height, rendererInstance);
 	ground = new Sprite("res/textures/Background.jpg", Vector3(0, -30.0f, 15.0f), Vector3(90.0f, 0, 0), -width, -height, rendererInstance);
 	//"res/textures/sans-dance.jpg",
-	cube = new Mesh(Vector3(), Vector3(), Color(1.0f, 0.6f, 0.3f, 1.0f), rendererInstance);
+	cube = new Mesh(Vector3(), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 5.0f), rendererInstance);
 
 }
 
