@@ -14,6 +14,15 @@ uniform vec3 u_AmbientLightColor;
 uniform vec3 u_PointLightColor;
 uniform vec3 u_PointLightPos;
 
+uniform vec4 u_DirectionalLightColor;
+uniform vec3 u_DirectionalLightDir;
+
+uniform vec4 u_SpotLightColor;
+uniform vec3 u_SpotLightDir;
+uniform vec3 u_SpotLightPos;
+
+uniform vec3 u_ViewPos;
+
 void main()
 {
 	vec4 tintedColor = texture(u_Texture,  ourTextureCoordinates) * ourColor;
@@ -23,8 +32,13 @@ void main()
 	
 	float diff = max(dot(norm, lightDir), 0.0);
 	vec3 diffuse = diff * u_PointLightColor;
-
-	vec3 result = vec3(vec4((u_AmbientLightColor + diffuse),1.0) * tintedColor); 
 	
+	float specularStrength = 1;
+	vec3 viewDir = normalize(u_ViewPos - FragPos);
+	vec3 reflectDir = reflect(-lightDir, norm);	
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+	vec3 specular = specularStrength * spec * u_PointLightColor;
+
+	vec3 result = vec3(vec4(u_AmbientLightColor + diffuse + specular, 1.0) * tintedColor);
 	FragColor = vec4(result, tintedColor.a);
 };

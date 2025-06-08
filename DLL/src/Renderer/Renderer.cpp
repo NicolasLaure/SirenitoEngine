@@ -110,6 +110,8 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 		SetShaderVector3(shaderProgram, "u_PointLightColor", Vector3(pointLight->color.r, pointLight->color.g, pointLight->color.b));
 		SetShaderVector3(shaderProgram, "u_PointLightPos", pointLight->transform.GetPosition());
 	}
+
+	SetShaderVector3(shaderProgram, "u_ViewPos", mainCamera->view->GetPosition());
 }
 
 void Renderer::AddVertices(Vector2 vertices[], int vertexQty)

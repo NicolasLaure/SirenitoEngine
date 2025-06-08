@@ -6,7 +6,7 @@
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
-	lightManager->SetPointLight(new PointLight(Color(1.0f, 0.3f, 0.8f, 1.0f), Vector3(1.0f, 0.0f, 0.0f)));
+	lightManager->SetPointLight(new PointLight(Color(1.0f, 0.3f, 0.8f, 1.0f), Vector3(2.0f, 0.0f, 0.0f)));
 	firstPersonCamera = new FirstPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
 	thirdPersonCamera = new ThirdPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
 	isFirstPerson = true;
@@ -28,7 +28,7 @@ Program::~Program()
 
 void Program::Update()
 {
-	lightManager->GetPointLight()->transform.RotateAround(Vector3(), Vector3::Up(), pointLightRotationIncrease);
+	//lightManager->GetPointLight()->transform.RotateAround(Vector3(), Vector3::Up(), pointLightRotationSpeed);
 
 	if (isFirstPerson)
 		firstPersonCamera->Update(inputInstance);

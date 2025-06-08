@@ -16,7 +16,7 @@ private:
 	ThirdPersonController* thirdPersonCamera;
 	bool isFirstPerson = true;
 
-	float pointLightRotationSpeed = 5.0f;
+	float pointLightRotationSpeed = 1.0f;
 
 public:
 	Program(int width, int height, const char* title);
