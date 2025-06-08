@@ -63,10 +63,10 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 
 	if (!hasTexture)
 	{
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 10, (void*)0);
 		glEnableVertexAttribArray(0);
 
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)(sizeof(float) * 3));
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 10, (void*)(sizeof(float) * 3));
 		glEnableVertexAttribArray(1);
 
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 10, (void*)(sizeof(float) * 7));
@@ -88,6 +88,7 @@ void Renderer::SetData(Transform* transform, Color color, bool hasTexture, float
 	}
 
 	unsigned int shaderProgram = basicShaderProgram;
+	
 	if (hasTexture)
 		shaderProgram = textureShaderProgram;
 

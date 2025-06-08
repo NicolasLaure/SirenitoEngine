@@ -1,7 +1,4 @@
 #include "Program.h"
-#include "Textures/Importer/TextureImporter.h"
-#include "Utilities/Vector3.h"
-#include "Utilities/Quaternion.h"
 #include "Collisions/CollisionManager.h"
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
@@ -13,7 +10,8 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 
 	background = new Sprite("res/textures/Background.jpg", Vector3(0, 30.0f, -60.0f), Vector3(), -width, -height, rendererInstance);
 	ground = new Sprite("res/textures/Background.jpg", Vector3(0, -30.0f, 15.0f), Vector3(90.0f, 0, 0), -width, -height, rendererInstance);
-	cube = new Mesh("res/textures/sans-dance.jpg", Vector3(), Vector3(), 32, 32, Color(1.0f, 1.0f, 1.0f, 1.0f), rendererInstance);
+	//"res/textures/sans-dance.jpg",
+	cube = new Mesh(Vector3(), Vector3(), Color(1.0f, 0.6f, 0.3f, 1.0f), rendererInstance);
 
 }
 
@@ -28,7 +26,7 @@ Program::~Program()
 
 void Program::Update()
 {
-	//lightManager->GetPointLight()->transform.RotateAround(Vector3(), Vector3::Up(), pointLightRotationSpeed);
+	lightManager->GetPointLight()->transform.RotateAround(Vector3(), Vector3::Up(), pointLightRotationSpeed);
 
 	if (isFirstPerson)
 		firstPersonCamera->Update(inputInstance);

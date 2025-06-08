@@ -3,7 +3,7 @@
 ThirdPersonController::ThirdPersonController(Vector3 initialPosition, Camera* camera, Renderer* rendererInstance)
 {
 	this->camera = camera;
-	mesh = new Mesh("res/textures/sans-dance.jpg", initialPosition, Vector3(), 32, 32, rendererInstance);
+	mesh = new Mesh("res/textures/sans-dance.jpg", initialPosition, Vector3(), rendererInstance);
 }
 
 ThirdPersonController::~ThirdPersonController()
