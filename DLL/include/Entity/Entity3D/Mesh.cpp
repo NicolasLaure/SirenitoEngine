@@ -12,7 +12,7 @@ Mesh::Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Material m
 
 Mesh::Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Renderer* rendererInstance)
 {
-	Init(texturePath, position, eulers, Color::white(), rendererInstance);
+	Init(texturePath, position, eulers, Material(), rendererInstance);
 }
 
 Mesh::Mesh(const char* texturePath, Material material, Renderer* rendererInstance)
@@ -22,7 +22,7 @@ Mesh::Mesh(const char* texturePath, Material material, Renderer* rendererInstanc
 
 Mesh::Mesh(const char* texturePath, Renderer* rendererInstance)
 {
-	Init(texturePath, Vector3(), Vector3(), Color::white(), rendererInstance);
+	Init(texturePath, Vector3(), Vector3(), Material(), rendererInstance);
 }
 
 void Mesh::Init(Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance)

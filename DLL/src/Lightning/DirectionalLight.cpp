@@ -6,13 +6,8 @@ DirectionalLight::DirectionalLight()
 	transform.SetRotation(Quaternion::Euler(-90.0f, 0.0f, 0.0f));
 }
 
-DirectionalLight::DirectionalLight(Color color, Vector3 eulers)
+DirectionalLight::DirectionalLight(Color color, Vector3 direction)
 {
 	this->color = color;
-	transform.SetRotation(Quaternion::Euler(eulers));
-}
-
-Vector3 DirectionalLight::GetDirection()
-{
-	return transform.GetRotation() * Vector3::One();
+	this->direction = direction;
 }

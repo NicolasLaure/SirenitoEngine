@@ -114,6 +114,9 @@
     <ClCompile Include="src\Utilities\Material.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lightning\SpotLight.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -231,6 +234,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Utilities\Material.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Lightning\SpotLight.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

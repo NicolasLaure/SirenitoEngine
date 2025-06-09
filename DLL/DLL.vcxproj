@@ -190,6 +190,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\Lightning\GlobalLight.cpp" />
     <ClCompile Include="src\Lightning\LightManager.cpp" />
     <ClCompile Include="src\Lightning\PointLight.cpp" />
+    <ClCompile Include="src\Lightning\SpotLight.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Textures\Importer\TextureImporter.cpp" />
     <ClCompile Include="src\Textures\Texture.cpp" />
@@ -228,6 +229,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\Lightning\GlobalLight.h" />
     <ClInclude Include="include\Lightning\LightManager.h" />
     <ClInclude Include="include\Lightning\PointLight.h" />
+    <ClInclude Include="include\Lightning\SpotLight.h" />
     <ClInclude Include="include\Renderer\Renderer.h" />
     <ClInclude Include="include\Textures\Importer\TextureImporter.h" />
     <ClInclude Include="include\Textures\Texture.h" />

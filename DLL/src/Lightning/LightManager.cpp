@@ -3,13 +3,21 @@
 LightManager::LightManager()
 {
 	ambientLight = new GlobalLight(Color(0.05f, 0.05f, 0.05f, 1.0f));
-	directionalLight = new DirectionalLight(Color(0.6f, 0.6f, 0.6f, 1.0f), Vector3(-75.0f, 90.0f, 0.0f));
 }
 
 LightManager::~LightManager()
 {
 	if (ambientLight != nullptr)
 		delete ambientLight;
+
+	if (directionalLight != nullptr)
+		delete directionalLight;
+
+	if (pointLight != nullptr)
+		delete pointLight;
+
+	if (spotLight != nullptr)
+		delete spotLight;
 }
 
 GlobalLight* LightManager::GetAmbientLight()
@@ -49,4 +57,17 @@ void LightManager::SetDirectionalLight(DirectionalLight* newLight)
 		delete directionalLight;
 
 	directionalLight = newLight;
+}
+
+SpotLight* LightManager::GetSpotLight()
+{
+	return spotLight;
+}
+
+void LightManager::SetSpotLight(SpotLight* newLight)
+{
+	if (spotLight != nullptr)
+		delete spotLight;
+
+	spotLight = newLight;
 }

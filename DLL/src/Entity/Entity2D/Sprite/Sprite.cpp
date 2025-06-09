@@ -95,13 +95,13 @@ float* Sprite::GetVertices(float width, float height, Vector2 minCoords, Vector2
 	return new float[48]
 	{
 		//Top Right
-		width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, maxCoords.y, 0.0f,  1.0f,  0.0f,
+		width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, maxCoords.y, 0.0f,  0.0f,  1.0f,
 		//Bottom Right
-		width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, minCoords.y, 0.0f,  1.0f,  0.0f,
+		width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, maxCoords.x, minCoords.y, 0.0f,  0.0f,  1.0f,
 		//Bottom Left
-		-width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, minCoords.y, 0.0f,  1.0f,  0.0f,
+		-width / 2, -height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, minCoords.y, 0.0f,  0.0f,  1.0f,
 		//Top Left
-		-width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, maxCoords.y, 0.0f,  1.0f,  0.0f
+		-width / 2, height / 2, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, minCoords.x, maxCoords.y, 0.0f,  0.0f,  1.0f
 	};
 }
 

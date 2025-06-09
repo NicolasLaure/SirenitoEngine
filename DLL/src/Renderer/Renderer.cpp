@@ -121,7 +121,17 @@ void Renderer::SetData(Transform* transform, Material material, bool hasTexture,
 	if (directionalLight != nullptr)
 	{
 		SetShaderVector3(shaderProgram, "u_DirectionalLight.color", Vector3(directionalLight->color.r, directionalLight->color.g, directionalLight->color.b));
-		SetShaderVector3(shaderProgram, "u_DirectionalLight.direction", directionalLight->GetDirection());
+		SetShaderVector3(shaderProgram, "u_DirectionalLight.direction", directionalLight->direction);
+	}
+
+	SpotLight* spotLight = lightManager->GetSpotLight();
+	if (spotLight != nullptr)
+	{
+		SetShaderVector3(shaderProgram, "u_SpotLight.color", Vector3(spotLight->color.r, spotLight->color.g, spotLight->color.b));
+		SetShaderVector3(shaderProgram, "u_SpotLight.position", spotLight->transform.GetPosition());
+		SetShaderVector3(shaderProgram, "u_SpotLight.direction", spotLight->GetDirection());
+		SetShaderFloat(shaderProgram, "u_SpotLight.innerAngle", glm::cos(glm::radians(spotLight->innerAngle)));
+		SetShaderFloat(shaderProgram, "u_SpotLight.outerAngle", glm::cos(glm::radians(spotLight->outerAngle)));
 	}
 
 	SetShaderVector3(shaderProgram, "u_ViewPos", mainCamera->view->GetPosition());
