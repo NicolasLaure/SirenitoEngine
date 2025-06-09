@@ -2,19 +2,19 @@
 #include "Textures/Importer/TextureImporter.h"
 
 
-Sprite::Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance)
+Sprite::Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Material material, Renderer* rendererInstance)
 {
-	Init(texturePath, position, eulers, width, height, color, rendererInstance);
+	Init(texturePath, position, eulers, width, height, material, rendererInstance);
 }
 
 Sprite::Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Renderer* rendererInstance)
 {
-	Init(texturePath, position, eulers, width, height, Color::white(), rendererInstance);
+	Init(texturePath, position, eulers, width, height, Material(), rendererInstance);
 }
 
-Sprite::Sprite(const char* texturePath, float width, float height, Color color, Renderer* rendererInstance)
+Sprite::Sprite(const char* texturePath, float width, float height, Material material, Renderer* rendererInstance)
 {
-	Init(texturePath, Vector3(), Vector3(), width, height, color, rendererInstance);
+	Init(texturePath, Vector3(), Vector3(), width, height, material, rendererInstance);
 }
 
 Sprite::Sprite(const char* texturePath, float width, float height, Renderer* rendererInstance)
@@ -22,7 +22,7 @@ Sprite::Sprite(const char* texturePath, float width, float height, Renderer* ren
 	Init(texturePath, Vector3(), Vector3(), width, height, Color::white(), rendererInstance);
 }
 
-void Sprite::Init(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance)
+void Sprite::Init(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Material material, Renderer* rendererInstance)
 {
 	this->texture = TextureImporter::ImportTexture(texturePath);
 	this->width = width;
@@ -31,7 +31,7 @@ void Sprite::Init(const char* texturePath, Vector3 position, Vector3 eulers, flo
 	this->collider.height = height;
 
 	this->rendererInstance = rendererInstance;
-	this->color = color;
+	this->material = material;
 	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
@@ -39,7 +39,7 @@ void Sprite::Init(const char* texturePath, Vector3 position, Vector3 eulers, flo
 	transform = new Transform();
 	transform->SetPositionAndRotation(position, Quaternion::Euler(eulers));
 
-	rendererInstance->SetData(transform, color, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
+	rendererInstance->SetData(transform, material, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
 }
 
 Sprite::~Sprite()
@@ -77,10 +77,10 @@ void Sprite::Draw()
 	if (animation != nullptr)
 	{
 		animation->UpdateAnimation();
-		rendererInstance->SetData(transform, color, true, GetVertices(width, height, animation->currentFrame.GetMin(), animation->currentFrame.GetMax()), 48, GetIndices(), 6, VAO, VBO, EBO);
+		rendererInstance->SetData(transform, material, true, GetVertices(width, height, animation->currentFrame.GetMin(), animation->currentFrame.GetMax()), 48, GetIndices(), 6, VAO, VBO, EBO);
 	}
 	else
-		rendererInstance->SetData(transform, color, true, GetVertices(width, height), 48, GetIndices(), 6, VAO, VBO, EBO);
+		rendererInstance->SetData(transform, material, true, GetVertices(width, height), 48, GetIndices(), 6, VAO, VBO, EBO);
 
 	rendererInstance->Draw(VAO, 6, texture.GetId());
 }

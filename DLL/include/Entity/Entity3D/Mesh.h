@@ -11,17 +11,17 @@ protected:
 	Material material;
 
 
-	SIRENITO_API void Init(Vector3 position, Vector3 eulers, Material color, Renderer* rendererInstance);
-	SIRENITO_API void Init(const char* texturePath, Vector3 position, Vector3 eulers, Material color, Renderer* rendererInstance);
+	SIRENITO_API void Init(Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance);
+	SIRENITO_API void Init(const char* texturePath, Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance);
 	SIRENITO_API float* GetVertices();
 	SIRENITO_API float* GetVertices(Vector2 minCoords, Vector2 maxCoords);
 	SIRENITO_API unsigned int* GetIndices();
 public:
 
-	SIRENITO_API Mesh(Vector3 position, Vector3 eulers, Material color, Renderer* rendererInstance);
-	SIRENITO_API Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Material color, Renderer* rendererInstance);
+	SIRENITO_API Mesh(Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance);
+	SIRENITO_API Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance);
 	SIRENITO_API Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Renderer* rendererInstance);
-	SIRENITO_API Mesh(const char* texturePath, Material color, Renderer* rendererInstance);
+	SIRENITO_API Mesh(const char* texturePath, Material material, Renderer* rendererInstance);
 	SIRENITO_API Mesh(const char* texturePath, Renderer* rendererInstance);
 	SIRENITO_API ~Mesh();
 

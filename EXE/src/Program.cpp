@@ -2,16 +2,16 @@
 
 Program::Program(int width, int height, const char* title) : BaseGame(width, height, title)
 {
-	lightManager->SetPointLight(new PointLight(Color(1.0f, 0.3f, 0.8f, 1.0f), Vector3(2.0f, 0.0f, 0.0f)));
-	firstPersonCamera = new FirstPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
-	thirdPersonCamera = new ThirdPersonController(Vector3(0, 0, 0), mainCamera, rendererInstance);
+	lightManager->SetPointLight(new PointLight(Color(1.0f, 0.3f, 0.8f, 1.0f), Vector3(2.0f, 0.5f, 0.0f)));
+	firstPersonCamera = new FirstPersonController(Vector3(0, 1, 0), mainCamera, rendererInstance);
+	thirdPersonCamera = new ThirdPersonController(Vector3(0, 1, 0), mainCamera, rendererInstance);
 	isFirstPerson = true;
 
-	background = new Sprite("res/textures/Background.jpg", Vector3(0, 30.0f, -60.0f), Vector3(), -width, -height, rendererInstance);
-	ground = new Sprite("res/textures/Background.jpg", Vector3(0, -30.0f, 15.0f), Vector3(90.0f, 0, 0), -width, -height, rendererInstance);
+	background = new Sprite("res/textures/Background.jpg", Vector3(0, 30.0f, -30.0f), Vector3(), -width, -height, rendererInstance);
+	ground = new Sprite("res/textures/Background.jpg", Vector3(0, -2.0f, 0.0f), Vector3(90.0f, 0, 0), 10.0f, 10.0f, rendererInstance);
 	//"res/textures/sans-dance.jpg",
-	cube = new Mesh(Vector3(), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 5.0f), rendererInstance);
-
+	cube = new Mesh(Vector3(), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
+	cube2 = new Mesh(Vector3(-5.0f, 0.0f, 0.0f), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
 }
 
 Program::~Program()
@@ -21,11 +21,13 @@ Program::~Program()
 	delete firstPersonCamera;
 	delete thirdPersonCamera;
 	delete cube;
+	delete cube2;
 }
 
 void Program::Update()
 {
 	lightManager->GetPointLight()->transform.RotateAround(Vector3(), Vector3::Up(), pointLightRotationSpeed);
+
 
 	if (isFirstPerson)
 		firstPersonCamera->Update(inputInstance);
@@ -52,6 +54,7 @@ void Program::Draw()
 	background->Draw();
 	ground->Draw();
 	cube->Draw();
+	cube2->Draw();
 	if (!isFirstPerson)
 		thirdPersonCamera->mesh->Draw();
 }

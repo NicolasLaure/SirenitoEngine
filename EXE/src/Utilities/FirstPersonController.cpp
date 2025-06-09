@@ -48,3 +48,8 @@ void FirstPersonController::SetFirstPerson()
 {
 	camera->view->SetParent(pivot);
 }
+
+Transform* FirstPersonController::GetPivot()
+{
+	return pivot;
+}

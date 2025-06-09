@@ -112,6 +112,9 @@ void Renderer::SetData(Transform* transform, Material material, bool hasTexture,
 	{
 		SetShaderVector3(shaderProgram, "u_PointLight.color", Vector3(pointLight->color.r, pointLight->color.g, pointLight->color.b));
 		SetShaderVector3(shaderProgram, "u_PointLight.position", pointLight->transform.GetPosition());
+		SetShaderFloat(shaderProgram, "u_PointLight.constant", 1.0f);
+		SetShaderFloat(shaderProgram, "u_PointLight.linear", 0.22f);
+		SetShaderFloat(shaderProgram, "u_PointLight.quadratic", 0.2f);
 	}
 
 	DirectionalLight* directionalLight = lightManager->GetDirectionalLight();

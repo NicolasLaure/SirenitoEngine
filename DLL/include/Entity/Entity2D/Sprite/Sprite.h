@@ -4,9 +4,9 @@
 #include "Utilities/Vector2.h"
 #include "Utilities/Vector3.h"
 #include "Utilities/Exporter.h"
-#include "Utilities/Color.h"
 #include "Animation/Animation.h"
 #include "Textures/Texture.h"
+#include "Utilities/Material.h"
 
 SIRENITO_API class Sprite : public Entity2D
 {
@@ -14,10 +14,10 @@ protected:
 	float width;
 	float height;
 	Texture texture;
-	Color color;
+	Material material;
 
 
-	SIRENITO_API void Init(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API void Init(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Material material, Renderer* rendererInstance);
 	SIRENITO_API float* GetVertices(float width, float height);
 	SIRENITO_API float* GetVertices(float width, float height, Vector2 minCoords, Vector2 maxCoords);
 	SIRENITO_API unsigned int* GetIndices();
@@ -25,9 +25,9 @@ protected:
 public:
 	Animation* animation = nullptr;
 
-	SIRENITO_API Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Material material, Renderer* rendererInstance);
 	SIRENITO_API Sprite(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Renderer* rendererInstance);
-	SIRENITO_API Sprite(const char* texturePath, float width, float height, Color color, Renderer* rendererInstance);
+	SIRENITO_API Sprite(const char* texturePath, float width, float height, Material material, Renderer* rendererInstance);
 	SIRENITO_API Sprite(const char* texturePath, float width, float height, Renderer* rendererInstance);
 	SIRENITO_API ~Sprite();
 

@@ -2,8 +2,8 @@
 
 LightManager::LightManager()
 {
-	ambientLight = new GlobalLight(Color(0.1f, 0.1f, 0.1f, 1.0f));
-	directionalLight = new DirectionalLight(Color::white(), Vector3(-35.0f, 90.0f, 0.0f));
+	ambientLight = new GlobalLight(Color(0.05f, 0.05f, 0.05f, 1.0f));
+	directionalLight = new DirectionalLight(Color(0.6f, 0.6f, 0.6f, 1.0f), Vector3(-75.0f, 90.0f, 0.0f));
 }
 
 LightManager::~LightManager()

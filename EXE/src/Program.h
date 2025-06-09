@@ -12,11 +12,12 @@ private:
 	Sprite* background;
 	Sprite* ground;
 	Mesh* cube;
+	Mesh* cube2;
 	FirstPersonController* firstPersonCamera;
 	ThirdPersonController* thirdPersonCamera;
 	bool isFirstPerson = true;
 
-	float pointLightRotationSpeed = 1.0f;
+	float pointLightRotationSpeed = 3.0f;
 
 public:
 	Program(int width, int height, const char* title);

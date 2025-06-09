@@ -1,6 +1,6 @@
 #include "Lightning/PointLight.h"
 
-PointLight::PointLight(Color color)
+PointLight::PointLight(Color material)
 {
 	this->color = color;
 }

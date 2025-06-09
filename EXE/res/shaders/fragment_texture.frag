@@ -22,6 +22,10 @@ struct PointLight
 {
 	vec3 color;
 	vec3 position;
+
+	float constant;
+	float linear;
+	float quadratic;
 };
 
 struct DirectionalLight
@@ -45,6 +49,12 @@ vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewP
 	vec3 reflectDir = reflect(-lightDir, norm);	
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
 	vec3 specular = u_ObjectGlossiness * spec * light.color;
+	
+	float distance = length(light.position - fragPos);
+	float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+
+	diffuse *= attenuation;
+	specular *= attenuation;
 	
 	return (diffuse + specular);
 };

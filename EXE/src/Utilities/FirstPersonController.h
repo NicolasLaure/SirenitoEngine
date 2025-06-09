@@ -19,4 +19,6 @@ public:
 	~FirstPersonController();
 	void Update(Input* inputInstance);
 	void SetFirstPerson();
+
+	Transform* GetPivot();
 };

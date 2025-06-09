@@ -1,13 +1,13 @@
 #include "Entity/Entity2D/Shape/Shapes/Rectangle.h"
 
-Rectangle::Rectangle(Vector3 position, float width, float height, Color color, Renderer* renderer) : Shape(color, GetVertices(width, height), 28, GetIndices(), 6, renderer)
+Rectangle::Rectangle(Vector3 position, float width, float height, Color material, Renderer* renderer) : Shape(material, GetVertices(width, height), 28, GetIndices(), 6, renderer)
 {
 	transform = new Transform();
 	transform->SetPosition(position);
 	collider.width = width;
 	collider.height = height;
 
-	rendererInstance->SetData(transform, color, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
+	rendererInstance->SetData(transform, material, false, vertices, vertexQty, indices, indexQty, VAO, VBO, EBO);
 }
 
 Rectangle::~Rectangle()
