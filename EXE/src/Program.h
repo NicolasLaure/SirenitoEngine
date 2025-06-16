@@ -4,15 +4,15 @@
 #include "Environment/Rock.h"
 #include "Utilities/FirstPersonController.h"
 #include "Utilities/ThirdPersonController.h"
-#include "Entity/Entity3D/Mesh.h"
+#include "Entity/Entity3D/Cube.h"
 
 SIRENITO_API class Program : public BaseGame
 {
 private:
 	Sprite* background;
 	Sprite* ground;
-	Mesh* cube;
-	Mesh* cube2;
+	Cube* cube;
+	Cube* cube2;
 	FirstPersonController* firstPersonCamera;
 	ThirdPersonController* thirdPersonCamera;
 	bool isFirstPerson = true;

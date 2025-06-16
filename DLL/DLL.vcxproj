@@ -88,17 +88,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;SIRENITO_EXPORT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glm;$(SolutionDir)libs\stb_image;$(ProjectDir)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glm;$(SolutionDir)libs\stb_image;$(ProjectDir)include;$(SolutionDir)libs\assimp-vc143-mtd</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)libs\glfw-3.4\lib;$(SolutionDir)libs\glew-2.1.0\lib\32bit</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)libs\glfw-3.4\lib;$(SolutionDir)libs\glew-2.1.0\lib\32bit;$(SolutionDir)libs\assimp-vc143-mtd</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /y "$(SolutionDir)libs\glfw-3.4\lib\glfw3.dll" "$(OutDir)"
 copy /y "$(SolutionDir)libs\glew-2.1.0\lib\32bit\glew32.dll" "$(OutDir)"
+copy /y "$(SolutionDir)libs\assimp-vc143-mtd\assimp-vc143-mtd.dll" "$(OutDir)"
 xcopy /y /i /s "$(ProjectDir)include" "$(OutDir)include"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -110,19 +111,21 @@ xcopy /y /i /s "$(ProjectDir)include" "$(OutDir)include"</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;SIRENITO_EXPORT;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glm;$(SolutionDir)DLL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glm;$(SolutionDir)DLL;$(SolutionDir)libs\assimp-vc143-mtd</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)libs\glfw-3.4\lib;$(SolutionDir)libs\glew-2.1.0\lib\32bit</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;glew32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)libs\glfw-3.4\lib;$(SolutionDir)libs\glew-2.1.0\lib\32bit;$(SolutionDir)libs\assimp-vc143-mtd</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /y "$(SolutionDir)libs\glfw-3.4\lib\glfw3.dll" "$(OutDir)"
-copy /y "$(SolutionDir)libs\glew-2.1.0\lib\32bit\glew32.dll" "$(OutDir)"</Command>
+copy /y "$(SolutionDir)libs\glew-2.1.0\lib\32bit\glew32.dll" "$(OutDir)"
+copy /y "$(SolutionDir)libs\assimp-vc143-mtd\assimp-vc143-mtd.dll" "$(OutDir)"
+xcopy /y /i /s "$(ProjectDir)include" "$(OutDir)include"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -171,7 +174,6 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\Entity\Entity3D\Mesh.cpp" />
     <ClCompile Include="src\Animation\Animation.cpp" />
     <ClCompile Include="src\Animation\Frame.cpp" />
     <ClCompile Include="src\BaseGame\BaseGame.cpp" />
@@ -183,7 +185,9 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\Entity\Entity2D\Shape\Shapes\Rectangle.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Shapes\Triangle.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Sprite\Sprite.cpp" />
+    <ClCompile Include="src\Entity\Entity3D\Cube.cpp" />
     <ClCompile Include="src\Entity\Entity3D\Entity3D.cpp" />
+    <ClCompile Include="src\Entity\Entity3D\Mesh.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Lightning\BaseLight.cpp" />
     <ClCompile Include="src\Lightning\DirectionalLight.cpp" />
@@ -210,6 +214,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h" />
     <ClInclude Include="include\Animation\Frame.h" />
+    <ClInclude Include="include\AssetImporter\AssetImporter.h" />
     <ClInclude Include="include\BaseGame\BaseGame.h" />
     <ClInclude Include="include\Camera\Camera.h" />
     <ClInclude Include="include\Collisions\Collider.h" />
@@ -220,6 +225,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\Entity\Entity2D\Shape\Shapes\Rectangle.h" />
     <ClInclude Include="include\Entity\Entity2D\Shape\Shapes\Triangle.h" />
     <ClInclude Include="include\Entity\Entity2D\Sprite\Sprite.h" />
+    <ClInclude Include="include\Entity\Entity3D\Cube.h" />
     <ClInclude Include="include\Entity\Entity3D\Entity3D.h" />
     <ClInclude Include="include\Entity\Entity3D\Mesh.h" />
     <ClInclude Include="include\Input\Input.h" />
@@ -231,6 +237,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\Lightning\PointLight.h" />
     <ClInclude Include="include\Lightning\SpotLight.h" />
     <ClInclude Include="include\Renderer\Renderer.h" />
+    <ClInclude Include="include\Renderer\Vertex.h" />
     <ClInclude Include="include\Textures\Importer\TextureImporter.h" />
     <ClInclude Include="include\Textures\Texture.h" />
     <ClInclude Include="include\Utilities\Color.h" />

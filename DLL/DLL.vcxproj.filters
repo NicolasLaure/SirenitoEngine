@@ -93,9 +93,6 @@
     <ClCompile Include="src\Entity\Entity3D\Entity3D.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="include\Entity\Entity3D\Mesh.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="src\Lightning\BaseLight.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -115,6 +112,12 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="src\Lightning\SpotLight.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity3D\Cube.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity3D\Mesh.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -212,9 +215,6 @@
     <ClInclude Include="include\Utilities\Transform.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\Entity\Entity3D\Mesh.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="include\Entity\Entity3D\Entity3D.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -237,6 +237,18 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Lightning\SpotLight.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AssetImporter\AssetImporter.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity3D\Cube.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity3D\Mesh.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Renderer\Vertex.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

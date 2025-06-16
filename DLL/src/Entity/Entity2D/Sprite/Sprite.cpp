@@ -48,6 +48,9 @@ Sprite::~Sprite()
 
 	if (animation != nullptr)
 		delete animation;
+
+	if (texture != nullptr)
+		delete texture;
 }
 
 void Sprite::SetTexture(const char* path)
@@ -61,7 +64,7 @@ void Sprite::SetAnimation(const char* path, Vector2 initialCoords, int frameWidt
 	if (animation != nullptr)
 		delete animation;
 
-	animation = new Animation(&texture, initialCoords, frameWidth, frameHeight, framesQuantity, animationDuration, canLoop);
+	animation = new Animation(texture, initialCoords, frameWidth, frameHeight, framesQuantity, animationDuration, canLoop);
 }
 void Sprite::SetAnimation(const char* path, Vector2 initialCoords, int frameWidth, int frameHeight)
 {
@@ -69,7 +72,7 @@ void Sprite::SetAnimation(const char* path, Vector2 initialCoords, int frameWidt
 	if (animation != nullptr)
 		delete animation;
 
-	animation = new Animation(&texture, initialCoords, frameWidth, frameHeight);
+	animation = new Animation(texture, initialCoords, frameWidth, frameHeight);
 }
 
 void Sprite::Draw()
@@ -82,7 +85,7 @@ void Sprite::Draw()
 	else
 		rendererInstance->SetData(transform, material, true, GetVertices(width, height), 48, GetIndices(), 6, VAO, VBO, EBO);
 
-	rendererInstance->Draw(VAO, 6, texture.GetId());
+	rendererInstance->Draw(VAO, 6, texture->GetId());
 }
 
 float* Sprite::GetVertices(float width, float height)

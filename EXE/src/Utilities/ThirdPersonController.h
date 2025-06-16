@@ -2,7 +2,7 @@
 #include "Input/Input.h"
 #include "Utilities/Vector3.h"
 #include "Camera/Camera.h"
-#include "Entity/Entity3D/Mesh.h"
+#include "Entity/Entity3D/Cube.h"
 
 class ThirdPersonController
 {
@@ -20,7 +20,7 @@ private:
 
 	void UpdateCameraPosition();
 public:
-	Mesh* mesh;
+	Cube* mesh;
 
 	ThirdPersonController(Vector3 initialPosition, Camera* camera, Renderer* rendererInstance);
 	~ThirdPersonController();

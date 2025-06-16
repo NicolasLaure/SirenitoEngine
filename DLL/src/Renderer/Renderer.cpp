@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include "gtc/matrix_transform.hpp"
+#include <iostream>
 
 void Renderer::Clear()
 {
@@ -84,6 +85,92 @@ void Renderer::SetData(Transform* transform, Material material, bool hasTexture,
 		glEnableVertexAttribArray(2);
 
 		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 12, (void*)(sizeof(float) * 9));
+		glEnableVertexAttribArray(3);
+	}
+
+	unsigned int shaderProgram = basicShaderProgram;
+
+	if (hasTexture)
+		shaderProgram = textureShaderProgram;
+
+	//Setting MVP Uniforms
+	SetShaderMatrix(shaderProgram, "u_Model", model);
+	SetShaderMatrix(shaderProgram, "u_View", GetView());
+	SetShaderMatrix(shaderProgram, "u_Projection", projection);
+
+	//Setting Tint Color
+	SetShaderVector4(shaderProgram, "u_Tint", Vector4(material.tint.r, material.tint.g, material.tint.b, material.tint.a));
+	//Setting Glossiness
+	SetShaderFloat(shaderProgram, "u_ObjectGlossiness", material.glossiness);
+
+	//SettingAmbientLight
+	GlobalLight* ambientLight = lightManager->GetAmbientLight();
+	Vector3 lightColor = ambientLight == nullptr ? Vector3(0.0f, 0.0f, 0.0f) : Vector3(ambientLight->color.r, ambientLight->color.g, ambientLight->color.b);
+	SetShaderVector3(shaderProgram, "u_AmbientLightColor", lightColor);
+
+	PointLight* pointLight = lightManager->GetPointLight();
+	if (pointLight != nullptr)
+	{
+		SetShaderVector3(shaderProgram, "u_PointLight.color", Vector3(pointLight->color.r, pointLight->color.g, pointLight->color.b));
+		SetShaderVector3(shaderProgram, "u_PointLight.position", pointLight->transform.GetPosition());
+		SetShaderFloat(shaderProgram, "u_PointLight.constant", 1.0f);
+		SetShaderFloat(shaderProgram, "u_PointLight.linear", 0.22f);
+		SetShaderFloat(shaderProgram, "u_PointLight.quadratic", 0.2f);
+	}
+
+	DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
+	if (directionalLight != nullptr)
+	{
+		SetShaderVector3(shaderProgram, "u_DirectionalLight.color", Vector3(directionalLight->color.r, directionalLight->color.g, directionalLight->color.b));
+		SetShaderVector3(shaderProgram, "u_DirectionalLight.direction", directionalLight->direction);
+	}
+
+	SpotLight* spotLight = lightManager->GetSpotLight();
+	if (spotLight != nullptr)
+	{
+		SetShaderVector3(shaderProgram, "u_SpotLight.color", Vector3(spotLight->color.r, spotLight->color.g, spotLight->color.b));
+		SetShaderVector3(shaderProgram, "u_SpotLight.position", spotLight->transform.GetPosition());
+		SetShaderVector3(shaderProgram, "u_SpotLight.direction", spotLight->GetDirection());
+		SetShaderFloat(shaderProgram, "u_SpotLight.innerAngle", glm::cos(glm::radians(spotLight->innerAngle)));
+		SetShaderFloat(shaderProgram, "u_SpotLight.outerAngle", glm::cos(glm::radians(spotLight->outerAngle)));
+	}
+
+	SetShaderVector3(shaderProgram, "u_ViewPos", mainCamera->view->GetPosition());
+}
+
+void Renderer::SetData(Transform* transform, Material material, bool hasTexture, vector<Vertex> vertices, vector<unsigned int> indices, unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
+{
+	MY4X4 model = transform->LocalToWorldMatrix();
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+
+	if (!hasTexture)
+	{
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(float) * 3));
+		glEnableVertexAttribArray(1);
+
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(float) * 9));
+		glEnableVertexAttribArray(2);
+	}
+	else
+	{
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(float) * 3));
+		glEnableVertexAttribArray(1);
+
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(float) * 7));
+		glEnableVertexAttribArray(2);
+
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(float) * 9));
 		glEnableVertexAttribArray(3);
 	}
 

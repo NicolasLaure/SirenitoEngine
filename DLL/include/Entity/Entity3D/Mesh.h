@@ -1,30 +1,23 @@
 #pragma once
 #include "Utilities/Exporter.h"
+#include <vector>
 #include "Entity/Entity3D/Entity3D.h"
+#include "Renderer/Vertex.h"
 #include "Textures/Texture.h"
-#include "Textures/Importer/TextureImporter.h"
+
+using namespace std;
 
 SIRENITO_API class Mesh : public Entity3D
 {
 protected:
-	Texture texture;
+	Texture* texture = nullptr;
 	Material material;
-
-
-	SIRENITO_API void Init(Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance);
-	SIRENITO_API void Init(const char* texturePath, Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance);
-	SIRENITO_API float* GetVertices();
-	SIRENITO_API float* GetVertices(Vector2 minCoords, Vector2 maxCoords);
-	SIRENITO_API unsigned int* GetIndices();
 public:
+	vector<Vertex> vertices;
+	vector<unsigned int> indices;
 
-	SIRENITO_API Mesh(Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance);
-	SIRENITO_API Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance);
-	SIRENITO_API Mesh(const char* texturePath, Vector3 position, Vector3 eulers, Renderer* rendererInstance);
-	SIRENITO_API Mesh(const char* texturePath, Material material, Renderer* rendererInstance);
-	SIRENITO_API Mesh(const char* texturePath, Renderer* rendererInstance);
+	SIRENITO_API Mesh();
+	SIRENITO_API Mesh(vector<Vertex> vertices, vector<unsigned int> indices, Texture* texture, Material material, Renderer* rendererInstance);
 	SIRENITO_API ~Mesh();
-
-	SIRENITO_API void SetTexture(const char* path);
-	SIRENITO_API void Draw() override;
+	SIRENITO_API void Draw();
 };
