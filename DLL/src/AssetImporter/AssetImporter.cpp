@@ -5,9 +5,9 @@
 
 using namespace Assimp;
 
-vector<Mesh>* AssetImporter::GetMeshes(const char* path, Material material)
+vector<Mesh>* AssetImporter::GetMeshes(const char* path, Material material, Renderer* rendererInstance)
 {
-	vector<Mesh> meshes;
+	vector<Mesh>* meshes = new vector<Mesh>;
 
 	Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -17,29 +17,28 @@ vector<Mesh>* AssetImporter::GetMeshes(const char* path, Material material)
 		system("pause");
 		return nullptr;
 	}
-	std::cout << "LoadSuccesful";
-	system("pause");
+
 	string pathString = path;
 	string directory = pathString.substr(0, pathString.find_last_of('/'));
-	ProcessNode(&meshes, scene->mRootNode, scene, material, directory);
-	return &meshes;
+	ProcessNode(meshes, scene->mRootNode, scene, material, directory, rendererInstance);
+	return meshes;
 }
 
-void AssetImporter::ProcessNode(vector<Mesh>* meshes, aiNode* node, const aiScene* scene, Material material, string directory)
+void AssetImporter::ProcessNode(vector<Mesh>* meshes, aiNode* node, const aiScene* scene, Material material, string directory, Renderer* rendererInstance)
 {
 	for (int i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		meshes->push_back(ProcessMesh(meshes, mesh, scene, material, directory));
+		meshes->push_back(ProcessMesh(meshes, mesh, scene, material, directory, rendererInstance));
 	}
 
 	for (int i = 0; i < node->mNumChildren; i++)
 	{
-		ProcessNode(meshes, node->mChildren[i], scene, material, directory);
+		ProcessNode(meshes, node->mChildren[i], scene, material, directory, rendererInstance);
 	}
 }
 
-Mesh AssetImporter::ProcessMesh(vector<Mesh>* meshes, aiMesh* mesh, const aiScene* scene, Material material, string directory)
+Mesh AssetImporter::ProcessMesh(vector<Mesh>* meshes, aiMesh* mesh, const aiScene* scene, Material material, string directory, Renderer* rendererInstance)
 {
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
@@ -57,6 +56,8 @@ Mesh AssetImporter::ProcessMesh(vector<Mesh>* meshes, aiMesh* mesh, const aiScen
 		}
 		else
 			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+
+		vertices.push_back(vertex);
 	}
 
 	for (int i = 0; i < mesh->mNumFaces; i++)
@@ -75,8 +76,9 @@ Mesh AssetImporter::ProcessMesh(vector<Mesh>* meshes, aiMesh* mesh, const aiScen
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
-		Texture texture = TextureImporter::ImportTexture(str.C_Str());
+		Texture texture = TextureImporter::ImportTexture(directory.append(str.C_Str()).c_str());
 		textures.push_back(texture);
 	}
-	return Mesh(vertices, indices, textures, material);
+
+	return Mesh(vertices, indices, textures, material, rendererInstance);
 }

@@ -14,7 +14,8 @@ private:
 	Sprite* ground;
 	Cube* cube;
 	Cube* cube2;
-	Model* model;
+	Model* backpackModel;
+	Model* mclarenmodel;
 
 	FirstPersonController* firstPersonCamera;
 	ThirdPersonController* thirdPersonCamera;

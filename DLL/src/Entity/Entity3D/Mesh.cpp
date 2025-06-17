@@ -4,6 +4,9 @@
 void Mesh::SetRendererInstance(Renderer* instance)
 {
 	this->rendererInstance = instance;
+	VAO = rendererInstance->CreateVertexArray();
+	VBO = rendererInstance->CreateBuffer();
+	EBO = rendererInstance->CreateBuffer();
 }
 
 Mesh::Mesh()
@@ -29,9 +32,6 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
 	this->textures = textures;
 	this->material = material;
 	this->rendererInstance = nullptr;
-	VAO = rendererInstance->CreateVertexArray();
-	VBO = rendererInstance->CreateBuffer();
-	EBO = rendererInstance->CreateBuffer();
 }
 
 Mesh::~Mesh()

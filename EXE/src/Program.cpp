@@ -16,7 +16,10 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	cube = new Cube(Vector3(0.0f, 0.0f, 0.0f), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
 	cube2 = new Cube(Vector3(-5.0f, 0.0f, 0.0f), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
 
-	model = new Model("res/models/MclarenF1Frame.fbx", Material(), rendererInstance);
+	mclarenmodel = new Model("res/models/MclarenF1Frame.fbx", Material(), rendererInstance);
+	mclarenmodel->transform->SetLocalScale(Vector3(0.01f, 0.01f, 0.01f));
+	mclarenmodel->transform->SetPositionAndRotation(Vector3(5.0f, 0.0f, 0.0f), Quaternion::Euler(90.0f, 0.0f, 0.0f));
+	backpackModel = new Model("res/models/backpack/backpack.obj", Material(), rendererInstance);
 }
 
 Program::~Program()
@@ -27,7 +30,8 @@ Program::~Program()
 	delete thirdPersonCamera;
 	delete cube;
 	delete cube2;
-	delete model;
+	delete mclarenmodel;
+	delete backpackModel;
 }
 
 void Program::Update()
@@ -61,7 +65,8 @@ void Program::Draw()
 	ground->Draw();
 	cube->Draw();
 	cube2->Draw();
-	model->Draw();
+	mclarenmodel->Draw();
+	backpackModel->Draw();
 	if (!isFirstPerson)
 		thirdPersonCamera->mesh->Draw();
 }
