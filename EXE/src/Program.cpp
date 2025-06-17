@@ -19,7 +19,11 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	mclarenmodel = new Model("res/models/MclarenF1Frame.fbx", Material(), rendererInstance);
 	mclarenmodel->transform->SetLocalScale(Vector3(0.01f, 0.01f, 0.01f));
 	mclarenmodel->transform->SetPositionAndRotation(Vector3(5.0f, 0.0f, 0.0f), Quaternion::Euler(90.0f, 0.0f, 0.0f));
+	mclarenmodel->SetTexture("res/textures/sans-dance.jpg");
+
 	backpackModel = new Model("res/models/backpack/backpack.obj", Material(), rendererInstance);
+
+	fw190model = new Model("res/models/Fw190/FW190.fbx", Material(), rendererInstance);
 }
 
 Program::~Program()
@@ -32,6 +36,7 @@ Program::~Program()
 	delete cube2;
 	delete mclarenmodel;
 	delete backpackModel;
+	delete fw190model;
 }
 
 void Program::Update()
@@ -67,6 +72,7 @@ void Program::Draw()
 	cube2->Draw();
 	mclarenmodel->Draw();
 	backpackModel->Draw();
+	fw190model->Draw();
 	if (!isFirstPerson)
 		thirdPersonCamera->mesh->Draw();
 }

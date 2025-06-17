@@ -12,4 +12,5 @@ public:
 	SIRENITO_API Model(const char* path, Material material, Renderer* rendererInstance);
 	SIRENITO_API ~Model();
 	SIRENITO_API void Draw();
+	SIRENITO_API void SetTexture(const char* path);
 };

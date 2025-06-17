@@ -16,6 +16,7 @@ private:
 	Cube* cube2;
 	Model* backpackModel;
 	Model* mclarenmodel;
+	Model* fw190model;
 
 	FirstPersonController* firstPersonCamera;
 	ThirdPersonController* thirdPersonCamera;

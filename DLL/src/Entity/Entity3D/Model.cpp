@@ -1,5 +1,6 @@
 #include "Entity/Entity3D/Model.h"
 #include "AssetImporter/AssetImporter.h"
+#include "Textures/Importer/TextureImporter.h"
 
 Model::Model(const char* path, Renderer* rendererInstance)
 {
@@ -31,5 +32,14 @@ void Model::Draw()
 		meshes->at(i).transform = this->transform;
 		meshes->at(i).Draw();
 		meshes->at(i).transform = nullptr;
+	}
+}
+
+void Model::SetTexture(const char* path)
+{
+	for (int i = 0; i < meshes->size(); i++)
+	{
+		meshes->at(i).textures.clear();
+		meshes->at(i).textures.push_back(TextureImporter::ImportTexture(path));
 	}
 }

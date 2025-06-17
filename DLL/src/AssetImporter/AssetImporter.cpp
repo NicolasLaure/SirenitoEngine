@@ -69,13 +69,13 @@ Mesh AssetImporter::ProcessMesh(vector<Mesh>* meshes, aiMesh* mesh, const aiScen
 		}
 	}
 
-	aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
-	aiTextureType type = aiTextureType_BASE_COLOR;
-
-	for (int i = 0; i < mat->GetTextureCount(type); i++)
+	if (mesh->mMaterialIndex >= 0)
 	{
+		aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
+		aiTextureType type = aiTextureType_DIFFUSE;
+
 		aiString str;
-		mat->GetTexture(type, i, &str);
+		mat->GetTexture(type, 0, &str);
 		Texture texture = TextureImporter::ImportTexture(directory.append(str.C_Str()).c_str());
 		textures.push_back(texture);
 	}
