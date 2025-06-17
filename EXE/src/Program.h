@@ -5,6 +5,7 @@
 #include "Utilities/FirstPersonController.h"
 #include "Utilities/ThirdPersonController.h"
 #include "Entity/Entity3D/Cube.h"
+#include "Entity/Entity3D/Model.h"
 
 SIRENITO_API class Program : public BaseGame
 {
@@ -13,6 +14,8 @@ private:
 	Sprite* ground;
 	Cube* cube;
 	Cube* cube2;
+	Model* model;
+
 	FirstPersonController* firstPersonCamera;
 	ThirdPersonController* thirdPersonCamera;
 	bool isFirstPerson = true;

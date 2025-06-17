@@ -13,7 +13,7 @@ SIRENITO_API class Sprite : public Entity2D
 protected:
 	float width;
 	float height;
-	Texture* texture;
+	Texture texture;
 	Material material;
 
 

@@ -10,7 +10,7 @@ SIRENITO_API class Animation
 private:
 	std::vector<Frame> frames;
 	bool canLoop;
-	Texture* texture;
+	Texture texture;
 	bool _isPlaying;
 	float _startTime;
 	float _pauseTime;
@@ -23,8 +23,8 @@ public:
 	Frame currentFrame;
 	int currentIndex;
 
-	SIRENITO_API Animation(Texture* texture, Vector2 anchorPos, int frameWidth, int frameHeight);
-	SIRENITO_API Animation(Texture* texture, Vector2 anchorPos, int frameWidth, int frameHeight, int quantity, float duration, bool canLoop);
+	SIRENITO_API Animation(Texture texture, Vector2 anchorPos, int frameWidth, int frameHeight);
+	SIRENITO_API Animation(Texture texture, Vector2 anchorPos, int frameWidth, int frameHeight, int quantity, float duration, bool canLoop);
 
 	SIRENITO_API void SetCanLoop(bool value);
 	SIRENITO_API void SetCurrentFrame(int index);

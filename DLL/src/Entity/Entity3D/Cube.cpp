@@ -41,7 +41,7 @@ void Cube::Init(Vector3 position, Vector3 eulers, Material material, Renderer* r
 
 void Cube::Init(const char* texturePath, Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance)
 {
-	this->texture = TextureImporter::ImportTexture(texturePath);
+	textures.push_back(TextureImporter::ImportTexture(texturePath));
 	Init(position, eulers, material, rendererInstance);
 }
 
@@ -52,7 +52,7 @@ Cube::~Cube()
 
 void Cube::SetTexture(const char* path)
 {
-	texture = TextureImporter::ImportTexture(path);
+	textures.push_back(TextureImporter::ImportTexture(path));
 }
 
 vector<Vertex> Cube::GetVertices()

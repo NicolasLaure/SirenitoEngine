@@ -10,14 +10,16 @@ using namespace std;
 SIRENITO_API class Mesh : public Entity3D
 {
 protected:
-	Texture* texture = nullptr;
 	Material material;
 public:
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
+	vector<Texture> textures;
 
 	SIRENITO_API Mesh();
-	SIRENITO_API Mesh(vector<Vertex> vertices, vector<unsigned int> indices, Texture* texture, Material material, Renderer* rendererInstance);
+	SIRENITO_API Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material, Renderer* rendererInstance);
+	SIRENITO_API Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material);
 	SIRENITO_API ~Mesh();
 	SIRENITO_API void Draw();
+	SIRENITO_API void SetRendererInstance(Renderer* instance);
 };

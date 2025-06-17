@@ -16,6 +16,7 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	cube = new Cube(Vector3(0.0f, 0.0f, 0.0f), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
 	cube2 = new Cube(Vector3(-5.0f, 0.0f, 0.0f), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
 
+	model = new Model("res/models/MclarenF1Frame.fbx", Material(), rendererInstance);
 }
 
 Program::~Program()
@@ -26,6 +27,7 @@ Program::~Program()
 	delete thirdPersonCamera;
 	delete cube;
 	delete cube2;
+	delete model;
 }
 
 void Program::Update()
@@ -59,6 +61,7 @@ void Program::Draw()
 	ground->Draw();
 	cube->Draw();
 	cube2->Draw();
+	model->Draw();
 	if (!isFirstPerson)
 		thirdPersonCamera->mesh->Draw();
 }

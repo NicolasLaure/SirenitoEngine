@@ -120,6 +120,12 @@
     <ClCompile Include="src\Entity\Entity3D\Mesh.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\AssetImporter\AssetImporter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity3D\Model.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -249,6 +255,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Renderer\Vertex.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity\Entity3D\Model.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

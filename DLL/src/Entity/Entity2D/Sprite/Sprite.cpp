@@ -48,9 +48,6 @@ Sprite::~Sprite()
 
 	if (animation != nullptr)
 		delete animation;
-
-	if (texture != nullptr)
-		delete texture;
 }
 
 void Sprite::SetTexture(const char* path)
@@ -85,7 +82,7 @@ void Sprite::Draw()
 	else
 		rendererInstance->SetData(transform, material, true, GetVertices(width, height), 48, GetIndices(), 6, VAO, VBO, EBO);
 
-	rendererInstance->Draw(VAO, 6, texture->GetId());
+	rendererInstance->Draw(VAO, 6, texture.GetId());
 }
 
 float* Sprite::GetVertices(float width, float height)

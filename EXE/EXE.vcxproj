@@ -101,6 +101,7 @@
       <Command>copy /y "$(SolutionDir)bin\DLL\Debug\DLL.dll" "$(OutDir)"
 copy /y "$(SolutionDir)bin\DLL\Debug\glfw3.dll" "$(OutDir)"
 copy /y "$(SolutionDir)bin\DLL\Debug\glew32.dll" "$(OutDir)"
+copy /y "$(SolutionDir)bin\DLL\Debug\assimp-vc143-mtd.dll" "$(OutDir)"
 xcopy /y /i /e "$(SolutionDir)res" "$(OutDir)res"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
