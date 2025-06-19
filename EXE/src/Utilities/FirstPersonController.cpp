@@ -6,7 +6,6 @@ FirstPersonController::FirstPersonController(Vector3 initialPosition, Camera* ca
 {
 	this->camera = camera;
 	pivot = new Transform("camera", initialPosition, Quaternion::identity(), Vector3::One());
-	camera->view->SetParent(pivot);
 }
 
 FirstPersonController::~FirstPersonController()
@@ -47,6 +46,8 @@ void FirstPersonController::Update(Input* inputInstance)
 void FirstPersonController::SetFirstPerson()
 {
 	camera->view->SetParent(pivot);
+	camera->view->SetPosition(pivot->GetPosition());
+	camera->view->SetLocalRotation(Quaternion::identity());
 }
 
 Transform* FirstPersonController::GetPivot()

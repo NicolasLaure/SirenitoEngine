@@ -8,6 +8,7 @@ using namespace Assimp;
 vector<Mesh>* AssetImporter::GetMeshes(const char* path, Material material, Renderer* rendererInstance)
 {
 	vector<Mesh>* meshes = new vector<Mesh>;
+	vector<Texture>* loadedTextures = new vector<Texture>;
 
 	Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -19,26 +20,27 @@ vector<Mesh>* AssetImporter::GetMeshes(const char* path, Material material, Rend
 	}
 
 	string pathString = path;
-	string directory = pathString.substr(0, pathString.find_last_of('/'));
-	ProcessNode(meshes, scene->mRootNode, scene, material, directory, rendererInstance);
+	string directory = pathString.substr(0, pathString.find_last_of('/') + 1);
+	ProcessNode(meshes, scene->mRootNode, scene, material, loadedTextures, directory, rendererInstance);
+
 	return meshes;
 }
 
-void AssetImporter::ProcessNode(vector<Mesh>* meshes, aiNode* node, const aiScene* scene, Material material, string directory, Renderer* rendererInstance)
+void AssetImporter::ProcessNode(vector<Mesh>* meshes, aiNode* node, const aiScene* scene, Material material, vector<Texture>* loadedTextures, string directory, Renderer* rendererInstance)
 {
 	for (int i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		meshes->push_back(ProcessMesh(meshes, mesh, scene, material, directory, rendererInstance));
+		meshes->push_back(ProcessMesh(mesh, scene, material, loadedTextures, directory, rendererInstance));
 	}
 
 	for (int i = 0; i < node->mNumChildren; i++)
 	{
-		ProcessNode(meshes, node->mChildren[i], scene, material, directory, rendererInstance);
+		ProcessNode(meshes, node->mChildren[i], scene, material, loadedTextures, directory, rendererInstance);
 	}
 }
 
-Mesh AssetImporter::ProcessMesh(vector<Mesh>* meshes, aiMesh* mesh, const aiScene* scene, Material material, string directory, Renderer* rendererInstance)
+Mesh AssetImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene, Material material, vector<Texture>* loadedTextures, string directory, Renderer* rendererInstance)
 {
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
@@ -74,10 +76,30 @@ Mesh AssetImporter::ProcessMesh(vector<Mesh>* meshes, aiMesh* mesh, const aiScen
 		aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
 		aiTextureType type = aiTextureType_DIFFUSE;
 
-		aiString str;
-		mat->GetTexture(type, 0, &str);
-		Texture texture = TextureImporter::ImportTexture(directory.append(str.C_Str()).c_str());
-		textures.push_back(texture);
+		for (int i = 0; i < mat->GetTextureCount(type); i++)
+		{
+			aiString str;
+			mat->GetTexture(type, i, &str);
+			bool shouldAddTexture = true;
+			for (int j = 0; j < loadedTextures->size(); j++)
+			{
+				if (loadedTextures->at(j).name == str.C_Str())
+				{
+					shouldAddTexture = false;
+					textures.push_back(loadedTextures->at(j));
+				}
+			}
+
+			if (shouldAddTexture)
+			{
+				Texture texture = TextureImporter::ImportTexture(directory.append(str.C_Str()).c_str());
+				texture.name = str.C_Str();
+				std::cout << "Texture name: " << texture.name << endl;
+				std::cout << "Path: " << directory.append(str.C_Str()).c_str() << endl;
+				textures.push_back(texture);
+				loadedTextures->push_back(texture);
+			}
+		}
 	}
 
 	return Mesh(vertices, indices, textures, material, rendererInstance);

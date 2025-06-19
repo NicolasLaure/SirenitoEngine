@@ -9,6 +9,7 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	firstPersonCamera = new FirstPersonController(Vector3(0, 1, 0), mainCamera, rendererInstance);
 	thirdPersonCamera = new ThirdPersonController(Vector3(0, 1, 0), mainCamera, rendererInstance);
 	isFirstPerson = true;
+	firstPersonCamera->SetFirstPerson();
 
 	background = new Sprite("res/textures/Background.jpg", Vector3(0, 30.0f, -30.0f), Vector3(), -width, -height, rendererInstance);
 	ground = new Sprite("res/textures/Background.jpg", Vector3(0, -2.0f, 0.0f), Vector3(90.0f, 0, 0), 10.0f, 10.0f, rendererInstance);
@@ -19,11 +20,15 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	mclarenmodel = new Model("res/models/MclarenF1Frame.fbx", Material(), rendererInstance);
 	mclarenmodel->transform->SetLocalScale(Vector3(0.01f, 0.01f, 0.01f));
 	mclarenmodel->transform->SetPositionAndRotation(Vector3(5.0f, 0.0f, 0.0f), Quaternion::Euler(90.0f, 0.0f, 0.0f));
-	mclarenmodel->SetTexture("res/textures/sans-dance.jpg");
+	//mclarenmodel->SetTexture("res/textures/sans-dance.jpg");
 
 	backpackModel = new Model("res/models/backpack/backpack.obj", Material(), rendererInstance);
+	//backpackModel->SetTexture("res/models/backpack/diffuse.jpg");
 
 	fw190model = new Model("res/models/Fw190/FW190.fbx", Material(), rendererInstance);
+	//fw190model->SetTexture("res/models/Fw190/baseColor.png");
+	fw190model->transform->SetLocalScale(Vector3(0.25f, 0.25f, 0.25f));
+	fw190model->transform->SetPositionAndRotation(Vector3(0.0f, 0.0f, 5.0f), Quaternion::Euler(90.0f, 0.0f, 0.0f));
 }
 
 Program::~Program()
@@ -56,11 +61,14 @@ void Program::Update()
 	}
 
 	if (inputInstance->isKeyDown(Keys::N1))
+	{
+		firstPersonCamera->SetFirstPerson();
 		isFirstPerson = true;
+	}
 	if (inputInstance->isKeyDown(Keys::N3))
 	{
-		thirdPersonCamera->SetThirdPerson(Vector3(0, 2.5f, -10));
 		isFirstPerson = false;
+		thirdPersonCamera->SetThirdPerson(Vector3(0, 2.5f, -10));
 	}
 }
 

@@ -47,8 +47,6 @@ void BaseGame::RunProgram()
 		rendererInstance->Clear();
 
 		deltaTime = glfwGetTime() - currentTime;
-		system("cls");
-		std::cout << deltaTime;
 		currentTime = glfwGetTime();
 
 		inputInstance->UpdateInput();

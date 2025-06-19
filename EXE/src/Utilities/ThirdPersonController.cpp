@@ -4,11 +4,13 @@ ThirdPersonController::ThirdPersonController(Vector3 initialPosition, Camera* ca
 {
 	this->camera = camera;
 	mesh = new Cube("res/textures/sans-dance.jpg", initialPosition, Vector3(), rendererInstance);
+	pivot = new Transform("camera", initialPosition, Quaternion::identity(), Vector3::One());
 }
 
 ThirdPersonController::~ThirdPersonController()
 {
 	delete mesh;
+	delete pivot;
 }
 
 void ThirdPersonController::Update(Input* inputInstance)
@@ -46,6 +48,7 @@ void ThirdPersonController::Update(Input* inputInstance)
 
 void ThirdPersonController::SetThirdPerson(Vector3 offset)
 {
+	camera->view->SetParent(pivot);
 	cameraOffset = offset;
 	UpdateCameraPosition();
 }
@@ -53,6 +56,7 @@ void ThirdPersonController::SetThirdPerson(Vector3 offset)
 
 void ThirdPersonController::UpdateCameraPosition()
 {
+	pivot->SetPosition(mesh->transform->GetPosition());
 	camera->view->SetPosition(mesh->transform->GetPosition() + cameraOffset);
 
 	camera->view->RotateAround(mesh->transform->GetPosition(), Vector3::Up(), yaw);

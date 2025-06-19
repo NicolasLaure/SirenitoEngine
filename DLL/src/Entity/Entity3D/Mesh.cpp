@@ -42,6 +42,8 @@ void Mesh::Draw()
 {
 	if (textures.size() > 0)
 	{
+		cout << "TextureId: " << textures[0].GetId() << " TextureName: " << textures[0].name << endl;
+
 		rendererInstance->SetData(transform, material, true, vertices, indices, VAO, VBO, EBO);
 		rendererInstance->Draw(VAO, vertices.size(), textures[0].GetId());
 		return;

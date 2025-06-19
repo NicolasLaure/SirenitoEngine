@@ -7,8 +7,9 @@ private:
 	unsigned int ID;
 	int width;
 	int height;
-
 public:
+	const char* name;
+
 	Texture();
 	Texture(unsigned int ID, int width, int height);
 	~Texture();

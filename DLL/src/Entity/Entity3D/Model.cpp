@@ -2,6 +2,8 @@
 #include "AssetImporter/AssetImporter.h"
 #include "Textures/Importer/TextureImporter.h"
 
+#include <iostream>
+
 Model::Model(const char* path, Renderer* rendererInstance)
 {
 	this->rendererInstance = rendererInstance;
