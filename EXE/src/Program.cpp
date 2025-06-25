@@ -20,13 +20,10 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	mclarenmodel = new Model("res/models/MclarenF1Frame.fbx", Material(), rendererInstance);
 	mclarenmodel->transform->SetLocalScale(Vector3(0.01f, 0.01f, 0.01f));
 	mclarenmodel->transform->SetPositionAndRotation(Vector3(5.0f, 0.0f, 0.0f), Quaternion::Euler(90.0f, 0.0f, 0.0f));
-	//mclarenmodel->SetTexture("res/textures/sans-dance.jpg");
 
 	backpackModel = new Model("res/models/backpack/backpack.obj", Material(), rendererInstance);
-	//backpackModel->SetTexture("res/models/backpack/diffuse.jpg");
 
 	fw190model = new Model("res/models/Fw190/FW190.fbx", Material(), rendererInstance);
-	//fw190model->SetTexture("res/models/Fw190/baseColor.png");
 	fw190model->transform->SetLocalScale(Vector3(0.25f, 0.25f, 0.25f));
 	fw190model->transform->SetPositionAndRotation(Vector3(0.0f, 0.0f, 5.0f), Quaternion::Euler(90.0f, 0.0f, 0.0f));
 }

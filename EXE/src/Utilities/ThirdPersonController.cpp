@@ -40,7 +40,7 @@ void ThirdPersonController::Update(Input* inputInstance)
 	if (dirX != 0)
 	{
 		meshAngle += dirX * speed * 10;
-		mesh->transform->Rotate(mesh->transform->GetUp() * meshAngle);
+		mesh->transform->SetRotation(Quaternion::Euler(0, meshAngle, 0));
 	}
 
 	UpdateCameraPosition();
