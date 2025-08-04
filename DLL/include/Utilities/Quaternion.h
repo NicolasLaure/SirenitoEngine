@@ -185,9 +185,9 @@ public:
 		return AngleAxis(angle, axis.normalized());
 	}
 
-	SIRENITO_API static Quaternion Inverse(Quaternion rotation)
+	SIRENITO_API static Quaternion Inverse(Quaternion GetRotation)
 	{
-		return Quaternion(-rotation.x, -rotation.y, -rotation.z, rotation.w);
+		return Quaternion(-GetRotation.x, -GetRotation.y, -GetRotation.z, GetRotation.w);
 	}
 
 	SIRENITO_API static Quaternion Lerp(Quaternion a, Quaternion b, float t)

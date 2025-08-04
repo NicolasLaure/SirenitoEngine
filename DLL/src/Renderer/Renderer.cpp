@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include "gtc/matrix_transform.hpp"
+#include <stb_image.h>
 #include <iostream>
 
 void Renderer::Clear()
@@ -21,6 +22,8 @@ Renderer::Renderer(float screenWidth, float screenHeight, bool hasPerspective, C
 
 	mainCamera = camera;
 	this->lightManager = light;
+
+	stbi_set_flip_vertically_on_load(true);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
@@ -147,6 +150,7 @@ void Renderer::SetData(Transform* transform, Material material, bool hasTexture,
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+
 
 	if (!hasTexture)
 	{

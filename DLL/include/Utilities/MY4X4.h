@@ -46,7 +46,7 @@ public:
 		return *this == identity();
 	}
 
-	SIRENITO_API Quaternion rotation()
+	SIRENITO_API Quaternion GetRotation()
 	{
 		Quaternion q = Quaternion::identity();
 		MY4X4 m = MY4X4(GetColumn(0), GetColumn(1), GetColumn(2), GetColumn(3));
@@ -373,22 +373,22 @@ public:
 
 	SIRENITO_API static MY4X4 Rotate(Quaternion q)
 	{
-		Quaternion rotation = q;
-		rotation.Normalize();
+		Quaternion GetRotation = q;
+		GetRotation.Normalize();
 
-		Vector4 firstColumn = Vector4(2.0f * (rotation.w * rotation.w + rotation.x * rotation.x) - 1,
-			2.0f * (rotation.x * rotation.y + rotation.w * rotation.z),
-			2.0f * (rotation.x * rotation.z - rotation.w * rotation.y),
+		Vector4 firstColumn = Vector4(2.0f * (GetRotation.w * GetRotation.w + GetRotation.x * GetRotation.x) - 1,
+			2.0f * (GetRotation.x * GetRotation.y + GetRotation.w * GetRotation.z),
+			2.0f * (GetRotation.x * GetRotation.z - GetRotation.w * GetRotation.y),
 			0.0f);
 
-		Vector4 secondColumn = Vector4(2.0f * (rotation.x * rotation.y - rotation.w * rotation.z),
-			2.0f * (rotation.w * rotation.w + rotation.y * rotation.y) - 1,
-			2.0f * (rotation.y * rotation.z + rotation.w * rotation.x),
+		Vector4 secondColumn = Vector4(2.0f * (GetRotation.x * GetRotation.y - GetRotation.w * GetRotation.z),
+			2.0f * (GetRotation.w * GetRotation.w + GetRotation.y * GetRotation.y) - 1,
+			2.0f * (GetRotation.y * GetRotation.z + GetRotation.w * GetRotation.x),
 			0.0f);
 
-		Vector4 thirdColumn = Vector4(2.0f * (rotation.x * rotation.z + rotation.w * rotation.y),
-			2.0f * (rotation.y * rotation.z - rotation.w * rotation.x),
-			2.0f * (rotation.w * rotation.w + rotation.z * rotation.z) - 1,
+		Vector4 thirdColumn = Vector4(2.0f * (GetRotation.x * GetRotation.z + GetRotation.w * GetRotation.y),
+			2.0f * (GetRotation.y * GetRotation.z - GetRotation.w * GetRotation.x),
+			2.0f * (GetRotation.w * GetRotation.w + GetRotation.z * GetRotation.z) - 1,
 			0.0f);
 
 		Vector4 fourthColumn = Vector4(0.0f, 0.0f, 0.0f, 1.0f);

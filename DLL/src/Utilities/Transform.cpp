@@ -16,9 +16,12 @@ Transform::Transform()
 
 	matrixTRS = MY4X4::TRS(localPosition, localRotation, scale);
 	_name = "";
+
+	_children = new List<Transform*>();
+	parent = nullptr;
 }
 
-Transform::Transform(const char* name)
+Transform::Transform(string name)
 {
 	localPosition = Vector3::Zero();
 	localRotation = Quaternion::identity();
@@ -31,9 +34,12 @@ Transform::Transform(const char* name)
 
 	matrixTRS = MY4X4::TRS(localPosition, localRotation, scale);
 	_name = name;
+
+	_children = new List<Transform*>();
+	parent = nullptr;
 }
 
-Transform::Transform(const char* name, Vector3 pos, Quaternion q, Vector3 s)
+Transform::Transform(string name, Vector3 pos, Quaternion q, Vector3 s)
 {
 	localPosition = pos;
 	localRotation = q;
@@ -47,6 +53,21 @@ Transform::Transform(const char* name, Vector3 pos, Quaternion q, Vector3 s)
 	matrixTRS = MY4X4::TRS(localPosition, localRotation, scale);
 
 	_name = name;
+
+	_children = new List<Transform*>();
+	parent = nullptr;
+}
+
+Transform::~Transform()
+{
+	int childrenCount = _children->GetCount();
+	if (childrenCount > 0)
+	{
+		for (int i = 0; i < childrenCount; i++)
+			delete _children->GetValueAt(i);
+	}
+
+	delete _children;
 }
 
 #pragma endregion
@@ -100,7 +121,7 @@ void Transform::SetEulerAngles(Vector3 value)
 
 Vector3 Transform::GetLocalEulerAngles()
 {
-	return matrixTRS.rotation().eulerAngles();
+	return matrixTRS.GetRotation().eulerAngles();
 }
 void Transform::SetLocalEulerAngles(Vector3 value) { SetLocalPositionAndRotation(localPosition, Quaternion::Euler(value.x, value.y, value.z)); }
 
@@ -144,14 +165,14 @@ void Transform::SetForward(Vector3 value)
 
 Quaternion Transform::GetRotation()
 {
-	return LocalToWorldMatrix().rotation();
+	return LocalToWorldMatrix().GetRotation();
 }
 void Transform::SetRotation(Quaternion value)
 {
 	//Should set local rotation in a certain way that the global rotation matches when multiplying with all parents
 	Transform worldTransform = Transform("World", Vector3::Zero(), value, Vector3::One());
 	worldTransform.parent = parent;
-	Quaternion newRotation = worldTransform.WorldToLocalMatrix().GetInverse().rotation();
+	Quaternion newRotation = worldTransform.WorldToLocalMatrix().GetInverse().GetRotation();
 
 	SetLocalRotation(newRotation);
 }
@@ -198,7 +219,19 @@ Transform* Transform::Root()
 
 int Transform::ChildCount()
 {
-	return _children.GetCount();
+	return _children->GetCount();
+}
+
+string Transform::GetName()
+{
+	return _name;
+}
+
+void Transform::SetTRS(MY4X4 trs)
+{
+	matrixTRS = trs;
+	localPosition = matrixTRS.GetPosition();
+	localRotation = matrixTRS.GetRotation();
 }
 
 #pragma endregion
@@ -227,23 +260,15 @@ int Transform::ChildCount()
 
 void Transform::SetParent(Transform* newParent)
 {
-	if (parent != nullptr)
-		parent->RemoveChild(this);
-
 	parent = newParent;
 	matrixTRS.SetTRS(localPosition, localRotation, scale);
 	_worldPosition = GetPosition();
 	_worldRotation = GetRotation();
-
-	if (parent != nullptr)
-		parent->AddChild(this);
-
-	//Translate to match local position relative to parent
 }
 
 void Transform::SetParent(Transform* newParent, bool worldPositionStays)
 {
-	if (parent != nullptr)
+	if (parent != nullptr || newParent == nullptr)
 		parent->RemoveChild(this);
 
 	parent = newParent;
@@ -254,27 +279,28 @@ void Transform::SetParent(Transform* newParent, bool worldPositionStays)
 
 void Transform::RemoveChild(Transform* child)
 {
-	_children.Remove(child);
+	_children->Remove(child);
 }
 
 void Transform::AddChild(Transform* child)
 {
-	_children.PushBack(child);
+	_children->PushBack(child);
 }
 
 void Transform::AddChild(Transform* child, int position)
 {
-	if (_children.Contains(child))
-		_children.Remove(child);
+	if (_children->Contains(child))
+		_children->Remove(child);
 
-	_children.Insert(child, position);
+	_children->Insert(child, position);
 }
 
 void Transform::DetachChildren()
 {
-	while (_children.GetCount() > 0)
+	while (_children->GetCount() > 0)
 	{
-		_children.GetValueAt(0)->SetParent(nullptr);
+		_children->GetValueAt(0)->GetParent()->RemoveChild(_children->GetValueAt(0));
+		_children->GetValueAt(0)->SetParent(nullptr);
 	}
 }
 
@@ -302,22 +328,28 @@ int Transform::GetSiblingIndex()
 		return parent->GetChildIndex(this);
 }
 
-Transform* Transform::Find(char* n)
+Transform* Transform::Find(const char* n)
 {
-	for (int i = 0; i < _children.GetCount(); i++)
+	for (int i = 0; i < _children->GetCount(); i++)
 	{
-		if (_children.GetValueAt(i)->_name == n)
-			return _children.GetValueAt(i);
+		if (_children->GetValueAt(i)->_name == n)
+			return _children->GetValueAt(i);
 
+		if (_children->GetValueAt(i)->ChildCount() > 0)
+		{
+			Transform* child = _children->GetValueAt(i)->Find(n);
+			if (child != nullptr)
+				return child;
+		}
 	}
 	return nullptr;
 }
 
 int Transform::GetChildIndex(Transform* child)
 {
-	for (int i = 0; i < _children.GetCount(); i++)
+	for (int i = 0; i < _children->GetCount(); i++)
 	{
-		if (_children.GetValueAt(i) == child)
+		if (_children->GetValueAt(i) == child)
 			return i;
 	}
 	return -1;
@@ -325,10 +357,10 @@ int Transform::GetChildIndex(Transform* child)
 
 #pragma endregion
 
-void Transform::SetPositionAndRotation(Vector3 position, Quaternion rotation)
+void Transform::SetPositionAndRotation(Vector3 position, Quaternion GetRotation)
 {
 	SetPosition(position);
-	SetRotation(rotation);
+	SetRotation(GetRotation);
 }
 
 void Transform::SetLocalPositionAndRotation(Vector3 newLocalPosition, Quaternion newLocalRotation)
@@ -337,17 +369,17 @@ void Transform::SetLocalPositionAndRotation(Vector3 newLocalPosition, Quaternion
 	SetLocalRotation(newLocalRotation);
 }
 
-void Transform::GetPositionAndRotation(Vector3* position, Quaternion* rotation)
+void Transform::GetPositionAndRotation(Vector3* position, Quaternion* GetRotation)
 {
 	MY4X4 transformedMatrix = LocalToWorldMatrix();
 	*position = transformedMatrix.GetPosition();
-	*rotation = transformedMatrix.rotation();
+	*GetRotation = transformedMatrix.GetRotation();
 }
 
 void Transform::GetLocalPositionAndRotation(Vector3* localPosition, Quaternion* localRotation)
 {
 	*localPosition = matrixTRS.GetPosition();
-	*localRotation = matrixTRS.rotation();
+	*localRotation = matrixTRS.GetRotation();
 }
 
 #pragma region Translates
@@ -443,15 +475,18 @@ void Transform::Rotate(Vector3 axis, float angle)
 
 void Transform::RotateAround(Vector3 point, Vector3 axis, float angle)
 {
-
 	Transform* originalParent = GetParent();
-	Transform pivotTransform = Transform("pivot", point, Quaternion::AngleAxis(angle, axis), Vector3::One());
-	Transform relativeTransform = Transform("relative", Vector3::Zero(), Quaternion::identity(), Vector3::One());
-	relativeTransform.SetParent(&pivotTransform);
-	relativeTransform.SetLocalPosition(GetPosition() - point);
+	Transform* pivotTransform = new  Transform("pivot", point, Quaternion::AngleAxis(angle, axis), Vector3::One());
+	Transform* relativeTransform = new Transform("relative", Vector3::Zero(), Quaternion::identity(), Vector3::One());
+	relativeTransform->SetParent(pivotTransform);
+	relativeTransform->SetLocalPosition(GetPosition() - point);
 
-	SetPosition(relativeTransform.GetPosition());
-	SetRotation(relativeTransform.GetRotation());
+	SetPosition(relativeTransform->GetPosition());
+	SetRotation(relativeTransform->GetRotation());
+	pivotTransform->RemoveChild(relativeTransform);
+
+	delete pivotTransform;
+	delete relativeTransform;
 }
 
 void Transform::LookAt(Transform target, Vector3 worldUp)
@@ -477,7 +512,7 @@ void Transform::LookAt(Vector3 worldPosition)
 
 Vector3 Transform::TransformDirection(Vector3 direction)
 {
-	return LocalToWorldMatrix().rotation() * direction;
+	return LocalToWorldMatrix().GetRotation() * direction;
 }
 
 Vector3 Transform::TransformDirection(float x, float y, float z)

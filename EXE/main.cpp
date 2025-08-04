@@ -2,6 +2,6 @@
 
 int main()
 {
-	Program game = Program(640, 480, "SirenitoEngine");
+	Program game = Program(1280, 720, "SirenitoEngine");
 	game.RunProgram();
 }

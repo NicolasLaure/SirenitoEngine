@@ -162,10 +162,11 @@ public:
 
 	Node<T>* GetLastNode()
 	{
-		Node<T>* lastNode = first;
+		Node<T>* lastNode = nullptr;
 
 		if (first != nullptr)
 		{
+			lastNode = first;
 			while (lastNode->GetNext() != nullptr)
 			{
 				lastNode = lastNode->GetNext();
@@ -222,7 +223,8 @@ public:
 	{
 		for (int i = 0; i < count; i++)
 		{
-			if (GetValueAt(i) == data)
+			T value = GetValueAt(i);
+			if (value == data)
 				return true;
 		}
 		return false;

@@ -4,10 +4,9 @@
 
 SIRENITO_API class Model : public Entity3D
 {
-protected:
-	vector<Mesh>* meshes;
-
 public:
+	vector<Mesh*>* meshes;
+
 	SIRENITO_API Model(const char* path, Renderer* rendererInstance);
 	SIRENITO_API Model(const char* path, Material material, Renderer* rendererInstance);
 	SIRENITO_API ~Model();

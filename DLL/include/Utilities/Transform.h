@@ -4,6 +4,10 @@
 #include "Utilities/Quaternion.h"
 #include "Utilities/Vector3.h"
 #include "List.h"
+#include <vector>
+#include <string>
+
+using namespace std;
 
 SIRENITO_API enum Space
 {
@@ -27,18 +31,17 @@ private:
 	Quaternion _worldRotation = Quaternion::identity();
 	Vector3 _localScale;
 	Vector3 _lossyScale;
-	List<Transform*> _children = List<Transform*>();
-
-	const char* _name;
+	List<Transform*>* _children;
+	string _name;
 
 #pragma endregion
 public:
 #pragma region Constructors
 
 	SIRENITO_API Transform();
-	SIRENITO_API Transform(const char* name);
-	SIRENITO_API Transform(const char* name, Vector3 pos, Quaternion q, Vector3 s);
-
+	SIRENITO_API Transform(string name);
+	SIRENITO_API Transform(string name, Vector3 pos, Quaternion q, Vector3 s);
+	SIRENITO_API ~Transform();
 #pragma endregion
 
 #pragma region Properties
@@ -131,6 +134,9 @@ public:
 
 	SIRENITO_API int ChildCount();
 
+	SIRENITO_API void SetTRS(MY4X4 trs);
+
+	SIRENITO_API string GetName();
 #pragma endregion
 
 #pragma region Functions
@@ -205,7 +211,7 @@ public:
 	/// <returns>
 	///   The found child MyTransform. Null if child with matching name isn't found.
 	/// </returns>
-	SIRENITO_API Transform* Find(char* n);
+	SIRENITO_API Transform* Find(const char* n);
 
 	SIRENITO_API int GetChildIndex(Transform* child);
 
@@ -216,7 +222,7 @@ public:
 	/// </summary>
 	/// <param name="position"></param>
 	/// <param name="rotation"></param>
-	SIRENITO_API void SetPositionAndRotation(Vector3 position, Quaternion rotation);
+	SIRENITO_API void SetPositionAndRotation(Vector3 position, Quaternion GetRotation);
 
 	/// <summary>
 	///   Sets the position and rotation of the MyTransform component in local space (i.e. relative to its parent MyTransform).
@@ -225,7 +231,7 @@ public:
 	/// <param name="newLocalRotation"></param>
 	SIRENITO_API void SetLocalPositionAndRotation(Vector3 newLocalPosition, Quaternion newLocalRotation);
 
-	SIRENITO_API void GetPositionAndRotation(Vector3* position, Quaternion* rotation);
+	SIRENITO_API void GetPositionAndRotation(Vector3* position, Quaternion* GetRotation);
 	SIRENITO_API void GetLocalPositionAndRotation(Vector3* localPosition, Quaternion* localRotation);
 #pragma region Translates
 

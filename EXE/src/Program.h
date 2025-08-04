@@ -6,6 +6,7 @@
 #include "Utilities/ThirdPersonController.h"
 #include "Entity/Entity3D/Cube.h"
 #include "Entity/Entity3D/Model.h"
+#include "Tank/Tank.h"
 
 SIRENITO_API class Program : public BaseGame
 {
@@ -16,7 +17,7 @@ private:
 	Cube* cube2;
 	Model* backpackModel;
 	Model* mclarenmodel;
-	Model* fw190model;
+	Tank* tank;
 
 	FirstPersonController* firstPersonCamera;
 	ThirdPersonController* thirdPersonCamera;

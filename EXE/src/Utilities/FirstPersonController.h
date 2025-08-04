@@ -7,8 +7,8 @@
 class FirstPersonController
 {
 private:
-	float speed = 0.5f;
-	float mouseSensitivity = 10.0f;
+	float speed = 0.1f;
+	float mouseSensitivity = 15.0f;
 	Camera* camera;
 	Transform* pivot;
 

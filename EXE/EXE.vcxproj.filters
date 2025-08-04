@@ -30,6 +30,9 @@
     <ClCompile Include="src\Utilities\ThirdPersonController.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\Tank\Tank.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program.h">
@@ -42,6 +45,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Utilities\ThirdPersonController.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tank\Tank.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

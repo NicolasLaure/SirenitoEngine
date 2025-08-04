@@ -260,5 +260,8 @@
     <ClInclude Include="include\Entity\Entity3D\Model.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="include\Utilities\vector\vectorUtils.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,9 +11,10 @@ void Mesh::SetRendererInstance(Renderer* instance)
 
 Mesh::Mesh()
 {
+	transform = new Transform();
 }
 
-Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material, Renderer* rendererInstance)
+Mesh::Mesh(const char* name, vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material, Renderer* rendererInstance)
 {
 	this->vertices = vertices;
 	this->indices = indices;
@@ -23,27 +24,30 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture
 	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
+
+	transform = new Transform(name);
 }
 
-Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material)
+Mesh::Mesh(const char* name, vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material)
 {
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
 	this->material = material;
 	this->rendererInstance = nullptr;
+
+	transform = new Transform(name);
 }
 
 Mesh::~Mesh()
 {
+	delete transform;
 }
 
 void Mesh::Draw()
 {
 	if (textures.size() > 0)
 	{
-		cout << "TextureId: " << textures[0].GetId() << " TextureName: " << textures[0].name << endl;
-
 		rendererInstance->SetData(transform, material, true, vertices, indices, VAO, VBO, EBO);
 		rendererInstance->Draw(VAO, vertices.size(), textures[0].GetId());
 		return;

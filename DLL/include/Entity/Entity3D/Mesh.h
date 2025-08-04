@@ -17,8 +17,8 @@ public:
 	vector<Texture> textures;
 
 	SIRENITO_API Mesh();
-	SIRENITO_API Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material, Renderer* rendererInstance);
-	SIRENITO_API Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material);
+	SIRENITO_API Mesh(const char* name, vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material, Renderer* rendererInstance);
+	SIRENITO_API Mesh(const char* name, vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material);
 	SIRENITO_API ~Mesh();
 	SIRENITO_API void Draw();
 	SIRENITO_API void SetRendererInstance(Renderer* instance);

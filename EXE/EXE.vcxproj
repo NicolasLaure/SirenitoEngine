@@ -89,7 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)bin\DLL\$(Configuration)\include;$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glm;$(SolutionDir)libs\stb_image</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)bin\DLL\$(Configuration)\include;$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glm;$(SolutionDir)libs\stb_image;$(SolutionDir)libs\assimp-vc143-mtd</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -181,12 +181,14 @@ copy /y "$(SolutionDir)libs\DLL\Release\glew32.dll" "$(OutDir)"</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Environment\Rock.cpp" />
     <ClCompile Include="src\Program.cpp" />
+    <ClCompile Include="src\Tank\Tank.cpp" />
     <ClCompile Include="src\Utilities\FirstPersonController.cpp" />
     <ClCompile Include="src\Utilities\ThirdPersonController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Environment\Rock.h" />
     <ClInclude Include="src\Program.h" />
+    <ClInclude Include="src\Tank\Tank.h" />
     <ClInclude Include="src\Utilities\FirstPersonController.h" />
     <ClInclude Include="src\Utilities\ThirdPersonController.h" />
   </ItemGroup>

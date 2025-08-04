@@ -1,14 +1,24 @@
 #pragma once
+#include <type_traits>
+
+using namespace std;
 
 template <typename T>
 class Node
 {
 private:
 	T data;
-	Node<T>* next;
+	Node<T>* next = nullptr;
 
 public:
 
+	Node()
+	{
+		if (is_pointer<T>::value)
+			this->data = nullptr;
+
+		next = nullptr;
+	}
 	Node(T data)
 	{
 		this->data = data;
@@ -22,7 +32,7 @@ public:
 			delete next;
 		}
 	}
-	
+
 	Node<T>* GetNext()
 	{
 		return next;
