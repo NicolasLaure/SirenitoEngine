@@ -52,7 +52,6 @@ void Tank::Update(Input* inputInstance)
 		if (lCannon != nullptr && rCannon != nullptr)
 		{
 			int rotationDir = 0;
-			cout << "Turret Right: " << turret->GetRight().x << ", " << turret->GetRight().y << ", " << turret->GetRight().z << endl;
 			if (inputInstance->isKeyPressed(Keys::NUMPAD_ADD))
 				rotationDir = -1;
 			if (inputInstance->isKeyPressed(Keys::NUMPAD_SUBTRACT))
