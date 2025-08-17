@@ -52,13 +52,16 @@ void Tank::Update(Input* inputInstance)
 		if (lCannon != nullptr && rCannon != nullptr)
 		{
 			int rotationDir = 0;
+			cout << "Turret Right: " << turret->GetRight().x << ", " << turret->GetRight().y << ", " << turret->GetRight().z << endl;
 			if (inputInstance->isKeyPressed(Keys::NUMPAD_ADD))
 				rotationDir = -1;
 			if (inputInstance->isKeyPressed(Keys::NUMPAD_SUBTRACT))
 				rotationDir = 1;
 
-			lCannon->Rotate(turret->GetRight(), rotationDir * cannonsSpeed);
-			rCannon->Rotate(turret->GetRight(), rotationDir * cannonsSpeed);
+			cannonsAngle += rotationDir * cannonsSpeed;
+
+			lCannon->SetLocalRotation(Quaternion::Euler(cannonsAngle, 0.0f, 0.0f));
+			rCannon->SetLocalRotation(Quaternion::Euler(cannonsAngle, 0.0f, 0.0f));
 		}
 	}
 	Vector3 movementDir = tankModel->transform->GetForward() * dirZ + tankModel->transform->GetRight() * dirX;
