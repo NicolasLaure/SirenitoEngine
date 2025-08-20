@@ -111,7 +111,7 @@ xcopy /y /i /s "$(ProjectDir)include" "$(OutDir)include"</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;SIRENITO_EXPORT;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glm;$(SolutionDir)DLL;$(SolutionDir)libs\assimp-vc143-mtd</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs\glfw-3.4\include;$(SolutionDir)libs\glew-2.1.0\include;$(SolutionDir)libs\glm;$(SolutionDir)libs\stb_image;$(ProjectDir)include;$(SolutionDir)libs\assimp-vc143-mtd</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
