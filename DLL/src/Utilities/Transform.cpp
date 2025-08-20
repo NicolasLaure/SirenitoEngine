@@ -60,14 +60,20 @@ Transform::Transform(string name, Vector3 pos, Quaternion q, Vector3 s)
 
 Transform::~Transform()
 {
+	if (_children == nullptr)
+		return;
+
 	int childrenCount = _children->GetCount();
 	if (childrenCount > 0)
 	{
 		for (int i = 0; i < childrenCount; i++)
+		{
 			delete _children->GetValueAt(i);
+		}
 	}
 
 	delete _children;
+	_children = nullptr;
 }
 
 #pragma endregion
@@ -219,7 +225,10 @@ Transform* Transform::Root()
 
 int Transform::ChildCount()
 {
-	return _children->GetCount();
+	if (_children != nullptr)
+		return _children->GetCount();
+
+	return 0;
 }
 
 string Transform::GetName()

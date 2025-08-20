@@ -21,10 +21,14 @@ Model::Model(const char* path, Material material, Renderer* rendererInstance)
 
 Model::~Model()
 {
-	if (meshes != nullptr)
-		delete meshes;
-
 	delete transform;
+	transform = nullptr;
+
+	if (meshes != nullptr)
+	{
+		delete meshes;
+		meshes = nullptr;
+	}
 }
 
 void Model::Draw()

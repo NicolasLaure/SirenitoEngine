@@ -78,14 +78,20 @@ Mesh* AssetImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene, Material ma
 		vertices.push_back(vertex);
 	}
 
+
 	for (int i = 0; i < mesh->mNumFaces; i++)
 	{
 		aiFace face = mesh->mFaces[i];
+		if (face.mNumIndices > 4)
+			cout << "NGON";
+
 		for (int j = 0; j < face.mNumIndices; j++)
 		{
+			face.mIndices[j] = static_cast<unsigned int>(face.mIndices[j]);
 			indices.push_back(face.mIndices[j]);
 		}
 	}
+	cout << "Index Qty" << indices.size() << "Faces: " << mesh->mNumFaces << endl;
 
 	if (mesh->mMaterialIndex >= 0)
 	{

@@ -45,6 +45,11 @@ void Program::Update()
 {
 	lightManager->GetPointLight()->transform.RotateAround(Vector3(), Vector3::Up(), pointLightRotationSpeed);
 
+	if (inputInstance->isKeyDown(Keys::DELETE))
+	{
+		delete tank;
+		tank = nullptr;
+	}
 
 	if (isFirstPerson)
 		firstPersonCamera->Update(inputInstance);
@@ -68,7 +73,8 @@ void Program::Update()
 		thirdPersonCamera->SetThirdPerson(Vector3(0, 2.5f, -10));
 	}
 
-	tank->Update(inputInstance);
+	if (tank != nullptr)
+		tank->Update(inputInstance);
 }
 
 void Program::Draw()
@@ -79,7 +85,9 @@ void Program::Draw()
 	//cube2->Draw();
 	//mclarenmodel->Draw();
 	//backpackModel->Draw();
-	tank->Draw();
+	if (tank != nullptr)
+		tank->Draw();
+
 	if (!isFirstPerson)
 		thirdPersonCamera->mesh->Draw();
 }

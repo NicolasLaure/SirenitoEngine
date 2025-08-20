@@ -21,7 +21,7 @@ private:
 
 	void UpdateCameraPosition();
 public:
-	Cube* mesh;
+	Cube* mesh = nullptr;
 
 	ThirdPersonController(Vector3 initialPosition, Camera* camera, Renderer* rendererInstance);
 	~ThirdPersonController();

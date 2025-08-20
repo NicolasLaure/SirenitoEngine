@@ -48,6 +48,7 @@ void Cube::Init(const char* texturePath, Vector3 position, Vector3 eulers, Mater
 Cube::~Cube()
 {
 	delete transform;
+	transform = nullptr;
 }
 
 void Cube::SetTexture(const char* path)

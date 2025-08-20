@@ -42,6 +42,7 @@ Mesh::Mesh(const char* name, vector<Vertex> vertices, vector<unsigned int> indic
 Mesh::~Mesh()
 {
 	delete transform;
+	transform = nullptr;
 }
 
 void Mesh::Draw()
