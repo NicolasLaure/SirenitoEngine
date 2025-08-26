@@ -126,6 +126,9 @@
     <ClCompile Include="src\Entity\Entity3D\Model.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="include\Collisions\BoundingBox.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -261,6 +264,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Utilities\vector\vectorUtils.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Collisions\BoundingBox.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

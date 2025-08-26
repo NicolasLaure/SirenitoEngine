@@ -5,7 +5,7 @@
 
 using namespace Assimp;
 
-vector<Mesh*>* AssetImporter::GetMeshes(const char* path, Transform* root, Material material, Renderer* rendererInstance)
+vector<Mesh*>* AssetImporter::GetMeshes(const char* path, Transform* root, BoundingBox* rootBoundingBox, Material material, Renderer* rendererInstance)
 {
 	vector<Mesh*>* meshes = new vector<Mesh*>;
 	vector<Texture> loadedTextures;
@@ -21,23 +21,12 @@ vector<Mesh*>* AssetImporter::GetMeshes(const char* path, Transform* root, Mater
 
 	string pathString = path;
 	string directory = pathString.substr(0, pathString.find_last_of('/') + 1);
-	ProcessNode(meshes, root, scene->mRootNode, scene, material, loadedTextures, directory, rendererInstance);
-
+	ProcessNode(meshes, root, rootBoundingBox, scene->mRootNode, scene, material, loadedTextures, directory, rendererInstance);
 	return meshes;
 }
 
-void AssetImporter::ProcessNode(vector<Mesh*>* meshes, Transform* parent, aiNode* node, const aiScene* scene, Material material, vector<Texture> loadedTextures, string directory, Renderer* rendererInstance)
+void AssetImporter::ProcessNode(vector<Mesh*>* meshes, Transform* parent, BoundingBox* parentBoundingBox, aiNode* node, const aiScene* scene, Material material, vector<Texture> loadedTextures, string directory, Renderer* rendererInstance)
 {
-	for (int i = 0; i < node->mNumMeshes; i++)
-	{
-		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		Mesh* processedMesh = ProcessMesh(mesh, scene, material, loadedTextures, directory, rendererInstance);
-		processedMesh->transform->SetParent(parent);
-		parent->AddChild(processedMesh->transform);
-
-		meshes->push_back(processedMesh);
-	}
-
 	for (int i = 0; i < node->mNumChildren; i++)
 	{
 		Transform* child = new Transform(node->mChildren[i]->mName.C_Str());
@@ -51,9 +40,23 @@ void AssetImporter::ProcessNode(vector<Mesh*>* meshes, Transform* parent, aiNode
 		Vector4 col4 = Vector4(localMatrix.a4, localMatrix.b4, localMatrix.c4, localMatrix.d4);
 		MY4X4 localM = MY4X4(col1, col2, col3, col4);
 		child->SetTRS(localM);
-
-		ProcessNode(meshes, child, node->mChildren[i], scene, material, loadedTextures, directory, rendererInstance);
+		BoundingBox* childBoundingBox = new BoundingBox(child, rendererInstance);
+		parentBoundingBox->AddChild(childBoundingBox);
+		ProcessNode(meshes, child, childBoundingBox, node->mChildren[i], scene, material, loadedTextures, directory, rendererInstance);
 	}
+	for (int i = 0; i < node->mNumMeshes; i++)
+	{
+		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+		Mesh* processedMesh = ProcessMesh(mesh, scene, material, loadedTextures, directory, rendererInstance);
+		processedMesh->transform->SetParent(parent);
+		parent->AddChild(processedMesh->transform);
+
+		BoundingBox* childBoundingBox = new BoundingBox(parent, rendererInstance);
+		parentBoundingBox->AddChild(childBoundingBox);
+		childBoundingBox->CalculateMeshBoundingBox(processedMesh->vertices);
+		meshes->push_back(processedMesh);
+	}
+	parentBoundingBox->CalculateCompoundBoundingBox();
 }
 
 Mesh* AssetImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene, Material material, vector<Texture> loadedTextures, string directory, Renderer* rendererInstance)
@@ -77,7 +80,6 @@ Mesh* AssetImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene, Material ma
 
 		vertices.push_back(vertex);
 	}
-
 
 	for (int i = 0; i < mesh->mNumFaces; i++)
 	{

@@ -1,11 +1,12 @@
 #pragma once
 #include "Utilities/Exporter.h"
 #include "Mesh.h"
-
+#include "Collisions/BoundingBox.h"
 SIRENITO_API class Model : public Entity3D
 {
 public:
 	vector<Mesh*>* meshes;
+	BoundingBox* boundingBox;
 
 	SIRENITO_API Model(const char* path, Renderer* rendererInstance);
 	SIRENITO_API Model(const char* path, Material material, Renderer* rendererInstance);

@@ -9,18 +9,21 @@ Model::Model(const char* path, Renderer* rendererInstance)
 	this->rendererInstance = rendererInstance;
 	transform = new Transform("Model");
 
-	meshes = AssetImporter::GetMeshes(path, transform, Material(), rendererInstance);
+	boundingBox = new BoundingBox(transform, rendererInstance);
+	meshes = AssetImporter::GetMeshes(path, transform, boundingBox, Material(), rendererInstance);
 }
 Model::Model(const char* path, Material material, Renderer* rendererInstance)
 {
 	this->rendererInstance = rendererInstance;
 	transform = new Transform("Model");
 
-	meshes = AssetImporter::GetMeshes(path, transform, material, rendererInstance);
+	boundingBox = new BoundingBox(transform, rendererInstance);
+	meshes = AssetImporter::GetMeshes(path, transform, boundingBox, material, rendererInstance);
 }
 
 Model::~Model()
 {
+	delete boundingBox;
 	delete transform;
 	transform = nullptr;
 
@@ -37,6 +40,8 @@ void Model::Draw()
 	{
 		meshes->at(i)->Draw();
 	}
+	if (boundingBox != nullptr)
+		boundingBox->Draw();
 }
 
 void Model::SetTexture(const char* path)

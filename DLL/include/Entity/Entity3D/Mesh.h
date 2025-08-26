@@ -21,5 +21,6 @@ public:
 	SIRENITO_API Mesh(const char* name, vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material);
 	SIRENITO_API ~Mesh();
 	SIRENITO_API void Draw();
+	SIRENITO_API void DrawWire();
 	SIRENITO_API void SetRendererInstance(Renderer* instance);
 };

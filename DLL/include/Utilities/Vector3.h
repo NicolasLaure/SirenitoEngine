@@ -4,6 +4,7 @@
 #include "math.h"
 #include "MathConstants.h"
 #include "Utilities/Vector2.h"
+#include <string>
 
 SIRENITO_API class Vector3
 {
@@ -130,7 +131,7 @@ public:
 		float diff_z = this->z - right.z;
 		float sqrmag = diff_x * diff_x + diff_y * diff_y + diff_z * diff_z;
 		//Checks if the difference between both vectors is close to zero
-		return sqrmag < KEpsilon * KEpsilon;
+		return sqrmag < KEpsilon* KEpsilon;
 	}
 
 	SIRENITO_API bool operator !=(Vector3 right)
@@ -315,6 +316,17 @@ public:
 		float newY = value.y / magnitude;
 		float newZ = value.z / magnitude;
 		return Vector3(newX, newY, newZ);
+	}
+
+	SIRENITO_API std::string ToString()
+	{
+		std::string str = std::string("x: ");
+		str.append(std::to_string(x));
+		str.append(", y: ");
+		str.append(std::to_string(y));
+		str.append(", z: ");
+		str.append(std::to_string(z));
+		return str;
 	}
 
 #pragma endregion

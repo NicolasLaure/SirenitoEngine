@@ -3,6 +3,9 @@
 #include "Entity/Entity3D/Mesh.h"
 #include "Textures/Texture.h"
 #include "Textures/Importer/TextureImporter.h"
+#include <vector>
+
+using namespace std;
 
 SIRENITO_API class Cube : public Mesh
 {

@@ -57,3 +57,9 @@ void Mesh::Draw()
 	rendererInstance->SetData(transform, material, false, vertices, indices, VAO, VBO, EBO);
 	rendererInstance->Draw(VAO, vertices.size());
 }
+
+void Mesh::DrawWire()
+{
+	rendererInstance->SetData(transform, material, false, vertices, indices, VAO, VBO, EBO);
+	rendererInstance->DrawWire(VAO, vertices.size());
+}
