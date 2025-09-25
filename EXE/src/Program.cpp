@@ -14,8 +14,7 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	firstPersonCamera->SetFirstPerson();
 
 	background = new Sprite("res/textures/Background.jpg", Vector3(0, 30.0f, -30.0f), Vector3(), -width, -height, rendererInstance);
-	ground = new Sprite("res/textures/Background.jpg", Vector3(0, -2.0f, 0.0f), Vector3(90.0f, 0, 0), 10.0f, 10.0f, rendererInstance);
-	//"res/textures/sans-dance.jpg",
+	ground = new Sprite("res/textures/Background.jpg", Vector3(0, -2.0f, 0.0f), Vector3(90.0f, 0, 0), 100.0f, 100.0f, rendererInstance);
 	cube = new Cube(Vector3(0.0f, 0.0f, 0.0f), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
 	cube2 = new Cube(Vector3(-5.0f, 0.0f, 0.0f), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
 
@@ -24,8 +23,9 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	//mclarenmodel->transform->SetPositionAndRotation(Vector3(5.0f, 0.0f, 0.0f), Quaternion::Euler(0.0f, 0.0f, 0.0f));
 
 	//backpackModel = new Model("res/models/backpack/backpack.obj", Material(), rendererInstance);
-
-	tank = new Tank("res/models/Tank/Tank.fbx", Vector3(0.0f, -1.5f, -0.0f), rendererInstance);
+	//tank = new Tank("res/models/Tank/Tank.fbx", Vector3(0.0f, -1.5f, -0.0f), rendererInstance);
+	scene = new Scene("res/models/BSP_Scene/BSP_Scene.fbx", rendererInstance);
+	tank = new Tank(scene->GetModel("Hull"));
 }
 
 Program::~Program()
@@ -39,6 +39,7 @@ Program::~Program()
 	//delete mclarenmodel;
 	//delete backpackModel;
 	delete tank;
+	delete scene;
 }
 
 void Program::Update()
@@ -75,6 +76,7 @@ void Program::Update()
 
 	if (tank != nullptr)
 		tank->Update(inputInstance);
+
 }
 
 void Program::Draw()
@@ -87,6 +89,9 @@ void Program::Draw()
 	//backpackModel->Draw();
 	if (tank != nullptr)
 		tank->Draw();
+
+	if (scene != nullptr)
+		scene->Draw();
 
 	if (!isFirstPerson)
 		thirdPersonCamera->mesh->Draw();

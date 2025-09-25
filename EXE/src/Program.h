@@ -7,6 +7,7 @@
 #include "Entity/Entity3D/Cube.h"
 #include "Entity/Entity3D/Model.h"
 #include "Tank/Tank.h"
+#include "Collisions/BSP_scene/Scene.h"
 
 SIRENITO_API class Program : public BaseGame
 {
@@ -18,6 +19,7 @@ private:
 	Model* backpackModel;
 	Model* mclarenmodel;
 	Tank* tank;
+	Scene* scene;
 
 	FirstPersonController* firstPersonCamera;
 	ThirdPersonController* thirdPersonCamera;

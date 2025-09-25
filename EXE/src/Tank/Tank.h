@@ -8,13 +8,14 @@ private:
 	Model* tankModel;
 	float turretSpeed = 5.0f;
 	float cannonsSpeed = 0.25f;
-	float cannonsAngle;
+	float cannonsAngle = 0;
 
-	Transform* turret ;
+	Transform* turret;
 	Transform* lCannon;
 	Transform* rCannon;
 public:
 	Tank(const char* modelPath, Vector3 position, Renderer* rendererInstance);
+	Tank(Model* tankModel);
 	~Tank();
 	void Draw();
 	void Update(Input* inputInstance);

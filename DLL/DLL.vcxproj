@@ -180,6 +180,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\AssetImporter\AssetImporter.cpp" />
     <ClCompile Include="src\BaseGame\BaseGame.cpp" />
     <ClCompile Include="src\Camera\Camera.cpp" />
+    <ClCompile Include="src\Collisions\BSP_Scene\Scene.cpp" />
     <ClCompile Include="src\Collisions\CollisionManager.cpp" />
     <ClCompile Include="src\Entity\Entity.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp" />
@@ -221,6 +222,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\BaseGame\BaseGame.h" />
     <ClInclude Include="include\Camera\Camera.h" />
     <ClInclude Include="include\Collisions\BoundingBox.h" />
+    <ClInclude Include="include\Collisions\BSP_scene\Scene.h" />
     <ClInclude Include="include\Collisions\Collider.h" />
     <ClInclude Include="include\Collisions\CollisionManager.h" />
     <ClInclude Include="include\Entity\Entity.h" />
@@ -252,6 +254,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\Utilities\Material.h" />
     <ClInclude Include="include\Utilities\MathConstants.h" />
     <ClInclude Include="include\Utilities\MY4X4.h" />
+    <ClInclude Include="include\Utilities\Plane.h" />
     <ClInclude Include="include\Utilities\Transform.h" />
     <ClInclude Include="include\Utilities\Node.h" />
     <ClInclude Include="include\Utilities\Quaternion.h" />

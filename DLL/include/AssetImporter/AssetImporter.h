@@ -6,6 +6,7 @@
 #include "Entity/Entity3D/Mesh.h"
 #include "Textures/Texture.h"
 #include "Collisions/BoundingBox.h"
+#include "Collisions/BSP_scene/Scene.h"
 
 SIRENITO_API static class AssetImporter
 {

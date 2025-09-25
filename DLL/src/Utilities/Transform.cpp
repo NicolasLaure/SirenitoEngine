@@ -101,6 +101,11 @@ Vector3 Transform::GetPosition()
 	return LocalToWorldMatrix().GetPosition();
 }
 
+MY4X4 Transform::GetMatrix()
+{
+	return matrixTRS;
+}
+
 void Transform::SetPosition(Vector3 value)
 {
 	SetLocalPosition(InverseTransformPoint(value));
@@ -241,6 +246,7 @@ void Transform::SetTRS(MY4X4 trs)
 	matrixTRS = trs;
 	localPosition = matrixTRS.GetPosition();
 	localRotation = matrixTRS.GetRotation();
+	_localScale = matrixTRS.GetlossyScale();
 }
 
 #pragma endregion
@@ -362,6 +368,10 @@ int Transform::GetChildIndex(Transform* child)
 			return i;
 	}
 	return -1;
+}
+Transform* Transform::GetChild(int index)
+{
+	return _children->GetValueAt(index);
 }
 
 #pragma endregion

@@ -51,10 +51,13 @@ public:
 	/// </summary>
 	SIRENITO_API MY4X4 WorldToLocalMatrix();
 
+
 	/// <summary>
 	///   Matrix that transforms a point from local space into world space (Read Only).
 	/// </summary>
 	SIRENITO_API MY4X4 LocalToWorldMatrix();
+
+	SIRENITO_API MY4X4 GetMatrix();
 
 	/// <summary>
 	///   The world space position of the MyTransform.
@@ -214,6 +217,7 @@ public:
 	SIRENITO_API Transform* Find(const char* n);
 
 	SIRENITO_API int GetChildIndex(Transform* child);
+	SIRENITO_API Transform* GetChild(int index);
 
 #pragma endregion
 

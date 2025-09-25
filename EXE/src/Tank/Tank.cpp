@@ -25,11 +25,22 @@ void Tank::Draw()
 	tankModel->Draw();
 }
 
+
+Tank::Tank(Model* tankModel)
+{
+	this->tankModel = tankModel;
+
+	turret = tankModel->transform->Find("Turret");
+	lCannon = tankModel->transform->Find("LeftCannon");
+	rCannon = tankModel->transform->Find("RightCannon");
+}
+
 void Tank::Update(Input* inputInstance)
 {
 	tankModel->transform->ChildCount();
 
 	float dirX = 0;
+	float dirY = 0;
 	float dirZ = 0;
 
 	if (inputInstance->isKeyPressed(Keys::NUMPAD_8))
@@ -41,6 +52,11 @@ void Tank::Update(Input* inputInstance)
 		dirX = -1;
 	else if (inputInstance->isKeyPressed(Keys::NUMPAD_6))
 		dirX = 1;
+
+	if (inputInstance->isKeyPressed(Keys::DOWN))
+		dirY = -1;
+	else if (inputInstance->isKeyPressed(Keys::UP))
+		dirY = 1;
 
 	if (turret != nullptr)
 	{
@@ -63,6 +79,6 @@ void Tank::Update(Input* inputInstance)
 			rCannon->SetLocalRotation(Quaternion::Euler(cannonsAngle, 0.0f, 0.0f));
 		}
 	}
-	Vector3 movementDir = tankModel->transform->GetForward() * dirZ + tankModel->transform->GetRight() * dirX;
+	Vector3 movementDir = tankModel->transform->GetRight() * dirX + tankModel->transform->GetUp() * dirY + tankModel->transform->GetForward() * dirZ ;
 	tankModel->transform->Translate(movementDir);
 }

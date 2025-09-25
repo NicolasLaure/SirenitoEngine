@@ -36,4 +36,6 @@ public:
 	SIRENITO_API void CalculateCompoundBoundingBox();
 	SIRENITO_API vector<Vector3> GetBoundsVertices();
 	SIRENITO_API void Draw();
+
+	SIRENITO_API BoundingBox* GetChild(Transform* childTransform);
 };

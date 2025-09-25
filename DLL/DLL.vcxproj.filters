@@ -129,6 +129,9 @@
     <ClCompile Include="include\Collisions\BoundingBox.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Collisions\BSP_Scene\Scene.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation\Animation.h">
@@ -267,6 +270,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Collisions\BoundingBox.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Collisions\BSP_scene\Scene.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\Plane.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

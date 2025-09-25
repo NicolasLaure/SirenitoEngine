@@ -141,6 +141,21 @@ void BoundingBox::Draw()
 		viewCube->DrawWire();
 }
 
+BoundingBox* BoundingBox::GetChild(Transform* childTransform)
+{
+	for (int i = 0; i < children.size(); i++)
+	{
+		if (children[i]->transform == childTransform)
+			return children[i];
+
+		BoundingBox* aux = children[i]->GetChild(childTransform);
+		if (aux != nullptr)
+			return aux;
+
+	}
+	return nullptr;
+}
+
 
 Vector3 BoundingBox::GetMin()
 {

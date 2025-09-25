@@ -4,6 +4,29 @@
 
 #include <iostream>
 
+void Model::PopulateChildren()
+{
+	for (int i = 0; i < transform->ChildCount(); i++)
+	{
+		vector<Mesh*>* childrenMeshes = new vector<Mesh*>();
+		for (int j = 0; j < meshes->size(); j++)
+		{
+			if (meshes->at(j)->transform->IsChildOf(transform->GetChild(i)))
+				childrenMeshes->push_back(meshes->at(j));
+		}
+
+		children.push_back(new Model(childrenMeshes, transform->GetChild(i), boundingBox->GetChild(transform->GetChild(i))));
+	}
+}
+
+Model::Model(vector<Mesh*>* meshes, Transform* transform, BoundingBox* boundingBox)
+{
+	this->meshes = meshes;
+	this->transform = transform;
+	this->boundingBox = boundingBox;
+	PopulateChildren();
+}
+
 Model::Model(const char* path, Renderer* rendererInstance)
 {
 	this->rendererInstance = rendererInstance;
@@ -11,6 +34,7 @@ Model::Model(const char* path, Renderer* rendererInstance)
 
 	boundingBox = new BoundingBox(transform, rendererInstance);
 	meshes = AssetImporter::GetMeshes(path, transform, boundingBox, Material(), rendererInstance);
+	PopulateChildren();
 }
 Model::Model(const char* path, Material material, Renderer* rendererInstance)
 {
@@ -19,6 +43,7 @@ Model::Model(const char* path, Material material, Renderer* rendererInstance)
 
 	boundingBox = new BoundingBox(transform, rendererInstance);
 	meshes = AssetImporter::GetMeshes(path, transform, boundingBox, material, rendererInstance);
+	PopulateChildren();
 }
 
 Model::~Model()
@@ -41,7 +66,10 @@ void Model::Draw()
 		meshes->at(i)->Draw();
 	}
 	if (boundingBox != nullptr)
+	{
+		boundingBox->CalculateCompoundBoundingBox();
 		boundingBox->Draw();
+	}
 }
 
 void Model::SetTexture(const char* path)
