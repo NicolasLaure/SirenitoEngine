@@ -18,8 +18,8 @@ protected:
 
 
 	SIRENITO_API void Init(const char* texturePath, Vector3 position, Vector3 eulers, float width, float height, Material material, Renderer* rendererInstance);
-	SIRENITO_API float* GetVertices(float width, float height);
-	SIRENITO_API float* GetVertices(float width, float height, Vector2 minCoords, Vector2 maxCoords);
+	SIRENITO_API float* GetTransformedVertices(float width, float height);
+	SIRENITO_API float* GetTransformedVertices(float width, float height, Vector2 minCoords, Vector2 maxCoords);
 	SIRENITO_API unsigned int* GetIndices();
 	SIRENITO_API void SetUVCoords(Vector2 minCoords, Vector2 maxCoords);
 public:

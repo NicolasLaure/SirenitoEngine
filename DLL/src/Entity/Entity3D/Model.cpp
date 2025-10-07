@@ -66,8 +66,14 @@ void Model::Draw()
 {
 	for (int i = 0; i < meshes->size(); i++)
 	{
-		meshes->at(i)->Draw();
+		if (meshes->at(i)->transform->GetParent() == transform && shouldDraw)
+			meshes->at(i)->Draw();
 	}
+	for (int i = 0; i < children.size(); i++)
+	{
+		children[i]->Draw();
+	}
+
 	if (boundingBox != nullptr)
 	{
 		boundingBox->CalculateCompoundBoundingBox();
@@ -82,4 +88,21 @@ void Model::SetTexture(const char* path)
 		meshes->at(i)->textures.clear();
 		meshes->at(i)->textures.push_back(TextureImporter::ImportTexture(path));
 	}
+}
+
+vector<Vector3> Model::GetTransformedVertices()
+{
+	vector<Vector3> vertices;
+	for (int i = 0; i < meshes->size(); i++)
+	{
+		if (meshes->at(i)->transform->IsChildOf(transform))
+		{
+			for (int j = 0; j < meshes->at(i)->vertices.size(); j++)
+			{
+				Transform* childTransform = meshes->at(i)->transform;
+				vertices.push_back(childTransform->TransformPoint(meshes->at(i)->vertices[j].Position));
+			}
+		}
+	}
+	return vertices;
 }

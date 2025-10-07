@@ -12,11 +12,13 @@ public:
 	vector<Model*> children;
 	vector<Mesh*>* meshes;
 	BoundingBox* boundingBox;
-	
+	bool shouldDraw = true;
+
 	SIRENITO_API Model(vector<Mesh*>* meshes, Transform* transform, BoundingBox* boundingBox);
 	SIRENITO_API Model(const char* path, Renderer* rendererInstance);
 	SIRENITO_API Model(const char* path, Material material, Renderer* rendererInstance);
 	SIRENITO_API ~Model();
 	SIRENITO_API void Draw();
 	SIRENITO_API void SetTexture(const char* path);
+	SIRENITO_API vector<Vector3> GetTransformedVertices();
 };

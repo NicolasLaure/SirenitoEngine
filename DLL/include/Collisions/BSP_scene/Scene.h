@@ -17,7 +17,7 @@ public:
 
 	SIRENITO_API Scene(const char* sceneModelPath, Renderer* rendererInstance);
 
-	SIRENITO_API bool ShouldDraw(Model* model);
+	SIRENITO_API void ShouldDraw(Model* model);
 	SIRENITO_API void Draw();
 	SIRENITO_API void SetScale(Vector3 scale);
 	SIRENITO_API Model* GetModel(const char* name);

@@ -39,7 +39,7 @@ void Sprite::Init(const char* texturePath, Vector3 position, Vector3 eulers, flo
 	transform = new Transform();
 	transform->SetPositionAndRotation(position, Quaternion::Euler(eulers));
 
-	rendererInstance->SetData(transform, material, true, GetVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
+	rendererInstance->SetData(transform, material, true, GetTransformedVertices(width, height), 36, GetIndices(), 6, VAO, VBO, EBO);
 }
 
 Sprite::~Sprite()
@@ -77,20 +77,20 @@ void Sprite::Draw()
 	if (animation != nullptr)
 	{
 		animation->UpdateAnimation();
-		rendererInstance->SetData(transform, material, true, GetVertices(width, height, animation->currentFrame.GetMin(), animation->currentFrame.GetMax()), 48, GetIndices(), 6, VAO, VBO, EBO);
+		rendererInstance->SetData(transform, material, true, GetTransformedVertices(width, height, animation->currentFrame.GetMin(), animation->currentFrame.GetMax()), 48, GetIndices(), 6, VAO, VBO, EBO);
 	}
 	else
-		rendererInstance->SetData(transform, material, true, GetVertices(width, height), 48, GetIndices(), 6, VAO, VBO, EBO);
+		rendererInstance->SetData(transform, material, true, GetTransformedVertices(width, height), 48, GetIndices(), 6, VAO, VBO, EBO);
 
 	rendererInstance->Draw(VAO, 6, texture.GetId());
 }
 
-float* Sprite::GetVertices(float width, float height)
+float* Sprite::GetTransformedVertices(float width, float height)
 {
-	return GetVertices(width, height, Vector2(0, 0), Vector2(1, 1));
+	return GetTransformedVertices(width, height, Vector2(0, 0), Vector2(1, 1));
 }
 
-float* Sprite::GetVertices(float width, float height, Vector2 minCoords, Vector2 maxCoords)
+float* Sprite::GetTransformedVertices(float width, float height, Vector2 minCoords, Vector2 maxCoords)
 {
 	return new float[48]
 	{

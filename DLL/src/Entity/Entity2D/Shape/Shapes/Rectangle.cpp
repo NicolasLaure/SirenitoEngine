@@ -1,6 +1,6 @@
 #include "Entity/Entity2D/Shape/Shapes/Rectangle.h"
 
-Rectangle::Rectangle(Vector3 position, float width, float height, Color material, Renderer* renderer) : Shape(material, GetVertices(width, height), 28, GetIndices(), 6, renderer)
+Rectangle::Rectangle(Vector3 position, float width, float height, Color material, Renderer* renderer) : Shape(material, GetTransformedVertices(width, height), 28, GetIndices(), 6, renderer)
 {
 	transform = new Transform();
 	transform->SetPosition(position);
@@ -15,7 +15,7 @@ Rectangle::~Rectangle()
 	delete transform;
 }
 
-float* Rectangle::GetVertices(float width, float height)
+float* Rectangle::GetTransformedVertices(float width, float height)
 {
 	return new float[28]
 		{

@@ -31,7 +31,7 @@ void Cube::Init(Vector3 position, Vector3 eulers, Material material, Renderer* r
 	VAO = rendererInstance->CreateVertexArray();
 	VBO = rendererInstance->CreateBuffer();
 	EBO = rendererInstance->CreateBuffer();
-	this->vertices = GetVertices();
+	this->vertices = GetTransformedVertices();
 	this->indices = GetIndices();
 	this->material = material;
 
@@ -59,12 +59,12 @@ void Cube::SetTexture(const char* path)
 	textures.push_back(texture);
 }
 
-vector<Vertex> Cube::GetVertices()
+vector<Vertex> Cube::GetTransformedVertices()
 {
-	return GetVertices(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f));
+	return GetTransformedVertices(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f));
 }
 
-vector<Vertex> Cube::GetVertices(Vector2 minCoords, Vector2 maxCoords)
+vector<Vertex> Cube::GetTransformedVertices(Vector2 minCoords, Vector2 maxCoords)
 {
 	vector<Vertex> vertices;
 	Vertex vertexArr[36] = {

@@ -1,6 +1,6 @@
 #include "Entity/Entity2D/Shape/Shapes/Triangle.h"
 
-Triangle::Triangle(Vector3 position, float width, float height, Color color, Renderer* renderer) : Shape(color, GetVertices(width, height), 21, GetIndices(), 3, renderer)
+Triangle::Triangle(Vector3 position, float width, float height, Color color, Renderer* renderer) : Shape(color, GetTransformedVertices(width, height), 21, GetIndices(), 3, renderer)
 {
 	transform = new Transform();
 	transform->SetPosition(position);
@@ -12,7 +12,7 @@ Triangle::~Triangle()
 	delete transform;
 }
 
-float* Triangle::GetVertices(float width, float height)
+float* Triangle::GetTransformedVertices(float width, float height)
 {
 	return new float[21]
 		{
