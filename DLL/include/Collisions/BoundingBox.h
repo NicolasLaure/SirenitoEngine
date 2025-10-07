@@ -12,6 +12,9 @@ private:
 
 	Vector3 min;
 	Vector3 max;
+	Vector3 compoundMin;
+	Vector3 compoundMax;
+
 	Transform* transform;
 	vector<BoundingBox*> children;
 	Cube* viewCube = nullptr;
@@ -34,7 +37,7 @@ public:
 	SIRENITO_API void CalculateMeshBoundingBox(vector<Vector3> vertexList);
 	SIRENITO_API void CalculateMeshBoundingBox(vector<Vertex> vertexList);
 	SIRENITO_API void CalculateCompoundBoundingBox();
-	SIRENITO_API vector<Vector3> GetBoundsVertices();
+	SIRENITO_API vector<Vector3> GetTransformedBoundsVertices();
 	SIRENITO_API void Draw();
 
 	SIRENITO_API BoundingBox* GetChild(Transform* childTransform);

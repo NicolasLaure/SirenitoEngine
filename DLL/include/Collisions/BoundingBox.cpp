@@ -39,23 +39,19 @@ void BoundingBox::CalculateMeshBoundingBox(vector<Vector3> vertexList)
 	if (vertexList.size() == 0)
 	{
 		center = transform->GetPosition();
-		min = Vector3::Zero();
-		max = Vector3::Zero();
+		min = transform->GetPosition();
+		max = transform->GetPosition();
 		return;
 	}
 
-	min = vertexList[0];
-	max = vertexList[0];
+	min = Vector3(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
+	max = Vector3(std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest());
 
-	for (int i = 1; i < vertexList.size(); i++)
+	for (int i = 0; i < vertexList.size(); i++)
 	{
 		min = Vector3::Min(min, vertexList[i]);
 		max = Vector3::Max(max, vertexList[i]);
 	}
-
-	size = max - min;
-	center = (max + min) / 2;
-	SetCube();
 }
 
 void BoundingBox::CalculateMeshBoundingBox(vector<Vertex> vertexList)
@@ -63,46 +59,46 @@ void BoundingBox::CalculateMeshBoundingBox(vector<Vertex> vertexList)
 	if (vertexList.size() == 0)
 	{
 		center = transform->GetPosition();
-		min = Vector3::Zero();
-		max = Vector3::Zero();
+		min = transform->GetPosition();
+		max = transform->GetPosition();
 		return;
 	}
 
-	min = vertexList[0].Position;
-	max = vertexList[0].Position;
+	min = Vector3(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
+	max = Vector3(std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest());
 
-	for (int i = 1; i < vertexList.size(); i++)
+	for (int i = 0; i < vertexList.size(); i++)
 	{
 		min = Vector3::Min(min, vertexList[i].Position);
 		max = Vector3::Max(max, vertexList[i].Position);
 	}
-
-	size = max - min;
-	center = (max + min) / 2;
-	SetCube();
 }
 
 void BoundingBox::CalculateCompoundBoundingBox()
 {
+	compoundMin = Vector3::Min(transform->TransformPoint(min), transform->TransformPoint(max));
+	compoundMax = Vector3::Max(transform->TransformPoint(min), transform->TransformPoint(max));
+
 	if (children.size() < 1)
+	{
+		size = compoundMax - compoundMin;
+		center = (compoundMax + compoundMin) * 0.5f;
 		return;
-
-	vector<Vector3> childrenBounds;
-	vector<Vector3>parentBounds = GetBoundsVertices();
-	vector<Vector3> childrenParentBounds;
-
-	for (int i = 0; i < parentBounds.size(); i++)
-		childrenParentBounds.push_back(parentBounds[i]);
+	}
 
 	for (int i = 0; i < children.size(); i++)
 	{
 		children[i]->CalculateCompoundBoundingBox();
-		childrenBounds = children[i]->GetBoundsVertices();
 
-		for (int j = 0; j < childrenBounds.size(); j++)
-			childrenParentBounds.push_back(childrenBounds[j]);
+		compoundMin = Vector3::Min(compoundMin, children[i]->compoundMax);
+		compoundMin = Vector3::Min(compoundMin, children[i]->compoundMin);
+
+		compoundMax = Vector3::Max(compoundMax, children[i]->compoundMin);
+		compoundMax = Vector3::Max(compoundMax, children[i]->compoundMax);
 	}
-	CalculateMeshBoundingBox(childrenParentBounds);
+
+	size = compoundMax - compoundMin;
+	center = (compoundMax + compoundMin) * 0.5f;
 }
 
 void BoundingBox::SetCube()
@@ -115,19 +111,18 @@ void BoundingBox::SetCube()
 
 	viewCube = new Cube(center, Vector3::Zero(), Material(Color::green()), rendererInstance);
 	viewCube->transform->SetLocalScale(size);
-	viewCube->transform->SetParent(transform);
 }
-vector<Vector3> BoundingBox::GetBoundsVertices()
+vector<Vector3> BoundingBox::GetTransformedBoundsVertices()
 {
 	vector<Vector3> vertices;
-	vertices.push_back(min);
-	vertices.push_back(max);
-	vertices.push_back(Vector3(min.x, max.y, max.z));
-	vertices.push_back(Vector3(max.x, min.y, max.z));
-	vertices.push_back(Vector3(min.x, min.y, max.z));
-	vertices.push_back(Vector3(min.x, max.y, min.z));
-	vertices.push_back(Vector3(max.x, min.y, min.z));
-	vertices.push_back(Vector3(max.x, max.y, min.z));
+	vertices.push_back(transform->TransformPoint(min));
+	vertices.push_back(transform->TransformPoint(max));
+	vertices.push_back(transform->TransformPoint(Vector3(min.x, max.y, max.z)));
+	vertices.push_back(transform->TransformPoint(Vector3(max.x, min.y, max.z)));
+	vertices.push_back(transform->TransformPoint(Vector3(min.x, min.y, max.z)));
+	vertices.push_back(transform->TransformPoint(Vector3(min.x, max.y, min.z)));
+	vertices.push_back(transform->TransformPoint(Vector3(max.x, min.y, min.z)));
+	vertices.push_back(transform->TransformPoint(Vector3(max.x, max.y, min.z)));
 	return vertices;
 }
 
@@ -137,8 +132,8 @@ void BoundingBox::Draw()
 	{
 		children[i]->Draw();
 	}
-	if (viewCube != nullptr)
-		viewCube->DrawWire();
+	SetCube();
+	viewCube->DrawWire();
 }
 
 BoundingBox* BoundingBox::GetChild(Transform* childTransform)

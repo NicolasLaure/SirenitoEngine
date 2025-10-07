@@ -35,14 +35,17 @@ Scene::Scene(const char* sceneModelPath, Renderer* rendererInstance)
 
 bool Scene::ShouldDraw(Model* model)
 {
-	vector<Vector3> vertices = model->boundingBox->GetBoundsVertices();
+	if (model->boundingBox == nullptr)
+		return true;
 
-	return IsPointInside(model->transform->GetPosition());
-	/*for (int i = 0; i < vertices.size(); i++)
+	vector<Vector3> vertices = model->boundingBox->GetTransformedBoundsVertices();
+
+	for (int i = 0; i < vertices.size(); i++)
 	{
 		if (IsPointInside(vertices[i]))
 			return true;
-	}*/
+	}
+
 	return false;
 }
 
@@ -55,8 +58,7 @@ void Scene::Draw()
 
 	for (int i = 0; i < models.size(); i++)
 	{
-		if (ShouldDraw(models[i]))
-			models[i]->Draw();
+		models[i]->Draw();
 	}
 }
 

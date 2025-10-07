@@ -87,8 +87,6 @@ void Program::Draw()
 	//cube2->Draw();
 	//mclarenmodel->Draw();
 	//backpackModel->Draw();
-	if (tank != nullptr)
-		tank->Draw();
 
 	if (scene != nullptr)
 		scene->Draw();

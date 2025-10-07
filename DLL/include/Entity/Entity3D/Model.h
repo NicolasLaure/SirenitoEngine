@@ -12,7 +12,7 @@ public:
 	vector<Model*> children;
 	vector<Mesh*>* meshes;
 	BoundingBox* boundingBox;
-
+	
 	SIRENITO_API Model(vector<Mesh*>* meshes, Transform* transform, BoundingBox* boundingBox);
 	SIRENITO_API Model(const char* path, Renderer* rendererInstance);
 	SIRENITO_API Model(const char* path, Material material, Renderer* rendererInstance);

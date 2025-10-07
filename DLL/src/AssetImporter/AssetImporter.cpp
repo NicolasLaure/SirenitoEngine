@@ -40,8 +40,13 @@ void AssetImporter::ProcessNode(vector<Mesh*>* meshes, Transform* parent, Boundi
 		Vector4 col4 = Vector4(localMatrix.a4, localMatrix.b4, localMatrix.c4, localMatrix.d4);
 		MY4X4 localM = MY4X4(col1, col2, col3, col4);
 		child->SetTRS(localM);
-		BoundingBox* childBoundingBox = new BoundingBox(child, rendererInstance);
-		parentBoundingBox->AddChild(childBoundingBox);
+		BoundingBox* childBoundingBox = nullptr;
+
+		if (child->GetName().find("Plane") == string::npos && parentBoundingBox != nullptr)
+		{
+			childBoundingBox = new BoundingBox(child, rendererInstance);
+			parentBoundingBox->AddChild(childBoundingBox);
+		}
 		ProcessNode(meshes, child, childBoundingBox, node->mChildren[i], scene, material, loadedTextures, directory, rendererInstance);
 	}
 	for (int i = 0; i < node->mNumMeshes; i++)
@@ -50,10 +55,12 @@ void AssetImporter::ProcessNode(vector<Mesh*>* meshes, Transform* parent, Boundi
 		Mesh* processedMesh = ProcessMesh(mesh, scene, material, loadedTextures, directory, rendererInstance);
 		processedMesh->transform->SetParent(parent);
 		parent->AddChild(processedMesh->transform);
-
-		BoundingBox* childBoundingBox = new BoundingBox(parent, rendererInstance);
-		parentBoundingBox->AddChild(childBoundingBox);
-		childBoundingBox->CalculateMeshBoundingBox(processedMesh->vertices);
+		if (parentBoundingBox != nullptr)
+		{
+			BoundingBox* childBoundingBox = new BoundingBox(parent, rendererInstance);
+			parentBoundingBox->AddChild(childBoundingBox);
+			childBoundingBox->CalculateMeshBoundingBox(processedMesh->vertices);
+		}
 		meshes->push_back(processedMesh);
 	}
 }

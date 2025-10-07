@@ -15,7 +15,10 @@ void Model::PopulateChildren()
 				childrenMeshes->push_back(meshes->at(j));
 		}
 
-		children.push_back(new Model(childrenMeshes, transform->GetChild(i), boundingBox->GetChild(transform->GetChild(i))));
+		if (boundingBox != nullptr)
+			children.push_back(new Model(childrenMeshes, transform->GetChild(i), boundingBox->GetChild(transform->GetChild(i))));
+		else
+			children.push_back(new Model(childrenMeshes, transform->GetChild(i), nullptr));
 	}
 }
 
