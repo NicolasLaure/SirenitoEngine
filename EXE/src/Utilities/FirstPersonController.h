@@ -21,4 +21,5 @@ public:
 	void SetFirstPerson();
 
 	Transform* GetPivot();
+	Camera* GetCamera();
 };

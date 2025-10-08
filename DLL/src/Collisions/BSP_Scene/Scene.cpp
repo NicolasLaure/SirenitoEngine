@@ -7,15 +7,19 @@ bool Scene::IsPointInside(Vector3 point)
 {
 	for (int i = 0; i < planes.size(); i++)
 	{
+		if (!planes[i].GetSide(camera->view->GetPosition()))
+			planes[i].Flip();
+
 		if (!planes[i].GetSide(point))
 			return false;
 	}
 	return true;
 }
 
-Scene::Scene(const char* sceneModelPath, Renderer* rendererInstance)
+Scene::Scene(const char* sceneModelPath, Camera* camera, Renderer* rendererInstance)
 {
 	sceneModel = new Model(sceneModelPath, rendererInstance);
+	this->camera = camera;
 
 	for (int i = 0; i < sceneModel->children.size(); i++)
 	{

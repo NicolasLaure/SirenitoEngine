@@ -2,7 +2,7 @@
 
 LightManager::LightManager()
 {
-	ambientLight = new GlobalLight(Color(0.05f, 0.05f, 0.05f, 1.0f));
+	ambientLight = new GlobalLight(Color(0.25f, 0.25f, 0.25f, 1.0f));
 }
 
 LightManager::~LightManager()

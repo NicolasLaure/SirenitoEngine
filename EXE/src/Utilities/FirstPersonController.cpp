@@ -54,3 +54,8 @@ Transform* FirstPersonController::GetPivot()
 {
 	return pivot;
 }
+
+Camera* FirstPersonController::GetCamera()
+{
+	return camera;
+}

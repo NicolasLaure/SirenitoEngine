@@ -24,7 +24,7 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 
 	//backpackModel = new Model("res/models/backpack/backpack.obj", Material(), rendererInstance);
 	//tank = new Tank("res/models/Tank/Tank.fbx", Vector3(0.0f, -1.5f, -0.0f), rendererInstance);
-	scene = new Scene("res/models/BSP_Scene/BSP_Scene.fbx", rendererInstance);
+	scene = new Scene("res/models/BSP_Scene/BSP_Scene.fbx", firstPersonCamera->GetCamera(), rendererInstance);
 	tank = new Tank(scene->GetModel("Hull"));
 }
 
@@ -44,7 +44,7 @@ Program::~Program()
 
 void Program::Update()
 {
-	lightManager->GetPointLight()->transform.RotateAround(Vector3(), Vector3::Up(), pointLightRotationSpeed);
+	//lightManager->GetPointLight()->transform.RotateAround(Vector3(), Vector3::Up(), pointLightRotationSpeed);
 
 	if (inputInstance->isKeyDown(Keys::DELETE))
 	{

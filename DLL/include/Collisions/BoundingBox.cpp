@@ -145,13 +145,11 @@ vector<Vector3> BoundingBox::GetCompoundBoundsVertices()
 
 void BoundingBox::SetCube()
 {
-	if (viewCube != nullptr)
+	if (viewCube == nullptr)
 	{
-		delete viewCube;
-		viewCube = nullptr;
+		viewCube = new Cube(center, Vector3::Zero(), Material(Color::green()), rendererInstance);
 	}
-
-	viewCube = new Cube(center, Vector3::Zero(), Material(Color::green()), rendererInstance);
+	viewCube->transform->SetPosition(center);
 	viewCube->transform->SetLocalScale(size);
 }
 vector<Vector3> BoundingBox::GetTransformedBoundsVertices()
