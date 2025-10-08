@@ -80,5 +80,5 @@ void Tank::Update(Input* inputInstance)
 		}
 	}
 	Vector3 movementDir = tankModel->transform->GetRight() * dirX + tankModel->transform->GetUp() * dirY + tankModel->transform->GetForward() * dirZ ;
-	tankModel->transform->Translate(movementDir);
+	tankModel->transform->Translate(movementDir * speed);
 }

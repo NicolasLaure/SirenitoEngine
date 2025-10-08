@@ -59,10 +59,13 @@ void AssetImporter::ProcessNode(vector<Mesh*>* meshes, Transform* parent, Boundi
 		{
 			BoundingBox* childBoundingBox = new BoundingBox(parent, rendererInstance);
 			parentBoundingBox->AddChild(childBoundingBox);
+			parentBoundingBox->AddMeshesVertices(processedMesh->vertices);
 			childBoundingBox->CalculateMeshBoundingBox(processedMesh->vertices);
 		}
 		meshes->push_back(processedMesh);
 	}
+	if (parentBoundingBox != nullptr)
+		parentBoundingBox->CalculateChildrenMeshesBoundingBox();
 }
 
 Mesh* AssetImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene, Material material, vector<Texture> loadedTextures, string directory, Renderer* rendererInstance)

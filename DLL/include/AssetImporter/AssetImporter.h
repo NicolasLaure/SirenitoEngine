@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #include "Utilities/Exporter.h"
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"

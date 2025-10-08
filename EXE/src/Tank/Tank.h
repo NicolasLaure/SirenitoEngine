@@ -6,7 +6,8 @@ class Tank
 {
 private:
 	Model* tankModel;
-	float turretSpeed = 5.0f;
+	float speed = 0.5f;
+	float turretSpeed = 1.25f;
 	float cannonsSpeed = 0.25f;
 	float cannonsAngle = 0;
 

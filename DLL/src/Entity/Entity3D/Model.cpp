@@ -6,6 +6,7 @@
 
 void Model::PopulateChildren()
 {
+	cout << "Transform: " << transform->GetName() << " Has: " << transform->ChildCount() << " children" << endl;
 	for (int i = 0; i < transform->ChildCount(); i++)
 	{
 		vector<Mesh*>* childrenMeshes = new vector<Mesh*>();

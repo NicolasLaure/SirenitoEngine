@@ -24,6 +24,15 @@ BoundingBox::BoundingBox(Transform* transform, vector<BoundingBox*> childrenBoxe
 	CalculateMeshBoundingBox(vertices);
 }
 
+BoundingBox::~BoundingBox()
+{
+	if (viewCube != nullptr)
+		delete viewCube;
+
+	if (meshesVertices != nullptr)
+		delete meshesVertices;
+}
+
 void BoundingBox::AddChild(BoundingBox* child)
 {
 	for (int i = 0; i < children.size(); i++)
@@ -34,6 +43,18 @@ void BoundingBox::AddChild(BoundingBox* child)
 	children.push_back(child);
 }
 
+void BoundingBox::AddMeshesVertices(vector<Vertex> vertices)
+{
+	if (meshesVertices == nullptr)
+		meshesVertices = new vector<Vector3>();
+
+	for (int i = 0; i < vertices.size(); i++)
+	{
+		Vector3 pos = vertices[i].Position;
+		meshesVertices->push_back(pos);
+	}
+}
+
 void BoundingBox::CalculateMeshBoundingBox(vector<Vector3> vertexList)
 {
 	if (vertexList.size() == 0)
@@ -41,6 +62,7 @@ void BoundingBox::CalculateMeshBoundingBox(vector<Vector3> vertexList)
 		center = transform->GetPosition();
 		min = transform->GetPosition();
 		max = transform->GetPosition();
+		size = Vector3::Zero();
 		return;
 	}
 
@@ -74,6 +96,12 @@ void BoundingBox::CalculateMeshBoundingBox(vector<Vertex> vertexList)
 	}
 }
 
+void BoundingBox::CalculateChildrenMeshesBoundingBox()
+{
+	if (meshesVertices != nullptr)
+		CalculateMeshBoundingBox(*meshesVertices);
+}
+
 void BoundingBox::CalculateCompoundBoundingBox()
 {
 	compoundMin = Vector3::Min(transform->TransformPoint(min), transform->TransformPoint(max));
@@ -99,6 +127,20 @@ void BoundingBox::CalculateCompoundBoundingBox()
 
 	size = compoundMax - compoundMin;
 	center = (compoundMax + compoundMin) * 0.5f;
+}
+
+vector<Vector3> BoundingBox::GetCompoundBoundsVertices()
+{
+	vector<Vector3> vertices;
+	vertices.push_back(compoundMin);
+	vertices.push_back(compoundMax);
+	vertices.push_back(Vector3(compoundMin.x, compoundMax.y, compoundMax.z));
+	vertices.push_back(Vector3(compoundMax.x, compoundMin.y, compoundMax.z));
+	vertices.push_back(Vector3(compoundMin.x, compoundMin.y, compoundMax.z));
+	vertices.push_back(Vector3(compoundMin.x, compoundMax.y, compoundMin.z));
+	vertices.push_back(Vector3(compoundMax.x, compoundMin.y, compoundMin.z));
+	vertices.push_back(Vector3(compoundMax.x, compoundMax.y, compoundMin.z));
+	return vertices;
 }
 
 void BoundingBox::SetCube()

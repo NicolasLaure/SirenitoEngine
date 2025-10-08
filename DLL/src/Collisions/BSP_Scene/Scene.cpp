@@ -46,18 +46,35 @@ void Scene::ShouldDraw(Model* model)
 		return;
 	}
 
-	vector<Vector3> vertices = model->boundingBox->GetTransformedBoundsVertices();
+	vector<Vector3> compoundBox = model->boundingBox->GetCompoundBoundsVertices();
 
 	int verticesInside = 0;
-	for (int i = 0; i < vertices.size(); i++)
+	for (int i = 0; i < compoundBox.size(); i++)
 	{
-		if (IsPointInside(vertices[i]))
+		if (IsPointInside(compoundBox[i]))
 		{
 			verticesInside++;
 		}
 	}
-
-	model->shouldDraw = verticesInside != 0;
+	if (verticesInside == compoundBox.size() - 1)
+	{
+		model->shouldDraw = true;
+	}
+	else if (verticesInside == 0)
+		model->shouldDraw = false;
+	else
+	{
+		vector<Vector3> localBox = model->boundingBox->GetTransformedBoundsVertices();
+		for (int i = 0; i < localBox.size(); i++)
+		{
+			if (IsPointInside(localBox[i]))
+			{
+				model->shouldDraw = true;
+				return;
+			}
+		}
+		model->shouldDraw = false;
+	}
 }
 
 void Scene::Draw()
