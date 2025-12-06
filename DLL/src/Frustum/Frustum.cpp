@@ -30,7 +30,10 @@ void Frustum::AddDebugCubes(Renderer* rendererInstance)
 	for (int i = 0; i < 8; i++)
 	{
 		debugCubes[i].SetRendererInstance(rendererInstance);
-		debugCubes[i].transform->SetLocalScale(Vector3(0.1f, 0.1f, 0.1f));
+		if (i < 4)
+			debugCubes[i].transform->SetLocalScale(Vector3(0.1f, 0.1f, 0.1f));
+		else
+			debugCubes[i].transform->SetLocalScale(Vector3(1.5f, 1.5f, 1.5f));
 	}
 }
 
