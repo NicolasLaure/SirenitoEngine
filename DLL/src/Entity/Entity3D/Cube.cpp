@@ -1,5 +1,10 @@
 #include "Entity/Entity3D/Cube.h"
 
+Cube::Cube()
+{
+	Init(Vector3::Zero(), Vector3::Zero(), Material(), nullptr);
+}
+
 Cube::Cube(Vector3 position, Vector3 eulers, Material material, Renderer* rendererInstance)
 {
 	Init(position, eulers, material, rendererInstance);

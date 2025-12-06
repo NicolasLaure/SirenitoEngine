@@ -11,7 +11,7 @@ private:
 public:
 	vector<Model*> children;
 	vector<Mesh*>* meshes;
-	BoundingBox* boundingBox;
+	BoundingBox* boundingBox = nullptr;
 	bool shouldDraw = true;
 
 	SIRENITO_API Model(vector<Mesh*>* meshes, Transform* transform, BoundingBox* boundingBox);

@@ -1,10 +1,11 @@
 #include "Tank.h"
 #include "AssetImporter/AssetImporter.h"
 #include <iostream>
+#include "Frustum/FrustumCulling.h"
 
 using namespace std;
 
-Tank::Tank(const char* modelPath, Vector3 position, Renderer* rendererInstance)
+Tank::Tank(const char* modelPath, Vector3 position, Frustum* frustum, Renderer* rendererInstance)
 {
 	tankModel = new Model(modelPath, Material(), rendererInstance);
 	tankModel->transform->SetLocalScale(Vector3(0.5f, 0.5f, 0.5f));
@@ -13,6 +14,7 @@ Tank::Tank(const char* modelPath, Vector3 position, Renderer* rendererInstance)
 	turret = tankModel->transform->Find("Turret");
 	lCannon = tankModel->transform->Find("LeftCannon");
 	rCannon = tankModel->transform->Find("RightCannon");
+	this->frustum = frustum;
 }
 
 Tank::~Tank()
@@ -22,6 +24,7 @@ Tank::~Tank()
 
 void Tank::Draw()
 {
+	FrustumCulling::ShouldDraw(frustum, tankModel);
 	tankModel->Draw();
 }
 
@@ -79,6 +82,6 @@ void Tank::Update(Input* inputInstance)
 			rCannon->SetLocalRotation(Quaternion::Euler(cannonsAngle, 0.0f, 0.0f));
 		}
 	}
-	Vector3 movementDir = tankModel->transform->GetRight() * dirX + tankModel->transform->GetUp() * dirY + tankModel->transform->GetForward() * dirZ ;
+	Vector3 movementDir = tankModel->transform->GetRight() * dirX + tankModel->transform->GetUp() * dirY + tankModel->transform->GetForward() * dirZ;
 	tankModel->transform->Translate(movementDir * speed);
 }

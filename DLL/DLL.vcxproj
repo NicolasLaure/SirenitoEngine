@@ -192,6 +192,7 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\Entity\Entity3D\Entity3D.cpp" />
     <ClCompile Include="src\Entity\Entity3D\Mesh.cpp" />
     <ClCompile Include="src\Entity\Entity3D\Model.cpp" />
+    <ClCompile Include="src\Frustum\Frustum.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Lightning\BaseLight.cpp" />
     <ClCompile Include="src\Lightning\DirectionalLight.cpp" />
@@ -235,6 +236,8 @@ copy /y "$(SolutionDir)libs\glew-2.1.0\lib\64bit\glew32.dll" "$(OutDir)"</Comman
     <ClInclude Include="include\Entity\Entity3D\Entity3D.h" />
     <ClInclude Include="include\Entity\Entity3D\Mesh.h" />
     <ClInclude Include="include\Entity\Entity3D\Model.h" />
+    <ClInclude Include="include\Frustum\Frustum.h" />
+    <ClInclude Include="include\Frustum\FrustumCulling.h" />
     <ClInclude Include="include\Input\Input.h" />
     <ClInclude Include="include\Input\KeysEnum.h" />
     <ClInclude Include="include\Lightning\BaseLight.h" />

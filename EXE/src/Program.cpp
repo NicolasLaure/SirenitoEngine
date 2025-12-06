@@ -18,14 +18,10 @@ Program::Program(int width, int height, const char* title) : BaseGame(width, hei
 	cube = new Cube(Vector3(0.0f, 0.0f, 0.0f), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
 	cube2 = new Cube(Vector3(-5.0f, 0.0f, 0.0f), Vector3(), Material(Color(1.0f, 0.6f, 0.3f, 1.0f), 1.0f), rendererInstance);
 
-	//mclarenmodel = new Model("res/models/MclarenF1Frame.fbx", Material(), rendererInstance);
-	//mclarenmodel->transform->SetLocalScale(Vector3(0.01f, 0.01f, 0.01f));
-	//mclarenmodel->transform->SetPositionAndRotation(Vector3(5.0f, 0.0f, 0.0f), Quaternion::Euler(0.0f, 0.0f, 0.0f));
+	frustum = new Frustum(1920, 1080, 75.0f, 2.0f, 20.0f, firstPersonCamera->GetCamera()->view);
+	frustum->AddDebugCubes(rendererInstance);
+	tank = new Tank("res/models/Tank/Tank.fbx", Vector3::Zero(), frustum, rendererInstance);
 
-	//backpackModel = new Model("res/models/backpack/backpack.obj", Material(), rendererInstance);
-	//tank = new Tank("res/models/Tank/Tank.fbx", Vector3(0.0f, -1.5f, -0.0f), rendererInstance);
-	scene = new Scene("res/models/BSP_Scene/BSP_Scene.fbx", firstPersonCamera->GetCamera(), rendererInstance);
-	tank = new Tank(scene->GetModel("Hull"));
 }
 
 Program::~Program()
@@ -36,10 +32,8 @@ Program::~Program()
 	delete thirdPersonCamera;
 	delete cube;
 	delete cube2;
-	//delete mclarenmodel;
-	//delete backpackModel;
 	delete tank;
-	delete scene;
+	delete frustum;
 }
 
 void Program::Update()
@@ -77,19 +71,15 @@ void Program::Update()
 	if (tank != nullptr)
 		tank->Update(inputInstance);
 
+	frustum->Update();
 }
 
 void Program::Draw()
 {
 	background->Draw();
 	ground->Draw();
-	//cube->Draw();
-	//cube2->Draw();
-	//mclarenmodel->Draw();
-	//backpackModel->Draw();
-
-	if (scene != nullptr)
-		scene->Draw();
+	frustum->Draw();
+	tank->Draw();
 
 	if (!isFirstPerson)
 		thirdPersonCamera->mesh->Draw();

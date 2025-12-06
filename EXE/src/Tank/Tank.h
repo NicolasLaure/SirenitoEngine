@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity/Entity3D/Model.h"
 #include "Input/Input.h"
+#include "Frustum/Frustum.h"
 
 class Tank
 {
@@ -14,8 +15,10 @@ private:
 	Transform* turret;
 	Transform* lCannon;
 	Transform* rCannon;
+
+	Frustum* frustum;
 public:
-	Tank(const char* modelPath, Vector3 position, Renderer* rendererInstance);
+	Tank(const char* modelPath, Vector3 position, Frustum* frustum, Renderer* rendererInstance);
 	Tank(Model* tankModel);
 	~Tank();
 	void Draw();
